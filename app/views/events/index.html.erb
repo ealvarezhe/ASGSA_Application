@@ -1,0 +1,39 @@
+<div class="Events index">
+  <h1>Events</h1>
+
+  <%= link_to("Add New Event", new_event_path, class: 'action new') %>
+
+  <% if @events.empty? %>
+    <p>No upcoming events!</p>
+  <% else %>
+		<table class="listing" summary="Event list" style="width: 100%;">
+			<tr class="header">
+				<th>Name</th>
+				<th>Location</th>
+				<th>Start Time</th>
+				<th>End Time</th>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Capacity</th>
+				<th>Points</th>
+			</tr>
+			<% @events.each do |event| %>
+			<tr>
+				<td><%= event.name %></td>
+				<td><%= event.location %></td>
+				<td><%= event.start_time %></td>
+				<td><%= event.end_time %></td>
+				<td><%= event.date %></td>
+				<td><%= event.description %></td>
+				<td><%= event.capacity || 'No Limit' %></td>
+				<td><%= event.points %></td>
+			#   <td class="actions">
+			#     <%= link_to("Show", task_path(task), class: 'action show') %>
+			#     <%= link_to("Edit", edit_task_path(task), class: 'action edit') %>
+			#     <%= link_to("Delete", delete_task_path(task), class: 'action delete') %>
+			#   </td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
+</div>
