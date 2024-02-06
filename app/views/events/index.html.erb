@@ -5,35 +5,26 @@
 
   <% if @events.empty? %>
     <p>No upcoming events!</p>
-  <% else %>
-		<table class="listing" summary="Event list" style="width: 100%;">
-			<tr class="header">
-				<th>Name</th>
-				<th>Location</th>
-				<th>Start Time</th>
-				<th>End Time</th>
-				<th>Date</th>
-				<th>Description</th>
-				<th>Capacity</th>
-				<th>Points</th>
-			</tr>
+  <% else %>	
+		<ul>
 			<% @events.each do |event| %>
-			<tr>
-				<td><%= event.name %></td>
-				<td><%= event.location %></td>
-				<td><%= event.start_time %></td>
-				<td><%= event.end_time %></td>
-				<td><%= event.date %></td>
-				<td><%= event.description %></td>
-				<td><%= event.capacity || 'No Limit' %></td>
-				<td><%= event.points %></td>
-			#   <td class="actions">
-			#     <%= link_to("Show", task_path(task), class: 'action show') %>
-			#     <%= link_to("Edit", edit_task_path(task), class: 'action edit') %>
-			#     <%= link_to("Delete", delete_task_path(task), class: 'action delete') %>
-			#   </td>
-			</tr>
+				<li>
+					<span style="font-size: 24px; font-weight: bold;"><%= event.name %></span><br>
+					Location: <%= event.location %><br>
+					Start Time: <%= event.start_time.strftime("%I:%M %p") %><br>
+					End Time: <%= event.end_time.strftime("%I:%M %p") %><br>
+					Date: <%= event.date %><br>
+					Description: <%= event.description %><br>
+					Capacity: <%= event.capacity || 'No Limit' %><br>
+					Points: <%= event.points %>
+				</li>
+				<p>
+					<%= link_to("Show", event_path(event), class: 'action show') %> |
+					<%= link_to("Edit", edit_event_path(event), class: 'action edit') %> |
+					<%= link_to("Delete", delete_event_path(event), class: 'action delete') %>
+				</p>
 			<% end %>
-		</table>
+		</ul>
 	<% end %>
 </div>
+

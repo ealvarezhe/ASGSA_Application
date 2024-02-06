@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   resources :events do 
+    member do
+      get 'delete'
+    end
   end
   # get 'events/index'
   # get 'events/new'
