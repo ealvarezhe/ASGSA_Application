@@ -16,6 +16,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path
     else
+      flash[:alert] = "Error creating event."
       render('new')
     end
   end
@@ -29,6 +30,7 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to event_path(@event)
     else
+      flash[:alert] = "Error updating event"
       render('edit')
     end
   end
@@ -46,16 +48,44 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(
+    permitted_params = params.require(:event).permit(
       :name,
       :location,
-      :start_time,
-      :end_time,
       :date,
       :description,
       :capacity,
       :points
     )
+  
+    # Check and format start_time
+    if params[:event][:start_hour].present? && params[:event][:start_minute].present? && params[:event][:start_am_pm].present?
+      start_hour = params[:event][:start_hour].to_i
+      start_minute = params[:event][:start_minute].to_i
+      start_am_pm = params[:event][:start_am_pm]
+      
+      if start_hour == 0
+        permitted_params[:start_time] = nil
+      else
+        permitted_params[:start_time] = "#{start_hour}:#{start_minute.to_s.rjust(2, '0')} #{start_am_pm}"
+      end
+    end
+  
+    # Check and format end_time
+    if params[:event][:end_hour].present? && params[:event][:end_minute].present? && params[:event][:end_am_pm].present?
+      end_hour = params[:event][:end_hour].to_i
+      end_minute = params[:event][:end_minute].to_i
+      end_am_pm = params[:event][:end_am_pm]
+      
+      if end_hour == 0
+        permitted_params[:end_time] = nil
+      else
+        permitted_params[:end_time] = "#{end_hour}:#{end_minute.to_s.rjust(2, '0')} #{end_am_pm}"
+      end
+    end
+  
+    permitted_params
   end
+  
+  
 
 end
