@@ -42,6 +42,21 @@
   </div>
 
   <div>
+    <%= form.label :date_joined, style: "display: block" %>
+    <%= form.date_field :date_joined %>
+  </div>  
+
+  <div>
+    <%= form.label :degree, style: "display: block" %> 
+    <%= form.text_field :degree %>
+  </div> 
+
+  <div>
+    <%= form.label :food_allergies, style: "display: block" %>
+    <%= form.text_field :food_allergies %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
