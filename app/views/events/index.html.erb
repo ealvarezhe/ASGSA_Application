@@ -10,11 +10,8 @@
 			<% @events.each do |event| %>
 				<li>
 					<span style="font-size: 24px; font-weight: bold;"><%= event.name %></span><br>
-					Location: <%= event.location %><br>
-					Start Time: <%= event.start_time.strftime("%I:%M %p") %><br>
-					End Time: <%= event.end_time.strftime("%I:%M %p") %><br>
+					Time: <%= event.start_time&.strftime("%I:%M %p") %> - <%= event.end_time&.strftime("%I:%M %p") %><br>
 					Date: <%= event.date %><br>
-					Description: <%= event.description %><br>
 					Capacity: <%= event.capacity || 'No Limit' %><br>
 					Points: <%= event.points %>
 				</li>
