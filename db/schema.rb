@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_195751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"
+    t.bigint "member_id"
   end
 
   create_table "events", primary_key: "event_id", id: :bigint, default: -> { "nextval('events_id_seq'::regclass)" }, force: :cascade do |t|
