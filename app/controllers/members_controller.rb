@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: %i[ show edit update destroy ]
+  before_action :set_member, only: %i[ show edit update destroy delete_confirmation]
 
   # GET /members or /members.json
   def index
@@ -17,6 +17,11 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+  end
+
+  # GET /members/1/delete_confirmation
+  def delete_confirmation
+    # Render delete_confirmation view
   end
 
   # POST /members or /members.json
