@@ -7,4 +7,5 @@ class Member < ApplicationRecord
   validates :position, presence: true
   validates :date_joined, presence: true
   validates :degree, presence: true
+  has_many :attendees
 end
