@@ -10,19 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_11_180300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attendees", primary_key: "attendee_id", id: :bigint, default: -> { "nextval('attendees_id_seq'::regclass)" }, force: :cascade do |t|
-    t.boolean "attended"
-    t.boolean "rsvp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "event_id"
-    t.bigint "member_id"
-  end
 
   create_table "events", primary_key: "event_id", id: :bigint, default: -> { "nextval('events_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "name"
@@ -33,6 +23,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
     t.string "description"
     t.integer "capacity"
     t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "member_roles", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +52,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
     t.text "area_of_study"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "description"
+    t.time "send_time"
+    t.date "send_date"
+    t.boolean "is_sent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.integer "role_id"
     t.string "name"
@@ -63,4 +70,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "notifications", "events", primary_key: "event_id"
 end
