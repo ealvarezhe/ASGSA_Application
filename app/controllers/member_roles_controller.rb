@@ -60,11 +60,11 @@ class MemberRolesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member_role
-      @member_role = MemberRole.find(params[:id])
+      @member_role = MemberRole.find(params[:member_role_id])
     end
 
     # Only allow a list of trusted parameters through.
     def member_role_params
-      params.require(:member_role).permit(:id, :member_id, :role_id)
+      params.require(:member_role).permit(:member_role_id, :member_id, :role_id)
     end
 end
