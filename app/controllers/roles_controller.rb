@@ -18,6 +18,7 @@ class RolesController < ApplicationController
 
   # GET /roles/1 or /roles/1.json
   def show
+    @role = Role.find(params[:id])
   end
 
   # GET /roles/new
@@ -27,6 +28,7 @@ class RolesController < ApplicationController
 
   # GET /roles/1/edit
   def edit
+    @role = Role.find(params[:id])
   end
 
   # POST /roles or /roles.json
