@@ -7,14 +7,12 @@ Rails.application.routes.draw do
 
   root "events#index"
 
-  resources :attendees do
-    member do
-      get 'delete'
-    end
-  end
-
   resources :events do
-    resources :attendees
+    resources :attendees do
+      member do
+        get 'delete'
+      end
+    end
     member do
       get 'delete'
     end
