@@ -11,17 +11,16 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :attended, style: "display: block" %>
-    <%= form.check_box :attended %>
-  </div>
+  <p><%= "Name: " + @event.name %></p>
+
+  <p>Member Id: <%= form.text_field(:member_id) %></p>
+
+
+<%= form.hidden_field :event_id, value: @event.event_id %>
+<%= form.hidden_field :rsvp, value: true %>
+<%= form.hidden_field :attended, value: false %>
 
   <div>
-    <%= form.label :rsvp, style: "display: block" %>
-    <%= form.check_box :rsvp %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%=form.submit "Confirm RSVP" %>
   </div>
 <% end %>

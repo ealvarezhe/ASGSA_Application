@@ -10,23 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_08_195751) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_10_181026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  
-    create_table "members", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.integer "points"
-    t.string "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "date_joined"
-    t.string "degree"
-    t.string "food_allergies"
-    t.string "research_topic"
-  end
 
   create_table "attendees", primary_key: "attendee_id", id: :bigint, default: -> { "nextval('attendees_id_seq'::regclass)" }, force: :cascade do |t|
     t.boolean "attended"
@@ -50,5 +36,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_195751) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "members", primary_key: "member_id", id: :bigint, default: -> { "nextval('members_id_seq'::regclass)" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.integer "points"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_joined"
+    t.string "degree"
+    t.string "food_allergies"
+    t.string "research_topic"
+  end
+
   add_foreign_key "attendees", "events", primary_key: "event_id"
+  add_foreign_key "attendees", "members", primary_key: "member_id"
 end

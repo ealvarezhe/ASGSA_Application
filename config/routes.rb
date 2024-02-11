@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :events do
+    resources :attendees
     member do
       get 'delete'
     end
