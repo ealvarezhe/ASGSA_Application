@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Editing role</h1>
+
+  <%= turbo_frame_tag "edit_role", src: edit_role_path(@role) do %>
+    <%= render "form", role: @role %>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to "Show this role", @role, class: "btn btn-secondary mr-2", data: { turbo_frame: "show_role" } %>
+    <%= link_to "Back to roles", roles_path, class: "btn btn-secondary", data: { turbo_frame: "roles" } %>
+  </div>
+</div>

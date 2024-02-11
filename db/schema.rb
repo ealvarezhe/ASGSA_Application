@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2024_02_10_181026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
+  
   create_table "attendees", primary_key: "attendee_id", id: :bigint, default: -> { "nextval('attendees_id_seq'::regclass)" }, force: :cascade do |t|
     t.boolean "attended"
     t.boolean "rsvp"
@@ -36,7 +36,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_181026) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "members", primary_key: "member_id", id: :bigint, default: -> { "nextval('members_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "member_roles", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "members", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -47,9 +54,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_181026) do
     t.date "date_joined"
     t.string "degree"
     t.string "food_allergies"
-    t.string "research_topic"
+    t.string "res_topic"
+    t.string "res_lab"
+    t.string "res_pioneer"
+    t.string "res_description"
+    t.text "area_of_study"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "description"
+    t.time "send_time"
+    t.date "send_date"
+    t.boolean "is_sent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer "role_id"
+    t.string "name"
+    t.string "permissions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "attendees", "events", primary_key: "event_id"
   add_foreign_key "attendees", "members", primary_key: "member_id"
+  add_foreign_key "notifications", "events", primary_key: "event_id"
 end
