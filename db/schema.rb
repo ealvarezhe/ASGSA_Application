@@ -13,8 +13,8 @@
 ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "members", force: :cascade do |t|
+  
+    create_table "members", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -32,4 +32,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_233903) do
     t.text "area_of_study"
   end
 
+  create_table "attendees", primary_key: "attendee_id", id: :bigint, default: -> { "nextval('attendees_id_seq'::regclass)" }, force: :cascade do |t|
+    t.boolean "attended"
+    t.boolean "rsvp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.bigint "member_id"
+  end
+
+  create_table "events", primary_key: "event_id", id: :bigint, default: -> { "nextval('events_id_seq'::regclass)" }, force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.time "start_time"
+    t.time "end_time"
+    t.date "date"
+    t.string "description"
+    t.integer "capacity"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "attendees", "events", primary_key: "event_id"
 end
