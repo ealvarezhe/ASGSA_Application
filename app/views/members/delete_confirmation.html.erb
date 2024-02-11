@@ -1,0 +1,11 @@
+<h1>Are you sure you want to delete this member?</h1>
+
+<%= render @member %>
+
+</br>
+
+<div>
+  <%= button_to "Delete this member", @member, method: :delete, form: { style: "display: inline;"} %>
+  <%= button_to "Cancel", members_path, method: :get, form: { style: "display: inline;"}%>
+</div>
+

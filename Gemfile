@@ -73,3 +73,5 @@ gem "pagy", "~> 6.4"
 gem "pg_search", "~> 2.3"
 
 gem "bootstrap", "~> 4.1"
+
+gem 'yaml_db'
