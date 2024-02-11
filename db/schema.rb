@@ -79,6 +79,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_181026) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "members", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.integer "points"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_joined"
+    t.string "degree"
+    t.string "food_allergies"
+    t.string "res_topic"
+    t.string "res_lab"
+    t.string "res_pioneer"
+    t.string "res_description"
+    t.text "area_of_study"
+  end
+
   add_foreign_key "attendees", "events", primary_key: "event_id"
   add_foreign_key "attendees", "members", primary_key: "member_id"
   add_foreign_key "notifications", "events", primary_key: "event_id"
