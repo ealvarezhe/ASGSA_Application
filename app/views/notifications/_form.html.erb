@@ -23,12 +23,17 @@
 
   <div>
     <%= form.label :send_date, style: "display: block" %>
-    <%= form.date_field :send_date %>
+    <%= form.date_field :send_date, min: Date.today %>
   </div>
 
   <div>
     <%= form.label :is_sent, style: "display: block" %>
     <%= form.check_box :is_sent %>
+  </div>
+
+  <div>
+    <%= form.label :event, style: "display: block" %>
+    <%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}) %>          
   </div>
 
   <div>
