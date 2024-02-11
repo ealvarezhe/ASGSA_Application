@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
 <h1>Roles</h1>
 
-<div id="roles">
-  <% @roles.each do |role| %>
-    <%= render role %>
-    <p>
-      <%= link_to "Show this role", role %>
-    </p>
-  <% end %>
-</div>
+<%= form_with url: "", method: :get, data: { turbo_frame: "roles", turbo_action: "advance" } do |form| %>
+  Show <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()" } %>
+
+  Search <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()" %>
+<% end %>
+
+<%= turbo_frame_tag "roles" do %>
+  <div class="table">
+    <div class="table-header-group">
+      <%= sort_link_to "Role ID", :role_id, class: "table-cell pr-4", data: { turbo_action: "advance" } %>
+      <%= sort_link_to "Name", :name, class: "table-cell pr-4", data: { turbo_action: "advance" } %>
+      <%= sort_link_to "Permissions", :permissions, class: "table-cell pr-4", data: { turbo_action: "advance" } %>
+    </div>
+
+    <%= render @roles %>
+  </div>
+  <%== pagy_nav @pagy %>
+<% end %>
 
 <%= link_to "New role", new_role_path %>

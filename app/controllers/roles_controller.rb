@@ -4,6 +4,16 @@ class RolesController < ApplicationController
   # GET /roles or /roles.json
   def index
     @roles = Role.all
+    @roles = @roles.search(params[:query]) if params[:query].present?
+    @pagy, @roles = pagy @roles.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ role_id name permissions }.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /roles/1 or /roles/1.json
