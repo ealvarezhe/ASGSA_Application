@@ -7,8 +7,9 @@ class Attendee < ApplicationRecord
   private
 
   def unique_member_and_event
+    existing_attendee = Attendee.find_by(member_id: member_id, event_id: event_id)
 
-    if Attendee.exists?(member_id: member_id, event_id: event_id)
+    if existing_attendee && existing_attendee != self
       errors.add(:base, "RSVP for this event has already been created")
     end
   end

@@ -19,6 +19,11 @@ class AttendeesController < ApplicationController
 
   # GET /attendees/1/edit
   def edit
+    @event = Event.find(params[:event_id])
+    @attendee = Attendee.find(params[:id])
+
+    @attendee.update(attended: !@attendee.attended)
+    redirect_to event_attendees_path(@event)
   end
 
   # POST /attendees or /attendees.json
@@ -66,6 +71,11 @@ class AttendeesController < ApplicationController
       format.html { redirect_to event_attendees_path(Event.find(event_id)), notice: "RSVP was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def attended
+    @event = Event.find(params[:event_id])
+    @attendees = @event.attendees.where(attended: true)
   end
 
   private

@@ -19,7 +19,8 @@
 					<%= link_to("Show", event_path(event), class: 'action show') %> |
 					<%= link_to("Edit", edit_event_path(event), class: 'action edit') %> |
 					<%= link_to("Delete", delete_event_path(event), class: 'action delete') %> |
-					<%= link_to("Show RSVP", event_attendees_path(event))%>
+					<%= link_to("Show RSVP", event_attendees_path(event))%> |
+					<%= link_to("Show Attended", attended_event_attendees_path(event))%>
 				</p>
 			<% end %>
 		</ul>
