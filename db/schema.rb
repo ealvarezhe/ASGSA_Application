@@ -36,8 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "member_roles", primary_key: "member_role_id", id: :integer, default: nil, force: :cascade do |t|
-    t.bigserial "id", null: false
+  create_table "member_roles", primary_key: "member_role_id", id: :bigint, default: -> { "nextval('member_roles_id_seq'::regclass)" }, force: :cascade do |t|
     t.integer "member_id"
     t.integer "role_id"
     t.datetime "created_at", null: false
@@ -72,8 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
     t.integer "event_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.integer "role_id"
+  create_table "roles", primary_key: "role_id", id: :bigint, default: -> { "nextval('roles_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "name"
     t.string "permissions"
     t.datetime "created_at", null: false
@@ -81,7 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
   end
 
   add_foreign_key "attendees", "events", primary_key: "event_id"
-  add_foreign_key "member_roles", "members"
-  add_foreign_key "member_roles", "roles"
+  add_foreign_key "attendees", "members", primary_key: "member_id"
+  add_foreign_key "member_roles", "members", primary_key: "member_id"
+  add_foreign_key "member_roles", "roles", primary_key: "role_id"
   add_foreign_key "notifications", "events", primary_key: "event_id"
 end
