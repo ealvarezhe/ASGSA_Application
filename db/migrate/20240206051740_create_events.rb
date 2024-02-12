@@ -1,6 +1,6 @@
 class CreateEvents < ActiveRecord::Migration[7.1]
   def change
-    create_table :events do |t|
+    create_table :events, primary_key: "event_id" do |t|
       t.string :name
       t.string :location
       t.time :start_time
