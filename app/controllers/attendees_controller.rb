@@ -19,6 +19,11 @@ class AttendeesController < ApplicationController
 
   # GET /attendees/1/edit
   def edit
+    @event = Event.find(params[:event_id])
+    @attendee = Attendee.find(params[:id])
+
+    @attendee.update(attended: !@attendee.attended)
+    redirect_to event_attendees_path(@event)
   end
 
   # POST /attendees or /attendees.json

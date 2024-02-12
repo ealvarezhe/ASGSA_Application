@@ -6,8 +6,15 @@
   <% @attendees.each do |attendee| %>
     <% member = Member.find(attendee.member_id) %>
     <p>
-     <%= member.first_name + " " + member.last_name  %>
-     <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
+    <%= member.first_name + " " + member.last_name + " " %>
+    <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
+    <% if !attendee.attended %>
+      <%= "Member has not been checked in" %>
+      <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
+    <% else %>
+      <%= "Member is checked in" %>
+      <%= link_to "Uncheck Member", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
+    <% end %>
     </p>
   <% end %>
 </div>
