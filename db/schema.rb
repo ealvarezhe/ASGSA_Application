@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "members", force: :cascade do |t|
+  create_table "members", primary_key: "member_id", id: :bigint, default: -> { "nextval('members_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
