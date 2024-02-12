@@ -1,15 +1,15 @@
-<div class="container">
-  <h1>Show role</h1>
+<%= turbo_frame_tag "roles" do %>
+  <div class="container">
+    <h1>Show role</h1>
 
-  <%= turbo_frame_tag "show_role", src: role_path(@role) do %>
     <%= render @role %>
-  <% end %>
 
-  <div class="mt-4">
-    <%= link_to "Edit this role", edit_role_path(@role), class: "btn btn-primary mr-2", data: { turbo_frame: "edit_role" } %>
-    <%= link_to "Back to roles", roles_path, class: "btn btn-secondary", data: { turbo_frame: "roles" } %>
-    <%= button_to "Destroy this role", @role, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %>
+    <div class="mt-4">
+      <%= link_to "Edit this role", edit_role_path(@role), class: "btn btn-primary mr-2", data: { turbo_frame: "edit_role" } %>
+      <%= link_to "Back to roles", roles_path, class: "btn btn-secondary", data: { turbo_frame: "roles" } %>
+      <%= button_to "Destroy this role", @role, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %>
+    </div>
   </div>
-</div>
+<% end %>
 
 
