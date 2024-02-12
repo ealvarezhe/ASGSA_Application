@@ -1,25 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
-  # Assuming FactoryBot is set up for 'member'
-  subject { build(:member) }
+  # Define a valid member directly
+  let(:valid_attributes) {
+    {
+      first_name: "John",
+      last_name: "Doe",
+      email: "john.doe@example.com",
+      points: 100,
+      position: "Member",
+      date_joined: Date.today,
+      degree: "Bachelor",
+      res_topic: "Topic",
+      res_lab: "Lab",
+      res_pioneer: "Pioneer",
+      res_description: "Description",
+      area_of_study: "Study Area",
+      food_allergies: "None"
+    }
+  }
 
-  describe 'validations' do
+  context 'validations' do
     it 'is valid with valid attributes' do
-      expect(subject).to be_valid
+      member = Member.new(valid_attributes)
+      expect(member).to be_valid
     end
 
     it 'is not valid without a first_name' do
-      subject.first_name = nil
-      expect(subject).not_to be_valid
+      invalid_attributes = valid_attributes.merge(first_name: nil)
+      member = Member.new(invalid_attributes)
+      expect(member).not_to be_valid
     end
 
     it 'is not valid without a last_name' do
-      subject.last_name = nil
-      expect(subject).not_to be_valid
+      invalid_attributes = valid_attributes.merge(last_name: nil)
+      member = Member.new(invalid_attributes)
+      expect(member).not_to be_valid
     end
 
-    
+    it 'is not valid with negative points' do
+      member = Member.new(valid_attributes.merge(points: -10))
+      expect(member).not_to be_valid
+    end
   end
 end
-
