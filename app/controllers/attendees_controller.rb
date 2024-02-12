@@ -73,6 +73,11 @@ class AttendeesController < ApplicationController
     end
   end
 
+  def attended
+    @event = Event.find(params[:event_id])
+    @attendees = @event.attendees.where(attended: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendee

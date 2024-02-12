@@ -14,11 +14,16 @@ Rails.application.routes.draw do
   root "events#index"
 
   resources :events do
+    # attendees resources
     resources :attendees do
+      collection do
+        get 'attended'
+      end
       member do
         get 'delete'
       end
     end
+    # end attendees resources
     member do
       get 'delete'
     end

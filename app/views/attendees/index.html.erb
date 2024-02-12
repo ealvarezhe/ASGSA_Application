@@ -8,6 +8,7 @@
     <p>
     <%= member.first_name + " " + member.last_name + " " %>
     <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
+    <br>
     <% if !attendee.attended %>
       <%= "Member has not been checked in" %>
       <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
