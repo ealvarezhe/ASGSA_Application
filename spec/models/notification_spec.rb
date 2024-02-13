@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Notification, type: :model do
+  let(:valid_event) { Event.create!(
+    name: "Test Event",
+    location: "College Station",
+    start_time: Time.now + 2.hour,
+    end_time: Time.current,
+    date: Date.today,
+    description: "This is a description for test event",
+    capacity: 20,
+    points: 3
+  ) }
   #Define a valid member
   let(:valid_attributes){
     {
@@ -8,7 +18,7 @@ RSpec.describe Notification, type: :model do
       send_time: Time.new(),
       send_date: Date.today,
       is_sent: false,
-      event_id: Event.create.id
+      event_id: valid_event.id
     }
   }
 
