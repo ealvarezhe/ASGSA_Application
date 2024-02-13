@@ -38,8 +38,29 @@ RSpec.describe Member, type: :model do
       expect(member).not_to be_valid
     end
 
+    it 'is not valid without an email' do
+      member = Member.new(valid_attributes.merge(email: nil))
+      expect(member).not_to be_valid
+    end
+
     it 'is not valid with negative points' do
       member = Member.new(valid_attributes.merge(points: -10))
+      expect(member).not_to be_valid
+    end
+
+    it 'is not valid position' do 
+      member = Member.new(valid_attributes.merge(position: nil))
+      expect(member).not_to be_valid
+    end
+
+    it 'is not valid without a date_joined' do
+      member = Member.new(valid_attributes.merge(date_joined: nil))
+      expect(member).not_to be_valid
+    end    
+
+    # If none enter 'None'
+    it 'is not valid without listing food_allergies' do
+      member = Member.new(valid_attributes.merge(food_allergies: nil))
       expect(member).not_to be_valid
     end
   end
