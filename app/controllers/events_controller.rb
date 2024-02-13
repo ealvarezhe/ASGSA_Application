@@ -13,12 +13,16 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
-      redirect_to events_path
-    else
-      flash[:alert] = "Error creating event."
-      render('new')
-    end
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to event_path(@event), notice: "Event was successfully created." }
+        format.json { render :show, status: :create, location: @event }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end 
   end
 
   def edit
@@ -27,12 +31,16 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
-      redirect_to event_path(@event)
-    else
-      flash[:alert] = "Error updating event"
-      render('edit')
-    end
+
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to event_path(@event), notice: "Event was successfully updated." }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end 
   end
 
   def delete
@@ -42,48 +50,26 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to events_path
+
+    respond_to do |format|
+      format.html { redirect_to events_path, notice: "Event was successfully deleted." }
+      format.json { head :no_content }
+    end
   end
 
   private
 
   def event_params
-    permitted_params = params.require(:event).permit(
+    params.require(:event).permit(
       :name,
       :location,
+      :start_time,
+      :end_time,
       :date,
       :description,
       :capacity,
       :points
     )
-
-    # Check and format start_time
-    if params[:event][:start_hour].present? && params[:event][:start_minute].present? && params[:event][:start_am_pm].present?
-      start_hour = params[:event][:start_hour].to_i
-      start_minute = params[:event][:start_minute].to_i
-      start_am_pm = params[:event][:start_am_pm]
-
-      if start_hour == 0
-        permitted_params[:start_time] = nil
-      else
-        permitted_params[:start_time] = "#{start_hour}:#{start_minute.to_s.rjust(2, '0')} #{start_am_pm}"
-      end
-    end
-
-    # Check and format end_time
-    if params[:event][:end_hour].present? && params[:event][:end_minute].present? && params[:event][:end_am_pm].present?
-      end_hour = params[:event][:end_hour].to_i
-      end_minute = params[:event][:end_minute].to_i
-      end_am_pm = params[:event][:end_am_pm]
-
-      if end_hour == 0
-        permitted_params[:end_time] = nil
-      else
-        permitted_params[:end_time] = "#{end_hour}:#{end_minute.to_s.rjust(2, '0')} #{end_am_pm}"
-      end
-    end
-
-    permitted_params
   end
 
 

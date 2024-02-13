@@ -1,39 +1,33 @@
-<% if flash[:alert].present? %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %>
+<% if @event.errors.any? %>
+  <div style="color: red">
+    <p>Error when submitting</p>
   </div>
 <% end %>
 
 <table summary="Event form fields">
   <tr>
     <th>Name</th>
-    <td><%= f.text_field(:name) %></td>
+    <td><%= f.text_field(:name, required: true) %></td>
   </tr>
   <tr>
     <th>Location</th>
-    <td><%= f.text_field(:location) %></td>
+    <td><%= f.text_field(:location, required: true) %></td>
   </tr>
   <tr>
     <th>Start Time</th>
     <td>
-      <%= f.number_field(:start_hour, value: "00", class: 'time-field', min: 0, max: 12) %>
-      :
-      <%= f.number_field(:start_minute, value: "00", class: 'time-field', min: 0, max: 59) %>
-      <%= f.select(:start_am_pm, ['AM', 'PM'], class: 'time-field') %>
+      <%= f.time_field(:start_time, required: true) %></td>
     </td>
   </tr>
   <tr>
     <th>End Time</th>
     <td>
-      <%= f.number_field(:end_hour, value: "00", class: 'time-field', min: 0, max: 12) %>
-      :
-      <%= f.number_field(:end_minute, value: "00", class: 'time-field', min: 0, max: 59) %>
-      <%= f.select(:end_am_pm, ['AM', 'PM'], class: 'time-field') %>
+      <%= f.time_field(:end_time, required: true) %></td>
     </td>
   </tr>
   <tr>
     <th>Date</th>
-    <td><%= f.date_field(:date) %></td>
+    <td><%= f.date_field(:date, required: true, min: Date.today - 1) %></td>
   </tr>
   <tr>
     <th>Description</th>
@@ -41,28 +35,10 @@
   </tr>
   <tr>
     <th>Capacity</th>
-    <td><%= f.text_field(:capacity) %></td>
+    <td><%= f.number_field(:capacity, min: 1) %> *Leave blank if there is no limit</td>
   </tr>
   <tr>
     <th>Points</th>
-    <td><%= f.text_field(:points) %></td>
+    <td><%= f.number_field(:points, required: true, min: 0) %></td>
   </tr>
 </table>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const timeFields = document.querySelectorAll('.time-field');
-    timeFields.forEach(field => {
-      field.addEventListener('input', function(event) {
-        let value = event.target.value;
-        // Remove non-numeric characters
-        value = value.replace(/\D/g, '');
-        // Limit the length to two characters
-        value = value.slice(0, 2);
-        event.target.value = value;
-        console.log("Value of time field:", value);
-      });
-    });
-  });
-</script>
