@@ -13,7 +13,11 @@
 
   <p><%= "Name: " + @event.name %></p>
 
-  <p>Member Id: <%= form.text_field(:member_id) %></p>
+  <p>
+    <label>
+    Member Id: 
+    </label>
+    <%= form.text_field(:member_id) %></p>
 
 
   <%= form.hidden_field :event_id, value: @event.event_id %>

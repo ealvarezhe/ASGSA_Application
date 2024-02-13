@@ -37,6 +37,7 @@ class AttendeesController < ApplicationController
         format.json { render :show, status: :created, location: @attendee }
       end
     else
+      @attendee.errors.add(:member_id, "Invalid Member Id")
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }

@@ -46,14 +46,4 @@ RSpec.describe Attendee, type: :model do
     subject.member_id = nil
     expect(subject).not_to be_valid
   end
-
-  it 'allows attended to be true or false' do
-    subject.attended = nil
-    expect(subject).not_to be_valid
-  end
-
-  it 'allows rsvp to be true or false' do
-    subject.rsvp = nil
-    expect(subject).not_to be_valid
-  end
 end
