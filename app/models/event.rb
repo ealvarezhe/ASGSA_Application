@@ -1,5 +1,4 @@
 class Event < ApplicationRecord
-    attr_accessor :start_am_pm
-    attr_accessor :end_am_pm
+    validates_presence_of :name, :location, :start_time, :end_time, :date, :points
     has_many :attendees
 end
