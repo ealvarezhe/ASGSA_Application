@@ -3,6 +3,10 @@ class Attendee < ApplicationRecord
   belongs_to :member
 
   validate :unique_member_and_event
+  validates :member_id, presence: true
+  validates :event_id, presence: true
+  validates :attended, presence: false
+  validates :rsvp, presence: false
 
   private
 

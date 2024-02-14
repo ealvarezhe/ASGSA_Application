@@ -37,6 +37,7 @@ class AttendeesController < ApplicationController
         format.json { render :show, status: :created, location: @attendee }
       end
     else
+      @attendee.errors.add(:member_id, "Invalid Member Id")
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
@@ -46,15 +47,6 @@ class AttendeesController < ApplicationController
 
   # PATCH/PUT /attendees/1 or /attendees/1.json
   def update
-    respond_to do |format|
-      if @attendee.update(attendee_params)
-        format.html { redirect_to attendee_url(@attendee), notice: "Attendee was successfully updated." }
-        format.json { render :show, status: :ok, location: @attendee }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @attendee.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def delete
