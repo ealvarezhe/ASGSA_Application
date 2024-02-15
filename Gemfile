@@ -83,3 +83,5 @@ gem 'yaml_db'
 
 gem 'rexml'
 gem 'brakeman'
+gem 'webdrivers'
+gem 'simplecov', require: false
