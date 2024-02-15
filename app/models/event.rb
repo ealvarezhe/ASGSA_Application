@@ -5,7 +5,7 @@ class Event < ApplicationRecord
     validates :end_time, presence: true
     validates :date, presence: true
     # validates :description
-    validates :capacity, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+    validates :capacity, numericality: {only_integer: true, greater_than_or_equal_to: 0}, allow_blank: true
     validates :points, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
     has_many :attendees
