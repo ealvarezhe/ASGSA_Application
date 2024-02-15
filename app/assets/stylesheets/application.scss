@@ -28,3 +28,15 @@
 .nav-link {
     color: white;
 }
+
+.profile-icon {
+    max-height: 50px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.nav-item-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
