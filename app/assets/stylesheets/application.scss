@@ -15,3 +15,28 @@
  */
 
 @import "bootstrap";
+
+.navbar-custom {
+    background-color: #500000;
+}
+
+.navbar-brand {
+    max-height: 100px;
+    width: auto;
+}
+
+.nav-link {
+    color: white;
+}
+
+.profile-icon {
+    max-height: 50px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.nav-item-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
