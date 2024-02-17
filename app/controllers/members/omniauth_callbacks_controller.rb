@@ -1,6 +1,6 @@
 class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
-      member = Member.from_google(**from_google_params)
+      member, @first_time = Member.from_google(**from_google_params)
   
       if member.present?
         sign_out_all_scopes
@@ -19,7 +19,11 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   
     def after_sign_in_path_for(resource_or_scope)
-      stored_location_for(resource_or_scope) || root_path
+      if @first_time
+        edit_member_path
+      else
+        stored_location_for(resource_or_scope) || root_path
+      end
     end
   
     private

@@ -14,7 +14,9 @@ class Member < ApplicationRecord
   has_many :attendees
 
   def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)
+    first_time = !Member.exists?(email: email)
     return nil unless email =~ /@tamu.edu\z/
-    create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Test", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
+    member = create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Member", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
+    [member, first_time]
   end
 end

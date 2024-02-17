@@ -124,6 +124,8 @@ GEM
     faraday-net_http (3.1.0)
       net-http
     ffi (1.16.3)
+    font-awesome-sass (6.5.1)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -393,6 +395,7 @@ DEPENDENCIES
   debug
   devise
   error_highlight (>= 0.4.0)
+  font-awesome-sass (~> 6.5.1)
   importmap-rails
   jbuilder
   omniauth
