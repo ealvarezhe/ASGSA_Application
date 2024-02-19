@@ -19,11 +19,7 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   
     def after_sign_in_path_for(resource_or_scope)
-      if @first_time
-        edit_member_path
-      else
-        stored_location_for(resource_or_scope) || root_path
-      end
+      stored_location_for(resource_or_scope) || root_path
     end
   
     private

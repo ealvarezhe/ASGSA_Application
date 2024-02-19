@@ -4,6 +4,11 @@ class Members::SessionsController < Devise::SessionsController
     end
   
     def after_sign_in_path_for(resource_or_scope)
-      stored_location_for(resource_or_scope) || root_path
+      if resource_or_scope.is_a?(Member) && resource_or_scope.current_sign_in_at == resource_or_scope.last_sign_in_at
+        edit_member_path
+      else
+        stored_location_for(resource_or_scope) || root_path
+      end
     end
+
   end
