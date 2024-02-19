@@ -12,11 +12,27 @@ class Member < ApplicationRecord
   validates :degree, presence: true
   validates :food_allergies, presence: true
   has_many :attendees
+  has_many :member_roles
+  has_many :roles, through: :member_roles
+
+  def admin?
+    member_roles.exists?(role_id: Role.find_by(name: 'Admin').id)
+  end
+
+  def officer?
+    roles.exists?(name: 'officer')
+  end
+
+  def member?
+    roles.exists?(name: 'member')
+  end
 
   def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)
     first_time = !Member.exists?(email: email)
     return nil unless email =~ /@tamu.edu\z/
     member = create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Member", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
+    admin_role_id = Role.find_by(name: 'Admin').id
+    MemberRole.find_or_create_by!(member_id: member.member_id, role_id: admin_role_id) if first_time
     [member, first_time]
   end
 end
