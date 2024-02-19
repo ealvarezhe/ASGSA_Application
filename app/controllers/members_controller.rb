@@ -1,9 +1,18 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy delete_confirmation]
 
-  # GET /members or /members.json
   def index
     @members = Member.all
+    @members = @members.search(params[:query]) if params[:query].present?
+    @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ member_id first_name last_name position points date_joined res_topic }.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /members/1 or /members/1.json

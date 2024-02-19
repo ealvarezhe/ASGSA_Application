@@ -1,6 +1,8 @@
 class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include PgSearch::Model
+  pg_search_scope :search, against: [:member_id, :first_name, :last_name, :email, :position, :points, :date_joined, :res_topic], using: { tsearch: { prefix: true } }
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   # Validate presence of essential attributes
   validates :first_name, presence: true
@@ -20,11 +22,11 @@ class Member < ApplicationRecord
   end
 
   def officer?
-    roles.exists?(name: 'officer')
+    member_roles.exists?(role_id: Role.find_by(name: 'Officer').id)
   end
 
   def member?
-    roles.exists?(name: 'member')
+    member_roles.exists?(role_id: Role.find_by(name: 'Member').id)
   end
 
   def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)
