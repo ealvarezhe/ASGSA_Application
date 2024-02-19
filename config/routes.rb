@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
+  devise_scope :member do
+    get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
+    get 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
+  end
 
   resources :roles
 
@@ -11,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root "events#index"
+  root "dashboards#show"
 
   resources :events do
     # attendees resources

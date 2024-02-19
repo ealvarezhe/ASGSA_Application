@@ -1,4 +1,7 @@
 class Member < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
   # Validate presence of essential attributes
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -9,4 +12,11 @@ class Member < ApplicationRecord
   validates :degree, presence: true
   validates :food_allergies, presence: true
   has_many :attendees
+
+  def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)
+    first_time = !Member.exists?(email: email)
+    return nil unless email =~ /@tamu.edu\z/
+    member = create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Member", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
+    [member, first_time]
+  end
 end
