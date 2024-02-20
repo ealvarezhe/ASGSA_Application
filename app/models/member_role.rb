@@ -1,4 +1,6 @@
 class MemberRole < ApplicationRecord
+    include PgSearch::Model
+    pg_search_scope :search, against: [:member_id, :first_name, :last_name, :name], using: { tsearch: { prefix: true } }
     belongs_to :member
     belongs_to :role
     validates :member_id, presence: true
