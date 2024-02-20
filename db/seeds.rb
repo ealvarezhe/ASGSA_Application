@@ -12,7 +12,7 @@ Role.create!([{
     permissions: "Create, Read, Update, Delete"
 },
 {
-    name:"Officerr",
+    name:"Officer",
     permissions: "Create, Read, Update"
 },
 {

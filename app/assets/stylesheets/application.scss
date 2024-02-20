@@ -17,6 +17,8 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$font-family-base: 'Oswald';
+
 .navbar-custom {
     background-color: #500000;
 }
@@ -45,7 +47,7 @@
 .container {
     text-align: center;
     width: 100%;
-    background-image: url('ASGSA_logo_Facebook_2.png');
+    background-image: url('tamu_stock.jpg');
     background-size: cover;
     background-position: center;
 }

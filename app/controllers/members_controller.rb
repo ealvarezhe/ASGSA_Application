@@ -63,6 +63,7 @@ class MembersController < ApplicationController
 
   # DELETE /members/1 or /members/1.json
   def destroy
+    
     @member.destroy!
 
     respond_to do |format|

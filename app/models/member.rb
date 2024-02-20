@@ -14,7 +14,7 @@ class Member < ApplicationRecord
   validates :degree, presence: true
   validates :food_allergies, presence: true
   has_many :attendees
-  has_many :member_roles
+  has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
 
   def admin?

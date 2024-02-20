@@ -5,7 +5,13 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if member.present?
         sign_out_all_scopes
         flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
-        sign_in_and_redirect member, event: :authentication
+        sign_in member, event: :authentication
+
+        if @first_time
+          redirect_to edit_member_path(member)
+        else
+          redirect_to stored_location_for(member) || root_path
+        end
       else
         flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
         redirect_to new_member_session_path
