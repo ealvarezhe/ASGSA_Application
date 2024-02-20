@@ -9,9 +9,13 @@
 #   end
 Role.create!([{
     name:"Admin",
-    permissions: "Create"
+    permissions: "Create, Read, Update, Delete"
 },
 {
-    name:"member",
-    permissions: "View"
+    name:"Officerr",
+    permissions: "Create, Read, Update"
+},
+{
+    name:"Member",
+    permissions: "Read"
 }])
