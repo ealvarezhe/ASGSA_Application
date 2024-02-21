@@ -12,18 +12,23 @@
   <% end %>
 
   <div>
-    <%= form.label :member_role_id, style: "display: block" %>
-    <%= form.number_field :member_role_id %>
+    <label>Member ID</label>
+    <p><%= member_role.member_id %></p>
   </div>
 
   <div>
-    <%= form.label :member_id, style: "display: block" %>
-    <%= form.number_field :member_id %>
+    <label>First Name</label>
+    <p><%= member_role.member.first_name %></p>
+  </div>
+
+  <div>
+    <label>Last Name</label>
+    <p><%= member_role.member.last_name %></p>
   </div>
 
   <div>
     <%= form.label :role_id, style: "display: block" %>
-    <%= form.number_field :role_id %>
+    <%= form.collection_select :role_id, Role.all, :id, :name %>
   </div>
 
   <div>

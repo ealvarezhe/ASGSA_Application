@@ -1,66 +1,34 @@
-<div id="<%= dom_id member %>">
-  <p>
-    <strong>First name:</strong>
+<div id="<%= dom_id member %>" class="table-row">
+   <div class="table-cell pr-4">
+    <%= member.member_id %>
+  </div>
+
+  <div class="table-cell pr-4">
     <%= member.first_name %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Last name:</strong>
+  <div class="table-cell pr-4">
     <%= member.last_name %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Email:</strong>
+  <div class="table-cell pr-4">
     <%= member.email %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Points:</strong>
-    <%= member.points %>
-  </p>
-
-  <p>
-    <strong>Position:</strong>
+  <div class="table-cell pr-4">
     <%= member.position %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Date Joined:</strong>
+  <div class="table-cell pr-4">
+    <%= member.points %>
+  </div>
+
+  <div class="table-cell pr-4">
     <%= member.date_joined %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Degree:</strong>
-    <%= member.degree %>
-  </p>
-
-  <p>
-    <strong>Research Topic:</strong>
+  <div class="table-cell pr-4">
     <%= member.res_topic %>
-  </p>
-
-  <p>
-    <strong>Research Lab:</strong>
-    <%= member.res_lab %>
-  </p>
-
-  <p>
-    <strong>Research Pioneer:</strong>
-    <%= member.res_pioneer %>
-  </p>
-
-  <p>
-    <strong>Research Description:</strong>
-    <%= member.res_description %>
-  </p>
-
-  <p>
-    <strong>Area of Study:</strong>
-    <%= member.area_of_study %>
-  </p>
-
-  <strong>Food Allergies:</strong>
-    <%= member.food_allergies %>
-  </p>
+  </div>
 
 </div>

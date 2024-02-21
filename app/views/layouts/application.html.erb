@@ -32,7 +32,10 @@
           <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
+          <% if member_signed_in? && current_member.admin? %>
+            <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
+          <% end %>
           <% if member_signed_in? %>
             <li class="nav-item"><%= link_to "Sign Out", destroy_member_session_path, class: "nav-link" %></li>
           <% end %>

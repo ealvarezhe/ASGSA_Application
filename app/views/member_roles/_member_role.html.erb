@@ -1,17 +1,18 @@
-<div id="<%= dom_id member_role %>">
-  <p>
-    <strong>Id:</strong>
-    <%= member_role.member_role_id %>
-  </p>
-
-  <p>
-    <strong>Member:</strong>
+<div id="<%= dom_id member_role %>" class="table-row">
+   <div class="table-cell pr-4">
     <%= member_role.member_id %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Role:</strong>
-    <%= member_role.role_id %>
-  </p>
+  <div class="table-cell pr-4">
+    <%= member_role.member.first_name %>
+  </div>
 
+  <div class="table-cell pr-4">
+    <%= member_role.member.last_name %>
+  </div>
+
+  <div class="table-cell pr-4">
+    <%= member_role.role.name %>
+  </div>
 </div>
+
