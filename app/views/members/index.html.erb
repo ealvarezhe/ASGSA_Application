@@ -31,39 +31,39 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-          <th scope="col">Member ID</th>
+          <% if can_see_all_attributes %>
+            <th scope="col">Member ID</th>
+          <% end %>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
           <% if can_see_all_attributes %>
+            <th scope="col">Email</th>
             <th scope="col">Position</th>
             <th scope="col">Points</th>
-            <th scope="col">Date Joined</th>
-            <th scope="col">Additional Info</th>
           <% end %>
+          <th scope="col">Date Joined</th>
+          <th scope="col">Additional Info</th>
           <th scope="col" colspan="3">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @members.each do |member| %>
           <tr>
-            <td><%= member.member_id %></td>
+            <% if can_see_all_attributes %>
+              <td><%= member.member_id %></td>
+            <% end %>
             <td><%= member.first_name %></td>
             <td><%= member.last_name %></td>
-            <td><%= member.email %></td>
             <% if can_see_all_attributes %>
+              <td><%= member.email %></td>
               <td><%= member.position %></td>
               <td><%= member.points %></td>
-              <td><%= member.date_joined %></td>
-              <td><%= member.res_topic %></td>
             <% end %>
+            <td><%= member.date_joined %></td>
+            <td><%= member.res_topic %></td>
             <% if personal_info %>
               <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
-            <% end %>
-            <% if can_see_all_attributes %>
               <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
-            <% end %>
-            <% if personal_info %>
               <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>
             <% end %>
           </tr>
