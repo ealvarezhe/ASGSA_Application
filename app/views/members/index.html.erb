@@ -1,3 +1,7 @@
+<% # Assuming @current_user is the current logged-in user %>
+<% can_see_all_attributes = policy(current_member).admin_officer? %>
+<% personal_info = policy(current_member).admin_officer_member_info? %>
+
 <%= turbo_frame_tag "members" do %>
   <p id="notice" class="mb-4"><%= notice %></p>
 
@@ -31,10 +35,12 @@
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Position</th>
-          <th scope="col">Points</th>
-          <th scope="col">Date Joined</th>
-          <th scope="col">Additional Info</th>
+          <% if can_see_all_attributes %>
+            <th scope="col">Position</th>
+            <th scope="col">Points</th>
+            <th scope="col">Date Joined</th>
+            <th scope="col">Additional Info</th>
+          <% end %>
           <th scope="col" colspan="3">Actions</th>
         </tr>
       </thead>
@@ -45,13 +51,21 @@
             <td><%= member.first_name %></td>
             <td><%= member.last_name %></td>
             <td><%= member.email %></td>
-            <td><%= member.position %></td>
-            <td><%= member.points %></td>
-            <td><%= member.date_joined %></td>
-            <td><%= member.res_topic %></td>
-            <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
-            <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
-            <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>
+            <% if can_see_all_attributes %>
+              <td><%= member.position %></td>
+              <td><%= member.points %></td>
+              <td><%= member.date_joined %></td>
+              <td><%= member.res_topic %></td>
+            <% end %>
+            <% if personal_info %>
+              <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
+            <% end %>
+            <% if can_see_all_attributes %>
+              <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
+            <% end %>
+            <% if personal_info %>
+              <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
