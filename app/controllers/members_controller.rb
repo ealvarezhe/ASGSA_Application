@@ -22,20 +22,24 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
+    authorize @member
     @member = Member.new
   end
 
   # GET /members/1/edit
   def edit
+    authorize @member
   end
 
   # GET /members/1/delete_confirmation
   def delete_confirmation
+    authorize @member
     # Render delete_confirmation view
   end
 
   # POST /members or /members.json
   def create
+    authorize @member
     @member = Member.new(member_params)
 
     respond_to do |format|
@@ -51,6 +55,7 @@ class MembersController < ApplicationController
 
   # PATCH/PUT /members/1 or /members/1.json
   def update
+    authorize @member
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
@@ -64,7 +69,7 @@ class MembersController < ApplicationController
 
   # DELETE /members/1 or /members/1.json
   def destroy
-    
+    authorize @member
     @member.destroy!
 
     respond_to do |format|

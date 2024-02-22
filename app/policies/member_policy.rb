@@ -12,13 +12,22 @@ class MemberPolicy < ApplicationPolicy
       end
     end
   end
+ 
+
+  def show?
+    admin_officer_member_info? # Users can see their own profile
+  end
+  
+  def new?
+    admin_officer?
+  end
 
   def create?
     admin_officer? # Only admins and officers can create new members
   end
 
-  def show?
-    admin_officer_member_info? # Users can see their own profile
+  def edit?
+    admin_officer_member_info?
   end
 
   def update?
@@ -32,6 +41,8 @@ class MemberPolicy < ApplicationPolicy
   def delete_confirmation?
     user.admin? || record.id == user.id
   end
+
+
 
   def admin_officer_member_info?
     user.admin? || user.officer? || record.id == user.id
