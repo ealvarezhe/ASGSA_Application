@@ -78,8 +78,6 @@ class MembersController < ApplicationController
     end
   end
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
@@ -91,8 +89,4 @@ class MembersController < ApplicationController
       params.require(:member).permit(:first_name, :last_name, :email, :points, :position, :date_joined, :degree, :food_allergies, :res_topic, :res_lab, :res_pioneer, :res_description, :area_of_study)
     end
 
-    def user_not_authorized
-      flash[:alert] = 'You are not authorized to perform this action.'
-      redirect_to(request.referrer || root_path)
-    end
 end
