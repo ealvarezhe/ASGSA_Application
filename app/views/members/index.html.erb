@@ -1,6 +1,5 @@
 <% # Assuming @current_user is the current logged-in user %>
 <% can_see_all_attributes = policy(current_member).admin_officer? %>
-<% personal_info = policy(current_member).admin_officer_member_info? %>
 
 <%= turbo_frame_tag "members" do %>
   <p id="notice" class="mb-4"><%= notice %></p>
@@ -61,7 +60,7 @@
             <% end %>
             <td><%= member.date_joined %></td>
             <td><%= member.res_topic %></td>
-            <% if personal_info %>
+            <% if can_see_all_attributes || member == current_member %>
               <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
               <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
               <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>

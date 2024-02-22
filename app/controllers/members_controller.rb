@@ -22,8 +22,8 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    authorize @member
     @member = Member.new
+    authorize @member
   end
 
   # GET /members/1/edit
@@ -39,8 +39,8 @@ class MembersController < ApplicationController
 
   # POST /members or /members.json
   def create
-    authorize @member
     @member = Member.new(member_params)
+    authorize @member
 
     respond_to do |format|
       if @member.save
@@ -78,6 +78,8 @@ class MembersController < ApplicationController
     end
   end
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
@@ -87,5 +89,10 @@ class MembersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def member_params
       params.require(:member).permit(:first_name, :last_name, :email, :points, :position, :date_joined, :degree, :food_allergies, :res_topic, :res_lab, :res_pioneer, :res_description, :area_of_study)
+    end
+
+    def user_not_authorized
+      flash[:alert] = 'You are not authorized to perform this action.'
+      redirect_to(request.referrer || root_path)
     end
 end
