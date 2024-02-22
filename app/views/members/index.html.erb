@@ -1,4 +1,4 @@
-<% # Assuming @current_user is the current logged-in user %>
+<% # Check if current_member is admin or officer %>
 <% can_see_all_attributes = policy(current_member).admin_officer? %>
 
 <%= turbo_frame_tag "members" do %>
@@ -73,4 +73,6 @@
   <%== pagy_nav @pagy %>
 <% end %>
 
-<%= link_to "Add New member", new_member_path %>
+<% if can_see_all_attributes %>
+  <%= link_to "Add New member", new_member_path %>
+<% end %>
