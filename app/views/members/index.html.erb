@@ -40,6 +40,7 @@
             <th scope="col">Position</th>
             <th scope="col">Points</th>
           <% end %>
+          <th scope="col">Degree</th>
           <th scope="col">Date Joined</th>
           <th scope="col">Additional Info</th>
           <th scope="col" colspan="3">Actions</th>
@@ -58,12 +59,13 @@
               <td><%= member.position %></td>
               <td><%= member.points %></td>
             <% end %>
+            <td><%= member.degree %></td>
             <td><%= member.date_joined %></td>
             <td><%= member.res_topic %></td>
             <% if can_see_all_attributes || member == current_member %>
               <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
               <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
-              <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>
+              <td><%= button_to "Delete", delete_confirmation_member_path(member), method: :get, class: "btn btn-danger" %></td>
             <% end %>
           </tr>
         <% end %>
@@ -71,8 +73,4 @@
     </table>
   </div>
   <%== pagy_nav @pagy %>
-<% end %>
-
-<% if can_see_all_attributes %>
-  <%= link_to "Add New member", new_member_path %>
 <% end %>

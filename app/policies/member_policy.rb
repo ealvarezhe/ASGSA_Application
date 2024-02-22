@@ -35,11 +35,11 @@ class MemberPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? || record.id == user.id
+    admin_officer?
   end
 
   def delete_confirmation?
-    user.admin? || record.id == user.id
+    admin_officer?
   end
 
 
