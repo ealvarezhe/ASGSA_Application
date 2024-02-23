@@ -1,6 +1,9 @@
 <% # Check if current_member is admin or officer %>
 <% can_see_all_attributes = policy(current_member).admin_officer? %>
 
+<!-- Style only included when the current controller is member and the current action is index -->
+<%= stylesheet_link_tag 'member', media: 'all', 'data-turbolinks-track': 'reload' if controller_name == 'members' && action_name == 'index' %>
+
 <%= turbo_frame_tag "members" do %>
   <p id="notice" class="mb-4"><%= notice %></p>
 
@@ -61,10 +64,19 @@
             <% end %>
             <td><%= member.degree %></td>
             <td><%= member.date_joined %></td>
-            <td><%= member.res_topic %></td>
+            <td class="td-content" id="dropDownButton<%= member.member_id %>" onclick="toggleDropdown('<%= member.member_id %>')">
+              <div class="drop-down">
+                Research Topic: <%= member.res_topic %> &#9660;
+              </div>
+              <div class="info-cell" id="dropDownContent<%= member.member_id %>" style="display: none;">
+                Research Lab: <%= member.res_lab %> <br> 
+              </div>  
+            </td>
             <% if can_see_all_attributes || member == current_member %>
               <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
               <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
+            <% end %>
+            <% if can_see_all_attributes %>
               <td><%= button_to "Delete", delete_confirmation_member_path(member), method: :get, class: "btn btn-danger" %></td>
             <% end %>
           </tr>
@@ -73,4 +85,5 @@
     </table>
   </div>
   <%== pagy_nav @pagy %>
+  <%= javascript_include_tag 'member_index' %>
 <% end %>
