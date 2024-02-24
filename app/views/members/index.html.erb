@@ -1,3 +1,9 @@
+<% # Check if current_member is admin or officer %>
+<% can_see_all_attributes = policy(current_member).admin_officer? %>
+
+<!-- Style only included when the current controller is member and the current action is index -->
+<%= stylesheet_link_tag 'member', media: 'all', 'data-turbolinks-track': 'reload' if controller_name == 'members' && action_name == 'index' %>
+
 <%= turbo_frame_tag "members" do %>
   <p id="notice" class="mb-4"><%= notice %></p>
 
@@ -27,12 +33,17 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-          <th scope="col">Member ID</th>
+          <% if can_see_all_attributes %>
+            <th scope="col">Member ID</th>
+          <% end %>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Position</th>
-          <th scope="col">Points</th>
+          <% if can_see_all_attributes %>
+            <th scope="col">Email</th>
+            <th scope="col">Position</th>
+            <th scope="col">Points</th>
+          <% end %>
+          <th scope="col">Degree</th>
           <th scope="col">Date Joined</th>
           <th scope="col">Additional Info</th>
           <th scope="col" colspan="3">Actions</th>
@@ -41,22 +52,41 @@
       <tbody>
         <% @members.each do |member| %>
           <tr>
-            <td><%= member.member_id %></td>
+            <% if can_see_all_attributes %>
+              <td><%= member.member_id %></td>
+            <% end %>
             <td><%= member.first_name %></td>
             <td><%= member.last_name %></td>
-            <td><%= member.email %></td>
-            <td><%= member.position %></td>
-            <td><%= member.points %></td>
+            <% if can_see_all_attributes %>
+              <td><%= member.email %></td>
+              <td><%= member.position %></td>
+              <td><%= member.points %></td>
+            <% end %>
+            <td><%= member.degree %></td>
             <td><%= member.date_joined %></td>
-            <td><%= member.res_topic %></td>
-            <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
-            <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
-            <td><%= button_to "Destroy", member, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", form: { "data-turbo-frame": "_top" } %></td>
+            <td class="td-content" id="dropDownButton<%= member.member_id %>" onclick="toggleDropdown('<%= member.member_id %>')">
+              <div class="drop-down">
+                Research Topic: <%= member.res_topic %> &#9660;
+              </div>
+              <div class="info-cell" id="dropDownContent<%= member.member_id %>" style="display: none;">
+                Research Lab: <%= member.res_lab %> <br> 
+                Research Pioneer: <%= member.res_pioneer %> <br>
+                Research Descriptions: <%= member.res_description %> <br>
+                Area of Study: <%= member.area_of_study %> <br>
+              </div>  
+            </td>
+            <% if can_see_all_attributes || member == current_member %>
+              <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
+            <% end %>
+            <% if can_see_all_attributes %>
+              <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
+              <td><%= button_to "Delete", delete_confirmation_member_path(member), method: :get, class: "btn btn-danger" %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
   <%== pagy_nav @pagy %>
+  <%= javascript_include_tag 'member_index' %>
 <% end %>
-

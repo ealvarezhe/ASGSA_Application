@@ -1,34 +1,54 @@
 <div id="<%= dom_id member %>" class="table-row">
-   <div class="table-cell pr-4">
+  <!-- <div class="table-cell pr-4">
     <%= member.member_id %>
+  </div>  This is commented-->
+
+  <div class="table-cell pr-4">
+    <p><strong>Full Name:</strong> <%= member.first_name %>, <%= member.last_name %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.first_name %>
+    <p><strong>Email:</strong> <%= member.email %> </p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.last_name %>
+    <p><strong>Position:</strong> <%= member.position %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.email %>
+    <p><strong>Points:</strong> <%= member.points %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.position %>
+    <p><strong>Date Joined:</strong> <%= member.date_joined %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.points %>
+    <p><strong>Degree:</strong> <%= member.degree %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.date_joined %>
+    <p><strong>Food Allergies:</strong> <%= member.food_allergies %></p>
   </div>
 
   <div class="table-cell pr-4">
-    <%= member.res_topic %>
+    <p><strong>Research Topic:</strong> <%= member.res_topic %></p>
+  </div>
+
+  <div class="table-cell pr-4">
+    <p><strong>Research Lab:</strong> <%= member.res_lab %></p>
+  </div>
+
+  <div class="table-cell pr-4">
+    <p><strong>Research Pioneer:</strong> <%= member.res_pioneer %></p>
+  </div>
+
+  <div class="table-cell pr-4">
+    <p><strong>Research Descriptions:</strong> <%= member.res_description %></p>
+  </div>
+
+  <div class="table-cell pr-4">
+    <p><strong>Area of Study:</strong> <%= member.area_of_study %></p>
   </div>
 
 </div>
