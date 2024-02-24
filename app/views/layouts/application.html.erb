@@ -38,12 +38,12 @@
           <% end %>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item nav-item-flex">
-            <%= link_to notifications_path, class: 'nav-link' do %>
-              <i class="fa fa-bell"></i>
-            <% end %>
-          </li>
           <% if member_signed_in? %>
+            <li class="nav-item nav-item-flex">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <i class="fa fa-bell"></i>
+              <% end %>
+            </li>
             <li class="nav-item dropdown">
               <input type="checkbox" id="profileDropdownCheck" class="dropdown-toggle-check">
               <label for="profileDropdownCheck" class="nav-link dropdown-toggle" id="profileDropdown">
@@ -54,6 +54,10 @@
                 <%= link_to 'Sign Out', destroy_member_session_path, class: 'dropdown-item' %>
               </div>
             </li>
+          <% else %>
+            <%= button_to member_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary' do %>
+              <i class="fab fa-google"></i> Sign in with Google
+            <% end %>
           <% end %>
         </ul>
       </div>
