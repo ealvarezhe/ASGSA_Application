@@ -1,10 +1,45 @@
 <%= link_to "Back to members", members_path %>
 <p style="color: green"><%= notice %></p>
-
-<%= render @member %>
-
-<div>
-  <%= link_to "Edit this member", edit_member_path(@member) %> |
-
-  <%= link_to "Delete this member", delete_confirmation_member_path(@member), method: :get %>
+<div class="show-member">
+  <div class="profile-section">
+    <div class="profile-image"> 
+      <%= image_tag @member.avatar_url, class: "avatar" %>
+    </div>
+    <div class="profile-details">
+      <h2><%= @member.first_name %>  <%= @member.last_name %></h2>
+      <table summary="Member detail view">
+        <tr>
+          <th>Points:</th>
+          <td><%= @member.points %></td>
+        </tr>
+        <tr>
+          <th>Email:</th>
+          <td><%= @member.email %></td>
+        </tr>
+        <!-- 
+        <tr>
+          <th>Position:</th>
+          <td><%= @member.position %></td>
+        </tr>
+        <tr>
+          <th>Date Joined:</th>
+          <td><%= @member.date_joined %></td>
+        </tr>
+        <tr>
+          <th>Research Topic:</th>
+          <td><%= @member.res_topic %></td>
+        </tr>
+        -->
+      </table>
+      <%= link_to "Edit", edit_member_path(@member) %>
+      <% if current_member.admin? %>
+        | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
+      <% end %>
+    </div>
+    
+    <div class="event-history">
+      <!-- Include event history here -->
+      <h1>Event History<h1>
+    </div>
+  </div>
 </div>

@@ -66,3 +66,31 @@ $font-family-base: 'Oswald';
     margin-bottom: 1em;
 }
 
+// Styling for member profiles
+
+.show-member {
+    display: flex;
+}
+
+.profile-section {
+    display: flex;
+    flex: 1; /* Take up remaining space */
+}
+
+.profile-details {
+    width: 70%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+}
+
+.event-history {
+    width: 30%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+}
+
+.avatar {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%; /* This will make the image circular */
+}
+  
+  
