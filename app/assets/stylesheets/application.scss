@@ -14,10 +14,12 @@
  *= require_self
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans+Narrow&display=swap');
+
+$font-family-base: 'Oswald', sans-serif;
+
 @import "bootstrap";
 @import "font-awesome";
-
-$font-family-base: 'Oswald';
 
 .navbar-custom {
     background-color: #500000;
@@ -47,9 +49,6 @@ $font-family-base: 'Oswald';
 .container {
     text-align: center;
     width: 100%;
-    background-image: url('tamu_stock.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .intro {
