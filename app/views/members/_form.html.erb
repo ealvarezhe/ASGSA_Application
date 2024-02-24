@@ -10,43 +10,62 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :degree, style: "display: block" %> 
-    <%= form.text_field :degree %>
-  </div>
   
-  <div>
-    <%= form.label "Research Topic", style: "display: block" %>
-    <%= form.text_field :res_topic %>
-  </div>
+  <table summary="Member form fields">
+    <tr>
+      <th>First Name</th>
+      <td><%= form.text_field(:first_name, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td><%= form.text_field(:last_name, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td><%= form.text_field(:email, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+    </tr>
+    <tr>
+      <th>Points</th>
+      <td><%= form.number_field(:points, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+    </tr>
+    <tr>
+      <th>Position</th>
+      <!-- Will restrict view here (current_user.officer? || current_user.admin?) and disable editing unless you are selected role --->
+      <td><%= form.collection_select(:role_id, Role.all, :id, :name, {}, { disabled: !(current_member.officer? || current_member.admin?) })%></td>
+    </tr>
+    <tr>
+      <th>Date Joined</th>
+      <td><%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today) %></td>
+    </tr>
+    <tr>
+      <th>Degree</th>
+      <td><%= form.text_field(:degree) %></td>
+    </tr>
+    <tr>
+      <th>Research Topic</th>
+      <td><%= form.text_field(:res_topic) %></td>
+    </tr>
+    <tr>
+      <th>Research Lab</th>
+      <td><%= form.text_field(:res_lab) %></td>
+    </tr>
+    <tr>
+      <th>Research Pioneer</th>
+      <td><%= form.text_field(:res_pioneer) %></td>
+    </tr>
+    <tr>
+      <th>Research Description</th>
+      <td><%= form.text_field(:res_description) %></td>
+    </tr>
+    <tr>
+      <th>Area of Study</th>
+      <td><%= form.text_field(:area_of_study) %></td>
+    </tr>
+    <tr>
+      <th>Food Allergies</th>
+      <td><%= form.text_field(:food_allergies, required: true) %></td>
+    </tr>
+  </table>
 
-  <div>
-    <%= form.label "Research Lab", style: "display: block" %>
-    <%= form.text_field :res_lab %>
-  </div> 
-
-  <div>
-    <%= form.label "Pioneer Researcher", style: "display: block" %>
-    <%= form.text_field :res_pioneer %>
-  </div> 
-
-  <div>
-    <%= form.label "Research Description", style: "display: block" %>
-    <%= form.text_field :res_description %>
-  </div> 
-
-  <div>
-    <%= form.label "Area of Study", style: "display: block" %>
-    <%= form.text_field :area_of_study %>
-  </div> 
-
-  <div>
-    <%= form.label "Food Allergies (None if N/A)", style: "display: block" %>
-    <%= form.text_field :food_allergies %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit %>
 <% end %>
