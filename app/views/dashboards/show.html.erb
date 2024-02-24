@@ -1,21 +1,18 @@
+<div>
+  <img class="img-fluid w-100" src="<%= image_path('tamu_stock2.jpg') %>" alt="Header Image">
+  <div class="header">
+      <h1 class="display-4" style="font-size: 3rem">Welcome to the Animal Science Graduate Student Association at Texas A&M University</h1>
+      <h1 class="display-4" style="font-size: 3rem"><br><br>Our Mission</h1>
+      <p class="lead">
+        ASGSA aims to foster close relationships among Animal Science graduate 
+        students and faculty among all disciplines of Animal Science at the 
+        Texas A&M University; to encourage leadership; to promote greater interest 
+        in the profession; and to promote participation in professional activities.
+      </p>
+  </div>
+</div>
+
 <div class="container mt-5">
-  <div class="jumbotron text-center bg-transparent">
-    <img class="img-fluid" src="<%= image_path('tamu_stock.jpg') %>" alt="Header Image">
-    <div class="container">
-      <h1 class="display-4">Welcome to the Animal Science Graduate Student Association</h1>
-    </div>
-  </div>
-
-  <div class="mission-statement my-5">
-    <h2 class="display-4">Mission Statement</h2>
-    <p class="lead">
-      ASGSA aims to foster close relationships among Animal Science graduate 
-      students and faculty among all disciplines of Animal Science at the 
-      Texas A&M University; to encourage leadership; to promote greater interest 
-      in the profession; and to promote participation in professional activities.
-    </p>
-  </div>
-
   <div class="upcoming-events my-5">
     <h2 class="display-4">Upcoming Events</h2>
     <% @events.last(3).each do |event| %>

@@ -26,7 +26,7 @@ $font-family-base: 'Oswald', sans-serif;
 }
 
 .navbar-brand {
-    max-height: 100px;
+    max-height: 10vh;
     width: auto;
 }
 
@@ -35,7 +35,7 @@ $font-family-base: 'Oswald', sans-serif;
 }
 
 .profile-icon {
-    max-height: 50px;
+    max-height: 5vh;
     width: auto;
     border-radius: 50%;
 }
@@ -65,3 +65,26 @@ $font-family-base: 'Oswald', sans-serif;
     margin-bottom: 1em;
 }
 
+.header {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    margin-top: 60px;
+}
+
+.dropdown-toggle-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+  
+.dropdown-toggle-check:checked ~ .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+}
