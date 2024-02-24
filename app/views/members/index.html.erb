@@ -70,13 +70,16 @@
               </div>
               <div class="info-cell" id="dropDownContent<%= member.member_id %>" style="display: none;">
                 Research Lab: <%= member.res_lab %> <br> 
+                Research Pioneer: <%= member.res_pioneer %> <br>
+                Research Descriptions: <%= member.res_description %> <br>
+                Area of Study: <%= member.area_of_study %> <br>
               </div>  
             </td>
             <% if can_see_all_attributes || member == current_member %>
               <td><%= link_to "Show", member, class: "btn btn-secondary" %></td>
-              <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
             <% end %>
             <% if can_see_all_attributes %>
+              <td><%= link_to "Edit", edit_member_path(member), class: "btn btn-primary" %></td>
               <td><%= button_to "Delete", delete_confirmation_member_path(member), method: :get, class: "btn btn-danger" %></td>
             <% end %>
           </tr>
