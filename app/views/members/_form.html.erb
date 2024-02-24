@@ -30,8 +30,7 @@
     </tr>
     <tr>
       <th>Position</th>
-      <!-- Will restrict view here (current_user.officer? || current_user.admin?) and disable editing unless you are selected role --->
-      <td><%= form.collection_select(:role_id, Role.all, :id, :name, {}, { disabled: !(current_member.officer? || current_member.admin?) })%></td>
+      <td><%= form.text_field(:position, disabled: !(current_member.admin?)) %></td>
     </tr>
     <tr>
       <th>Date Joined</th>
@@ -66,6 +65,8 @@
       <td><%= form.text_field(:food_allergies, required: true) %></td>
     </tr>
   </table>
+
+  <br>
 
   <%= form.submit %>
 <% end %>
