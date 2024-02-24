@@ -1,7 +1,7 @@
 <div>
-  <img class="img-fluid w-100" src="<%= image_path('tamu_stock2.jpg') %>" alt="Header Image">
+  <img class="img-fluid w-100" src="<%= image_path('tamu_stock.jpg') %>" alt="Header Image">
   <div class="header">
-      <h1 class="display-4" style="font-size: 3rem">Welcome to the Animal Science Graduate Student Association at Texas A&M University</h1>
+      <h1 class="display-4" style="font-size: 3rem">Welcome to the Texas A&M Animal Science Graduate Student Association</h1>
       <h1 class="display-4" style="font-size: 3rem"><br><br>Our Mission</h1>
       <p class="lead">
         ASGSA aims to foster close relationships among Animal Science graduate 
@@ -10,22 +10,54 @@
         in the profession; and to promote participation in professional activities.
       </p>
   </div>
-</div>
-
-<div class="container mt-5">
-  <div class="upcoming-events my-5">
+  <div class="upcoming-events">
     <h2 class="display-4">Upcoming Events</h2>
-    <% @events.last(3).each do |event| %>
-      <div class="event card mb-3">
-        <div class="card-body">
-          <h3 class="card-title"><%= event.date.strftime('%B %-d') %>: <%= event.name %></h3>
-          <p class="card-text"><%= event.description %></p>
-          <p class="card-text">Location: <%= event.location %></p>
-          <p class="card-text">Time: <%= event.start_time.strftime('%I:%M %p') %> - <%= event.end_time.strftime('%I:%M %p') %></p>
-          <p class="card-text">Capacity: <%= event.capacity %></p>
-          <p class="card-text">Points: <%= event.points %></p>
+    <div class="row">
+      <% @events.last(3).each do |event| %>
+        <div class="event card mb-3 col" style="margin-top: 3%; font-weight: 400;">
+          <div class="card-body">
+            <h3 class="card-title"><%= event.date.strftime('%m/%d') %> - <%= event.name %></h3>
+            <p class="card-text"><%= event.description %></p>
+            <p class="card-text">Location: <%= event.location %></p>
+            <p class="card-text">Time: <%= event.start_time.strftime('%I:%M %p') %> - <%= event.end_time.strftime('%I:%M %p') %></p>
+            <p class="card-text">Capacity: <%= event.capacity %></p>
+            <p class="card-text">Points: <%= event.points %></p>
+            <% if member_signed_in? %>
+              <%= link_to "RSVP", events_path, class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="display-4" style="font-size: 3rem; font-style: italic;">Connect With Us</h1>
+        <div class="social-icons">
+          <i class="fa-brands fa-instagram"></i> - @asgsa.tamu
+          <br>
+          <i class="fa-brands fa-facebook"></i> - Texas A&M Animal Science Graduate Student Association
+          <br>
+          <i class="fa-brands fa-x-twitter"></i> - @TAMUASGSA
+          <br>
+          <i class="fa-solid fa-envelope"></i> - asgsa@ag.tamu.edu
         </div>
       </div>
-    <% end %>
+      <div class="col-md-4" style="margin-left: 1%; margin-right: -1%;">
+        <h2 class="display-4" style="font-size: 3rem; font-style: italic;">Active Member Requirements</h2>
+        <div class="requirements">
+          <i class="fa-regular fa-square-check"></i> Pay membership dues (Fall Semester - by the October club meeting, Spring Semester - by the March club meeting)
+          <br>
+          <i class="fa-regular fa-square-check"></i> Attend no less than 50% of the regular club meetings of their membership period
+          <br>
+          <i class="fa-regular fa-square-check"></i> Participate in at least one philanthropic event and one social event within their membership period
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2 class="display-4" style="font-size: 3rem; margin-left: 20%; font-style: italic;">Help</h2>
+        <!-- Add your help section here -->
+      </div>
+    </div>
   </div>
 </div>
