@@ -1,34 +1,33 @@
 <div id="<%= dom_id member %>" class="table-row">
-   <div class="table-cell pr-4">
-    <%= member.member_id %>
-  </div>
 
-  <div class="table-cell pr-4">
-    <%= member.first_name %>
-  </div>
+<h2>Show Member</h2>
+<p style="color: green"><%= notice %></p>
 
-  <div class="table-cell pr-4">
-    <%= member.last_name %>
-  </div>
-
-  <div class="table-cell pr-4">
-    <%= member.email %>
-  </div>
-
-  <div class="table-cell pr-4">
-    <%= member.position %>
-  </div>
-
-  <div class="table-cell pr-4">
-    <%= member.points %>
-  </div>
-
-  <div class="table-cell pr-4">
-    <%= member.date_joined %>
-  </div>
-
-  <div class="table-cell pr-4">
-    <%= member.res_topic %>
-  </div>
+<table summary="Member detail view">
+  <tr>
+    <th>Name:</th>
+    <td><%= member.first_name %>  <%= member.last_name %></td>
+  </tr>
+  <tr>
+    <th>Email:</th>
+    <td><%= member.email %></td>
+  </tr>
+  <tr>
+    <th>Position:</th>
+    <td><%= member.position %></td>
+  </tr>
+  <tr>
+    <th>Points:</th>
+    <td><%= member.points %></td>
+  </tr>
+  <tr>
+    <th>Date Joined:</th>
+    <td><%= member.date_joined %></td>
+  </tr>
+  <tr>
+    <th>Research Topic:</th>
+    <td><%= member.res_topic %></td>
+  </tr>
+</table>
 
 </div>
