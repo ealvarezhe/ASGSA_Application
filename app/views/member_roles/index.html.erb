@@ -21,6 +21,15 @@
         <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control" %>
       </div>
     </div>
+
+    <div class="form-row align-items-center mb-3">
+      <div class="col-auto">
+        Filter by Role
+      </div>
+      <div class="col-auto">
+        <%= form.select :role, options_for_select(['Admin', 'Officer', 'Member'], selected: params[:role]), {}, { onchange: "this.form.requestSubmit()", class: "form-control" } %>
+      </div>
+    </div>
   <% end %>
 
   <div class="table-responsive">
