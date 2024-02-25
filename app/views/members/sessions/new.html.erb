@@ -23,7 +23,7 @@
             <p class="card-text">Capacity: <%= event.capacity %></p>
             <p class="card-text">Points: <%= event.points %></p>
             <% if member_signed_in? %>
-              <%= link_to "RSVP", events_path, class: "btn btn-primary" %>
+              <%= link_to "View Event", event_path(event), class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>
