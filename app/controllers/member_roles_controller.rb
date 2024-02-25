@@ -5,6 +5,9 @@ class MemberRolesController < ApplicationController
     @member_roles = MemberRole.all
     @member_roles = @member_roles.search(params[:query]) if params[:query].present?
     @pagy, @member_roles = pagy @member_roles.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    if params[:role].present?
+      @member_roles = @member_roles.joins(:role).where(roles: { name: params[:role] })
+    end
   end
 
   def sort_column
