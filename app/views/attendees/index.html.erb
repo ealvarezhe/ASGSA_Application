@@ -5,7 +5,7 @@
 <div id="attendees">
   <% @attendees.each do |attendee| %>
     <% member = Member.find(attendee.member_id) %>
-    <p>
+    <p> <strong>Name:</strong>
     <%= member.first_name + " " + member.last_name + " " %>
     <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
     <br>

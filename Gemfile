@@ -88,3 +88,5 @@ gem "omniauth-rails_csrf_protection"
 
 gem "font-awesome-sass", "~> 6.5.1"
 
+gem 'pundit' 
+

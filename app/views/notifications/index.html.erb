@@ -4,7 +4,14 @@
 
 <div id="notifications">
   <% @notifications.each do |notification| %>
-    <%= render notification %>
+    <p>
+      <strong>Event:</strong>
+      <%= notification.event.name %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%= notification.description %>
+    </p>
     <p>
       <%= link_to "Show this notification", notification %>
     </p>

@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
+<h1>Member Details</h1>
 <%= render @member %>
 
 <div>
-  <%= link_to "Edit this member", edit_member_path(@member) %> |
+  <% if policy(current_member).admin_officer? %>
+    <%= link_to "Edit this member", edit_member_path(@member) %> | 
+  <% end %>
   <%= link_to "Back to members", members_path %>
-
-  <%= button_to "Delete this member", delete_confirmation_member_path(@member), method: :get %>
+  <% if policy(current_member).admin_officer? %>
+    <%= button_to "Delete this member", delete_confirmation_member_path(@member), method: :get %>
+  <% end %>
 </div>
