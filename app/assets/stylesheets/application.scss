@@ -92,5 +92,14 @@ $font-family-base: 'Oswald';
     height: 100px; /* Adjust as needed */
     border-radius: 50%; /* This will make the image circular */
 }
-  
-  
+
+label.header {
+    display: block;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+}
