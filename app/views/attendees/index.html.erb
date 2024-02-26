@@ -7,14 +7,19 @@
     <% member = Member.find(attendee.member_id) %>
     <p> <strong>Name:</strong>
     <%= member.first_name + " " + member.last_name + " " %>
-    <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
+    <% if attendee.member_id == current_member.member_id %>
+      <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
+    <% end %> 
     <br>
-    <% if !attendee.attended %>
-      <%= "Member has not been checked in" %>
-      <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
-    <% else %>
-      <%= "Member is checked in" %>
-      <%= link_to "Uncheck Member", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
+    <%# Renders the check in feature if the current member is not a member %>
+    <% if current_member.position != "Member" %>
+      <% if !attendee.attended %>
+        <%= "Member has not been checked in" %>
+        <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
+      <% else %>
+        <%= "Member is checked in" %>
+        <%= link_to "Uncheck Member", edit_event_attendee_path(@event, attendee), class: 'action edit' %>
+      <% end %>
     <% end %>
     </p>
   <% end %>
