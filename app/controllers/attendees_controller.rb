@@ -15,6 +15,11 @@ class AttendeesController < ApplicationController
   def new
     @attendee = Attendee.new
     @event = Event.find(params[:event_id])
+    @current_time = Time.zone.now
+
+    date = @event.date
+
+    @event_time = @event.start_time.change(year: date.year, month: date.month, day: date.day)
   end
 
   # GET /attendees/1/edit
@@ -66,6 +71,13 @@ class AttendeesController < ApplicationController
   # DELETE /attendees/1 or /attendees/1.json
   def destroy
     event_id = @attendee.event_id
+    @member = Member.find(@attendee.member_id)
+
+    if @attendee.attended
+      @member.points -= Event.find(event_id).points
+      @member.update(points: @member.points)
+    end
+
     @attendee.destroy!
 
     respond_to do |format|
