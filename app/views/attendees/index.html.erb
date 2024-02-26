@@ -1,6 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>RSVP for event: <%= @event.name%></h1>
+<h1>
+  Members RSVP'd for event: <%= @event.name%>
+  <br>
+  Capacity: <%= @attendees.count %> / 
+  <% if @event.capacity == nil %>
+    Unlimited
+  <% else %>
+    <%= @event.capacity %>
+  <% end %>
+</h1>
+
 
 <div id="attendees">
   <% @attendees.each do |attendee| %>
@@ -11,8 +21,8 @@
       <%= link_to("Delete RSVP", delete_event_attendee_path(@event, attendee), class: 'action delete') %>
     <% end %> 
     <br>
-    <%# Renders the check in feature if the current member is not a member %>
-    <% if current_member.position != "Member" %>
+    <%# Renders the check in feature if the current user is not a member %>
+    <% if Role.find(MemberRole.find(current_member.member_id).role_id).name != "Member" %>
       <% if !attendee.attended %>
         <%= "Member has not been checked in" %>
         <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: 'action edit' %>

@@ -22,7 +22,7 @@ class EventsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
-    end 
+    end
   end
 
   def edit
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
-    end 
+    end
   end
 
   def delete

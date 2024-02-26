@@ -21,7 +21,16 @@ class AttendeesController < ApplicationController
   def edit
     @event = Event.find(params[:event_id])
     @attendee = Attendee.find(params[:id])
+    @member = Member.find(@attendee.member_id)
+    currentPoints = @member.points
 
+    if @attendee.attended
+      currentPoints -= @event.points
+    else
+      currentPoints += @event.points
+    end
+
+    @member.update(points: currentPoints)
     @attendee.update(attended: !@attendee.attended)
     redirect_to event_attendees_path(@event)
   end

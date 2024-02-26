@@ -8,5 +8,5 @@ class Event < ApplicationRecord
     validates :capacity, numericality: {only_integer: true, greater_than_or_equal_to: 0}, allow_blank: true
     validates :points, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
-    has_many :attendees
+    has_many :attendees, dependent: :destroy
 end
