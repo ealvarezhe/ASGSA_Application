@@ -11,62 +11,124 @@
     </div>
   <% end %>
   
-  <table summary="Member form fields">
-    <tr>
-      <th>First Name</th>
-      <td><%= form.text_field(:first_name, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Last Name</th>
-      <td><%= form.text_field(:last_name, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Email</th>
-      <td><%= form.text_field(:email, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Points</th>
-      <td><%= form.number_field(:points, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Position</th>
-      <td><%= form.text_field(:position, disabled: !(current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Date Joined</th>
-      <td><%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today) %></td>
-    </tr>
-    <tr>
-      <th>Degree</th>
-      <td><%= form.text_field(:degree) %></td>
-    </tr>
-    <tr>
-      <th>Research Topic</th>
-      <td><%= form.text_field(:res_topic) %></td>
-    </tr>
-    <tr>
-      <th>Research Lab</th>
-      <td><%= form.text_field(:res_lab) %></td>
-    </tr>
-    <tr>
-      <th>Research Pioneer</th>
-      <td><%= form.text_field(:res_pioneer) %></td>
-    </tr>
-    <tr>
-      <th>Research Description</th>
-      <td><%= form.text_field(:res_description) %></td>
-    </tr>
-    <tr>
-      <th>Area of Study</th>
-      <td><%= form.text_field(:area_of_study) %></td>
-    </tr>
-    <tr>
-      <th>Food Allergies</th>
-      <td><%= form.text_field(:food_allergies, required: true) %></td>
-    </tr>
-  </table>
+  
+  <div>
+  <%= form.label :"First Name", class: "header" %>
+  <%= form.text_field(:first_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+  </div>
+
+  <div>
+    <%= form.label :"Last Name", class: "header" %>
+    <%= form.text_field(:last_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+  </div>
+
+  <div>
+    <%= form.label :"Email", class: "header" %>
+    <%= form.text_field(:email, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+  </div>
+
+  <div>
+    <%= form.label :"Points", class: "header" %>
+    <%= form.number_field(:points, required: true, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %>
+  </div>
+
+  <div>
+    <%= form.label :"Position", class: "header" %>
+    <%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %>
+  </div>
+
+  <div>
+    <%= form.label :"Date Joined", class: "header" %>
+    <%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today) %>
+  </div>
+
+  <div>
+    <%= form.label :"Degree", class: "header" %>
+    <%= form.text_field(:degree) %>
+  </div>
+
+  <div>
+    <%= form.label :"Research Topic", class: "header" %>
+    <%= form.text_field(:res_topic) %>
+  </div>
+
+  <div>
+    <%= form.label :"Research Pioneer", class: "header" %>
+    <%= form.text_field(:res_pioneer) %>
+  </div>
+
+  <div>
+    <%= form.label :"Research Description", class: "header" %>
+    <%= form.text_field(:res_description) %>
+  </div>
+
+  <div>
+    <%= form.label :"Area of Study", class: "header" %>
+    <%= form.text_field(:area_of_study) %>
+  </div>
+
+  <div>
+    <%= form.label :"Food Allergies", class: "header" %>
+    <%= form.text_field(:food_allergies, required: true) %>
+  </div>
 
   <br>
 
   <%= form.submit %>
+<!--
+<table summary="Member form fields">
+  <tr>
+    <th>First Name</th>
+    <td><%= form.text_field(:first_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td><%= form.text_field(:last_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= form.text_field(:email, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+  </tr>
+  <tr>
+    <th>Points</th>
+    <td><%= form.number_field(:points, required: true, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %></td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <td><%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %></td>
+  </tr>
+  <tr>
+    <th>Date Joined</th>
+    <td><%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today) %></td>
+  </tr>
+  <tr>
+    <th>Degree</th>
+    <td><%= form.text_field(:degree) %></td>
+  </tr>
+  <tr>
+    <th>Research Topic</th>
+    <td><%= form.text_field(:res_topic) %></td>
+  </tr>
+  <tr>
+    <th>Research Lab</th>
+    <td><%= form.text_field(:res_lab) %></td>
+  </tr>
+  <tr>
+    <th>Research Pioneer</th>
+    <td><%= form.text_field(:res_pioneer) %></td>
+  </tr>
+  <tr>
+    <th>Research Description</th>
+    <td><%= form.text_field(:res_description) %></td>
+  </tr>
+  <tr>
+    <th>Area of Study</th>
+    <td><%= form.text_field(:area_of_study) %></td>
+  </tr>
+  <tr>
+    <th>Food Allergies</th>
+    <td><%= form.text_field(:food_allergies, required: true) %></td>
+  </tr>
+</table>
+-->
 <% end %>
