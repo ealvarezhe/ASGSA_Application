@@ -15,7 +15,7 @@ class MemberPolicy < ApplicationPolicy
  
 
   def show?
-    admin_officer_member_info? # Users can see their own profile
+    true # Information displayed by show is controlled by the view. But everyone can access. 
   end
   
   def new?
