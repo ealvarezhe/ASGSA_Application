@@ -9,6 +9,7 @@ class Event < ApplicationRecord
     validates :points, numericality: {only_integer: true, greater_than_or_equal_to: 0}
     validate :end_time_after_start_time
     has_many :attendees
+    has_many :attendees, dependent: :destroy
 
     private
 
@@ -19,4 +20,6 @@ class Event < ApplicationRecord
         errors.add(:end_time, "must be after the start time")
         end
     end
+
+    
 end

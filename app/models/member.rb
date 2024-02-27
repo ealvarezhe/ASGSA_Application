@@ -13,7 +13,7 @@ class Member < ApplicationRecord
   validates :date_joined, presence: true
   validates :degree, presence: true
   validates :food_allergies, presence: true
-  has_many :attendees
+  has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
 
@@ -33,7 +33,7 @@ class Member < ApplicationRecord
     first_time = !Member.exists?(email: email)
     return nil unless email =~ /@tamu.edu\z/
     member = create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Member", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
-    admin_role_id = Role.find_by(name: 'Admin').id
+    admin_role_id = Role.find_by(name: 'Member').id
     MemberRole.find_or_create_by!(member_id: member.member_id, role_id: admin_role_id) if first_time
     MemberMailer.with(member: member).new_member_email.deliver_now if first_time
     [member, first_time]
