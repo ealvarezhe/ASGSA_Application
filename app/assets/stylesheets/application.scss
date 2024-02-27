@@ -72,19 +72,13 @@ $font-family-base: 'Oswald';
     display: flex;
 }
 
-.profile-section {
+.profile-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
     display: flex;
     flex: 1; /* Take up remaining space */
-}
-
-.profile-details {
-    width: 70%; /* Adjust as needed */
-    // padding-left: 20px; /* Adjust spacing between details and event history */
-}
-
-.event-history {
-    width: 30%; /* Adjust as needed */
-    // padding-left: 20px; /* Adjust spacing between details and event history */
+    margin-bottom: 20px;
 }
 
 .avatar {
@@ -92,6 +86,55 @@ $font-family-base: 'Oswald';
     height: 100px; /* Adjust as needed */
     border-radius: 50%; /* This will make the image circular */
 }
+
+.profile {
+    width: 65%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+}
+
+.profile-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    margin-right: 30px
+}
+
+.item1 { grid-area: degree; }
+.item2 { grid-area: study; }
+.item3 { grid-area: topic; }
+.item4 { grid-area: lab; }
+.item5 { grid-area: pioneer; }
+.item6 { grid-area: description; }
+.item7 { grid-area: allergies; }
+
+.additional-info {
+    height: auto;
+    // border: 2px solid black;
+    display: grid;
+    grid-template-areas:
+    'degree study . .'
+    'topic lab pioneer .'
+    'description description allergies allergies';
+    align-items: start;
+    gap: 10px;
+    // background-color: #2196F3;
+    padding: 10px;
+}
+
+.event-history {
+    // border: 2px solid black;
+    width: 35%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+    text-align: center;
+}
+
+.events-list {
+    height: auto;
+    border: 2px solid black;
+}
+
+
+// Styling for member editing
 
 label.header {
     display: block;
@@ -108,10 +151,31 @@ label.header {
     margin-bottom: 5px;
 }
 
+.member-form-field input[type="text"],
+.member-form-field input[type="email"],
+.member-form-field input[type="date"],
+.member-form-field input[type="number"] {
+  width: 100%; /* Adjust the width as needed */
+  padding: 4px; /* Adjust padding as needed */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.member-form-field textarea {
+    height: 100px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
 .centered-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.member-form-field {
+    margin-bottom: 20px;
+    width: 25%; 
 }
 
 .form-row {
@@ -121,25 +185,5 @@ label.header {
     width: 25%;
 }
 
-.member-form-field {
-    margin-bottom: 20px;
-    width: 25%; 
-}
 
-.member-form-field input[type="text"],
-.member-form-field input[type="email"],
-.member-form-field input[type="date"],
-.member-form-field input[type="number"] {
-  width: 100%; /* Adjust the width as needed */
-  padding: 4px; /* Adjust padding as needed */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  margin-right: auto;
-}
-
-.member-form-field textarea {
-    height: 100px; /* Adjust the height as needed */
-    width: 100%; /* Adjust the width as needed */
-    padding: 4px; /* Adjust padding as needed */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
 
