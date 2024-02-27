@@ -1,0 +1,20 @@
+<h1>Contact Us</h1>
+
+<%= form_with(url: help_path, method: :post, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name, 'Your Name' %>
+    <%= form.text_field :name, value: current_member.first_name, readonly: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, 'Your Email' %>
+    <%= form.email_field :email, value: current_member.email, readonly: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issue, 'Your Issue' %>
+    <%= form.text_area :issue %>
+  </div>
+
+  <%= form.submit 'Send' %>
+<% end %>
