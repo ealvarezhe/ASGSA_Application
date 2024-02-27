@@ -1,45 +1,93 @@
-<%= link_to "Back to members", members_path %>
+<%= link_to "Member List", members_path %>
+<% if current_member.admin? %>
+  | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
+<% end %>
+
 <p style="color: green"><%= notice %></p>
+
 <div class="show-member">
-  <div class="profile-section">
-    <div class="profile-image"> 
-      <%= image_tag @member.avatar_url, class: "avatar" %>
-    </div>
-    <div class="profile-details">
-      <h2><%= @member.first_name %>  <%= @member.last_name %></h2>
-      <table summary="Member detail view">
-        <tr>
-          <th>Points:</th>
-          <td><%= @member.points %></td>
-        </tr>
-        <tr>
-          <th>Email:</th>
-          <td><%= @member.email %></td>
-        </tr>
-        <!-- 
-        <tr>
-          <th>Position:</th>
-          <td><%= @member.position %></td>
-        </tr>
-        <tr>
-          <th>Date Joined:</th>
-          <td><%= @member.date_joined %></td>
-        </tr>
-        <tr>
-          <th>Research Topic:</th>
-          <td><%= @member.res_topic %></td>
-        </tr>
-        -->
-      </table>
-      <%= link_to "Edit", edit_member_path(@member) %>
-      <% if current_member.admin? %>
-        | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
+
+  <div class="profile">
+    <div class="profile-header">
+      <div class="profile-image", style="margin-right: 30px"> 
+        <%= image_tag @member.avatar_url, class: "avatar" %>
+      </div>
+
+      <div class="profile-center">
+        <h2><%= @member.first_name %>  <%= @member.last_name %></h2>
+      </div>
+        
+      <div class="profile-center">
+        <strong>Position</strong>
+        <%= @member.position %>
+      </div>
+
+      <div class="profile-center">
+        <strong>Member Since</strong>
+        <%= @member.date_joined %>
+      </div>
+
+      <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
+        <div class="profile-center">
+          <strong>Email Address</strong>
+          <%= @member.email %>
+        </div>
+
+        <div class="profile-center">
+          <strong>Current Points</strong>
+          <%= @member.points %>
+        </div>
+        
+        <%= link_to "Edit", edit_member_path(@member) %>
       <% end %>
     </div>
-    
-    <div class="event-history">
-      <!-- Include event history here -->
-      <h1>Event History<h1>
+
+    <div class="additional-info">
+      <div class="profile-center item1">
+        <strong> Degree </strong>
+        <%= @member.degree  %>
+      </div>
+
+      <div class="profile-center item2">
+        <strong> Area of Study </strong>
+        <%= @member.area_of_study %>
+      </div>
+
+      <div class="profile-center item3">
+        <strong> Research Topic </strong>
+        <%= @member.res_topic  %>
+      </div>
+
+      <div class="profile-center item4">
+        <strong> Research Lab </strong>
+        <%= @member.res_lab  %>
+      </div>
+
+      <div class="profile-center item5">
+        <strong> Research Pioneer </strong>
+        <%= @member.res_pioneer  %>
+      </div>
+      
+      <div class="profile-center item6">
+        <strong> Research Description </strong>
+        <%= @member.res_description  %>
+      </div>
+
+      <div class="profile-center item7">
+        <strong> Food Allergies </strong>
+        <%= @member.food_allergies  %>
+      </div>
     </div>
   </div>
+
+  <div class="event-history">
+    <!-- Include event history here -->
+    <h1>Event History<h1>
+    <div class = "events-list">
+      
+    </div>
+
+    </div>
+  </div>
+
 </div>
