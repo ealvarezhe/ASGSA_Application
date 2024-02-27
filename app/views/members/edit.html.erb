@@ -1,10 +1,10 @@
 <div>
-  <%= link_to "Back to Profile", @member %> |
-  <%= link_to "Member List", members_path %>
+  <%= link_to "Back to Profile", @member %>
+  <!-- | <%= link_to "-", members_path %> -->
 </div>
 
 <h1 style="text-align: center">Edit Profile</h1>
-<p style="color: red; text-align: center">Some fields may be blocked due to insufficient privileges<p>
+<p style="color: red; text-align: center">Some fields can only be changed by Officers or Admins<p>
 
 <div style="text-align: center; margin-bottom: 10px"> 
   <%= image_tag @member.avatar_url, class: "avatar" %>
