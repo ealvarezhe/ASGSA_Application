@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Member notifications</h1>
+
+<div id="member_notifications">
+  <% @member_notifications.each do |member_notification| %>
+    <% if member_notification.member_id == current_member.id %> 
+      <%= render member_notification %>
+      <p>
+        <%= link_to "Show this member notification", member_notification %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "New member notification", new_member_notification_path %>

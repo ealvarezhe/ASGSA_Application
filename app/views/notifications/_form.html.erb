@@ -33,7 +33,8 @@
 
   <div>
     <%= form.label :event, style: "display: block" %>
-    <%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}) %>          
+    <div><%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}), include_blank: true %>
+    <p> Leave blank if the notification isn't for an event</p> </div>        
   </div>
 
   <div>

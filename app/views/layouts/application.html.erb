@@ -32,6 +32,7 @@
           <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'Notifications', notifications_path, class: 'nav-link' %></li>
           <% if member_signed_in? && current_member.admin? %>
             <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
@@ -40,7 +41,7 @@
         <ul class="navbar-nav">
           <% if member_signed_in? %>
             <li class="nav-item nav-item-flex">
-              <%= link_to notifications_path, class: 'nav-link' do %>
+              <%= link_to member_notifications_path, class: 'nav-link' do %>
                 <i class="fa fa-bell"></i>
               <% end %>
             </li>

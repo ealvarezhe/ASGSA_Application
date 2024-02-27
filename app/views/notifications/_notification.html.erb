@@ -1,11 +1,17 @@
 <div id="<%= dom_id notification %>">
-  <p>
-    <strong>Event:</strong>
-    <%= notification.event.name %>
-  </p>
+  
   <p>
     <strong>Description:</strong>
     <%= notification.description %>
+  </p>
+
+  <p>
+    <strong>Event:</strong>
+    <% if notification.event %>
+      <%= notification.event.name %>
+    <% else %>
+      N/a
+    <% end %>
   </p>
 
   <p>

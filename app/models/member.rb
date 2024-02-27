@@ -16,6 +16,8 @@ class Member < ApplicationRecord
   has_many :attendees
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
+  has_many :member_notifications, dependent: :destroy
+  has_many :notifications, through: :member_notifications
 
   def admin?
     member_roles.exists?(role_id: Role.find_by(name: 'Admin').id)

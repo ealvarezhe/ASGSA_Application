@@ -1,0 +1,16 @@
+<div id="<%= dom_id member_notification %>">
+  <p>
+    <strong>Member:</strong>
+    <%= member_notification.member.first_name%>
+  </p>
+
+  <p>
+    <strong>Notification:</strong>
+    <%= member_notification.notification.description %>
+  </p>
+
+  <p>
+    <strong>Seen:</strong>
+    <%= member_notification.seen %>
+  </p>
+</div>

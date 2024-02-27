@@ -1,0 +1,53 @@
+<%= form_with(model: notification) do |form| %>
+    <% if notification.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(notification.errors.count, "error") %> prohibited this notification from being saved:</h2>
+  
+        <ul>
+          <% notification.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <%= form.label :description, style: "display: block" %>
+      <%= form.text_field :description %>
+    </div>
+  
+    <div>
+      <%= form.label :send_time, style: "display: block" %>
+      <%= form.time_field :send_time %>
+    </div>
+  
+    <div>
+      <%= form.label :send_date, style: "display: block" %>
+      <%= form.date_field :send_date, min: Date.today %>
+    </div>
+  
+    <div>
+      <%= form.label :is_sent, style: "display: block" %>
+      <%= form.check_box :is_sent %>
+    </div>
+  
+    <div>
+      <%= form.label :event, style: "display: block" %>
+      <div><%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}), include_blank: true %>
+      <p> Leave blank if the notification isn't for an event</p> </div>        
+    </div>
+
+    
+    <%= form.fields_for :member_notifications do |member_notifications_fields| %>
+      <div>
+        <%= member_notifications_fields.label :member_id, style: "display: block" %>
+        <%= member_notifications_fields.text_field :member_id %>
+      </div>
+    <% end %>
+
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  

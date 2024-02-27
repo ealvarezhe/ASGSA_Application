@@ -13,6 +13,7 @@ class NotificationsController < ApplicationController
   # GET /notifications/new
   def new
     @notification = Notification.new
+    Member.count.times {@notification.member_notifications.build}
   end
 
   # GET /notifications/1/edit
@@ -22,9 +23,14 @@ class NotificationsController < ApplicationController
   # POST /notifications or /notifications.json
   def create
     @notification = Notification.new(notification_params)
+    @members = Member.all
 
     respond_to do |format|
       if @notification.save
+        @members.each do |mem|
+          @notification.member_notifications.create(member_id: mem.id, notification_id: @notification.id, seen: false)
+        end
+      
         format.html { redirect_to notification_url(@notification), notice: "Notification was successfully created." }
         format.json { render :show, status: :created, location: @notification }
       else
@@ -65,6 +71,11 @@ class NotificationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def notification_params
+      params.require(:notification).permit(:description, :send_time, :send_date, :is_sent, :event_id)
+    end
+
+    # Notifications list only for creation
+    def notification_params_create
       params.require(:notification).permit(:description, :send_time, :send_date, :is_sent, :event_id)
     end
 end
