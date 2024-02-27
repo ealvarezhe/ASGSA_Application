@@ -103,3 +103,43 @@ label.header {
     content: '*';
     color: red;
 }
+
+.member-form-field {
+    margin-bottom: 5px;
+}
+
+.centered-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 25%;
+}
+
+.member-form-field {
+    margin-bottom: 20px;
+    width: 25%; 
+}
+
+.member-form-field input[type="text"],
+.member-form-field input[type="email"],
+.member-form-field input[type="date"],
+.member-form-field input[type="number"] {
+  width: 100%; /* Adjust the width as needed */
+  padding: 4px; /* Adjust padding as needed */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  margin-right: auto;
+}
+
+.member-form-field textarea {
+    height: 100px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
