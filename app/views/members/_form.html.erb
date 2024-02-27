@@ -49,6 +49,11 @@
     <%= form.label :"Degree", class: "header" %>
     <%= form.text_field(:degree) %>
   </div>
+  
+  <div class="member-form-field">
+    <%= form.label :"Area of Study", class: "header" %>
+    <%= form.text_field(:area_of_study) %>
+  </div>
 
   <div class="member-form-field">
     <%= form.label :"Research Topic", class: "header" %>
@@ -61,85 +66,17 @@
   </div>
 
   <div class="member-form-field">
-    <%= form.label :"Research Pioneer", class: "header" %>
-    <%= form.text_field(:res_pioneer) %>
-  </div>
-
-  <div class="member-form-field">
     <%= form.label :"Research Description", class: "header" %>
     <%= form.text_area(:res_description, class: "research-description") %>
   </div>
 
-  <div class="member-form-field">
-    <%= form.label :"Area of Study", class: "header" %>
-    <%= form.text_field(:area_of_study) %>
-  </div>
 
   <div class="member-form-field">
     <%= form.label :"Food Allergies", class: "header required" %>
     <%= form.text_area(:food_allergies, required: true) %>
   </div>
-          
-  <br>
 
   <div class="form-row">
     <%= form.submit %>
   <div>
-
-  <!--
-  <table summary="Member form fields">
-    <tr>
-      <th>First Name</th>
-      <td><%= form.text_field(:first_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Last Name</th>
-      <td><%= form.text_field(:last_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Email</th>
-      <td><%= form.text_field(:email, required: true, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Points</th>
-      <td><%= form.number_field(:points, required: true, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Position</th>
-      <td><%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %></td>
-    </tr>
-    <tr>
-      <th>Date Joined</th>
-      <td><%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today) %></td>
-    </tr>
-    <tr>
-      <th>Degree</th>
-      <td><%= form.text_field(:degree) %></td>
-    </tr>
-    <tr>
-      <th>Research Topic</th>
-      <td><%= form.text_field(:res_topic) %></td>
-    </tr>
-    <tr>
-      <th>Research Lab</th>
-      <td><%= form.text_field(:res_lab) %></td>
-    </tr>
-    <tr>
-      <th>Research Pioneer</th>
-      <td><%= form.text_field(:res_pioneer) %></td>
-    </tr>
-    <tr>
-      <th>Research Description</th>
-      <td><%= form.text_field(:res_description) %></td>
-    </tr>
-    <tr>
-      <th>Area of Study</th>
-      <td><%= form.text_field(:area_of_study) %></td>
-    </tr>
-    <tr>
-      <th>Food Allergies</th>
-      <td><%= form.text_field(:food_allergies, required: true) %></td>
-    </tr>
-  </table>
-  -->
 <% end %>
