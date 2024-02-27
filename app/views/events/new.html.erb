@@ -8,6 +8,11 @@
 
     <%= render(partial: 'form', locals: {f: f}) %>
 
+    <div class="field">
+      <%= f.label :send_email, 'Send email to all members' %>
+      <%= check_box_tag :send_email %>
+    </div>
+
     <div class="form-buttons">
       <%= f.submit("Create Event") %>
     </div>

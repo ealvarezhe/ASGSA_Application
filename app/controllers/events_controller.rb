@@ -18,6 +18,9 @@ class EventsController < ApplicationController
       if @event.save
         format.html { redirect_to event_path(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :create, location: @event }
+        if params[:send_email] == "1"
+          MemberMailer.event_email(@event).deliver_now
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
