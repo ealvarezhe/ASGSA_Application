@@ -1,5 +1,6 @@
-.profile-icon2 {
-    max-height: 4vh;
-    width: auto;
-    border-radius: 50%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans+Narrow&display=swap');
+
+$font-family-base: 'Oswald', sans-serif;
+
+@import "bootstrap";
+@import "font-awesome";

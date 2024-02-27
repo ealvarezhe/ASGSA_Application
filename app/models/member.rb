@@ -13,7 +13,7 @@ class Member < ApplicationRecord
   validates :date_joined, presence: true
   validates :degree, presence: true
   validates :food_allergies, presence: true
-  has_many :attendees
+  has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
 
