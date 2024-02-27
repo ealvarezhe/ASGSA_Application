@@ -21,10 +21,14 @@ $font-family-base: 'Oswald', sans-serif;
 @import "bootstrap";
 @import "font-awesome";
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+.content {
+    flex: 1;
 }
 
 .navbar-custom {
@@ -43,6 +47,12 @@ html, body {
 
 .profile-icon {
     max-height: 5vh;
+    width: auto;
+    border-radius: 50%;
+}
+
+.profile-icon2 {
+    max-height: 4vh;
     width: auto;
     border-radius: 50%;
 }
@@ -80,19 +90,19 @@ html, body {
     text-align: center;
     color: black;
     font-weight: bold;
-    margin-top: 60px;
+    margin-top: 3.5em;
 }
 
 .upcoming-events {
     width: 75%;
     position: absolute;
-    top: 100%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: black;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid #ccc; /* Adjust color as needed */
     padding: 50px;
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
@@ -123,11 +133,23 @@ html, body {
     width: auto;
     margin: 1em 0;
     font-size: 1.5rem;
-    margin-bottom: 25%;
+    margin-bottom: 40%;
 }
 
 .requirements i {
     margin: 0.5rem 0;
+}
+
+.help {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+    margin-left: 20%
+}
+
+.help i {
+    margin: 2rem 0;
 }
 
 .dropdown-toggle-check {

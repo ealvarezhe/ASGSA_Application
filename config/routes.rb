@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     get 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
   end
 
+  get 'help', to: 'pages#help'
+  post 'help', to: 'pages#help'
+
   resources :roles
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
