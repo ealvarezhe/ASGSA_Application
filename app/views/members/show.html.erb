@@ -27,12 +27,12 @@
         <%= @member.date_joined %>
       </div>
 
+      <div class="profile-center">
+        <strong>Email Address</strong>
+        <%= @member.email %>
+      </div>
+      
       <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
-        <div class="profile-center">
-          <strong>Email Address</strong>
-          <%= @member.email %>
-        </div>
-
         <div class="profile-center">
           <strong>Current Points</strong>
           <%= @member.points %>
@@ -62,11 +62,6 @@
         <strong> Research Lab </strong>
         <%= @member.res_lab  %>
       </div>
-
-      <div class="profile-center item5">
-        <strong> Research Pioneer </strong>
-        <%= @member.res_pioneer  %>
-      </div>
       
       <div class="profile-center item6">
         <strong> Research Description </strong>
@@ -80,14 +75,15 @@
     </div>
   </div>
 
-  <div class="event-history">
-    <!-- Include event history here -->
-    <h1>Event History<h1>
-    <div class = "events-list">
-      
-    </div>
+  <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
+    <div class="event-history">
+      <h1>Event History<h1>
+      <div class = "events-list">
+        
+      </div>
 
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>
