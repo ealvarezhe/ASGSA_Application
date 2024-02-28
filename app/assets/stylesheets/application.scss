@@ -76,7 +76,7 @@ $font-family-base: 'Oswald';
 .profile {
     // margin: auto; 
     width: 100%;
-    // padding-left: 20px; /* Adjust spacing between details and event history */
+    // padding-right: 50px; /* Adjust spacing between details and event history */
 }
 
 .profile-header {
@@ -126,6 +126,7 @@ $font-family-base: 'Oswald';
 
 .event-history {
     // border: 2px solid black;    
+    // border-left: 2px solid black;
     right: 0;
     width: 50%; /* Adjust as needed */
     // padding-left: 20px; /* Adjust spacing between details and event history */
@@ -134,10 +135,11 @@ $font-family-base: 'Oswald';
 }
 
 .events-list {
-    height: auto;
+    height: 600px;
     // border: 2px solid black;
     font-size: medium;
     padding-top: 20px;
+    overflow-y: auto;
 }
 
 .event-member {
