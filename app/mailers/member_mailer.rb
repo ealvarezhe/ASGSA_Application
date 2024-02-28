@@ -1,3 +1,5 @@
+require 'cgi'
+
 class MemberMailer < ApplicationMailer
     def new_member_email
         @member = params[:member]
@@ -24,6 +26,9 @@ class MemberMailer < ApplicationMailer
             description: @event.description,
             timezone: 'America/Chicago'
         )
+
+        ics_content = CGI.unescape(@calendar_link.ical_url.split(',')[1])
+        attachments['event.ics'] = { mime_type: 'text/calendar', content: ics_content }
 
         mail(to: Member.pluck(:email), subject: 'ASGSA: New Upcoming Event!')
     end
