@@ -71,7 +71,55 @@ $font-family-base: 'Oswald';
     margin-bottom: 1em;
 }
 
-// Styling for member profiles
+
+// Edit Page Styling
+
+label.header {
+    display: block;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="date"],
+.form-field input[type="number"] {
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-field textarea {
+    height: 100px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.centered-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-field {
+    margin-bottom: 20px;
+    width: 25%; 
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 25%;
+}
+
+// Show Member Syling
 
 .show-member {
     display: flex;
@@ -129,7 +177,7 @@ $font-family-base: 'Oswald';
     word-break: auto;
 }
 
-.event-history {
+.member-event-history {
     // border: 2px solid black;    
     // border-left: 2px solid black;
     right: 0;
@@ -139,7 +187,7 @@ $font-family-base: 'Oswald';
     // text-align: center;
 }
 
-.events-list {
+.member-events-list {
     height: 800px;
     // border: 2px solid black;
     font-size: medium;
@@ -147,62 +195,23 @@ $font-family-base: 'Oswald';
     overflow-y: auto;
 }
 
-.event-member {
-    border: 2px solid black;
-    width: 50%;
+// Event Show Styling
+
+.show-event {
+
+}
+
+.event-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 35%;
     margin: auto;
-}
-
-// Styling for member editing
-
-label.header {
-    display: block;
-    text-transform: capitalize;
-    font-weight: bold;
-}
-
-.required::after {
-    content: '*';
-    color: red;
-}
-
-.member-form-field {
-    margin-bottom: 5px;
-}
-
-.member-form-field input[type="text"],
-.member-form-field input[type="email"],
-.member-form-field input[type="date"],
-.member-form-field input[type="number"] {
-  width: 100%; /* Adjust the width as needed */
-  padding: 4px; /* Adjust padding as needed */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-.member-form-field textarea {
-    height: 100px; /* Adjust the height as needed */
-    width: 100%; /* Adjust the width as needed */
-    padding: 4px; /* Adjust padding as needed */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-.centered-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.member-form-field {
     margin-bottom: 20px;
-    width: 25%; 
 }
 
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    width: 25%;
+.event-info {
+    justify-content: center;
+    text-align: center;
 }
-
-
-
