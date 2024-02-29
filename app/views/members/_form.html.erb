@@ -14,12 +14,12 @@
   <div class="form-row">
     <div>
       <%= form.label :"First Name", class: "label-header required" %>
-      <%= form.text_field(:first_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+      <%= form.text_field(:first_name, required: true, disabled: !(policy(current_member).admin_officer?)) %>
     </div>
     
     <div>
       <%= form.label :"Last Name", class: "label-header required" %>
-      <%= form.text_field(:last_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+      <%= form.text_field(:last_name, required: true, disabled: !(policy(current_member).admin_officer?)) %>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
   <div class="form-row">
     <div>
       <%= form.label :"Points", class: "label-header required" %>
-      <%= form.number_field(:points, required: true, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %>
+      <%= form.number_field(:points, required: true, min: 0, disabled: !(policy(current_member).admin_officer?)) %>
     </div>
   
     <div>
@@ -42,7 +42,7 @@
 
   <div class="form-field">
     <%= form.label :"Position", class: "label-header required" %>
-    <%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %>
+    <%= form.text_field(:position, required: true, disabled: !(policy(current_member).admin?)) %>
   </div>
   
   <div class="form-field">

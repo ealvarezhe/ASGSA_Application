@@ -31,7 +31,7 @@
         <%= @member.email %>
       </div>
       
-      <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
+      <% if policy(current_member).admin_officer_member_info? %>
         <div class="profile-center">
           <strong>Current Points</strong>
           <%= @member.points %>
@@ -76,7 +76,7 @@
 
   </div>
 
-  <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
+  <% if policy(current_member).admin_officer_member_info? %>
     <div class="member-event-history">
       <h1 style="text-align: center; text-decoration: underline">Event History<h1>
       <div class="member-events-list">
