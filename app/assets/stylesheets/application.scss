@@ -19,6 +19,11 @@
 
 $font-family-base: 'Oswald';
 
+* {
+    word-break: break-word;
+    hyphens: auto;
+}
+
 .navbar-custom {
     background-color: #500000;
 }
@@ -120,8 +125,8 @@ $font-family-base: 'Oswald';
     'description description allergies allergies';
     align-items: start;
     gap: 10px;
-    // background-color: #2196F3;
     padding: 10px;
+    word-break: auto;
 }
 
 .event-history {
@@ -135,7 +140,7 @@ $font-family-base: 'Oswald';
 }
 
 .events-list {
-    height: 600px;
+    height: 800px;
     // border: 2px solid black;
     font-size: medium;
     padding-top: 20px;
