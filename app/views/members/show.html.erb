@@ -1,3 +1,7 @@
+<%= link_to "Member List", members_path %>
+<% if current_member.admin? %>
+  | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
+<% end %>
 <p style="color: green"><%= notice %></p>
 
 <div class="show-member">
@@ -69,10 +73,7 @@
       </div>
     </div>
     
-    <%= link_to "Member List", members_path %>
-    <% if current_member.admin? %>
-      | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
-    <% end %>
+
   </div>
 
   <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
