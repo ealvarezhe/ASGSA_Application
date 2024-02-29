@@ -1,64 +1,70 @@
-<%= form_with(model: event, class: "centered-form") do |form| %>
-  <% if event.errors.any? %>
-    <div style="color: red; text-align: center">
-      <h2><%= pluralize(event.errors.count, "Error") %> prohibited this event from being saved:</h2>
-
-      <ul style="display: inline-block; text-align: left">
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: @event) do |form| %>
+  <% if @event.errors.any? %>
+    <div style="color: red">
+      <p>Error when submitting</p>
     </div>
-  <% end %>
-  
-  <div class="form-field">
-    <%= form.label :"Name", class: "label-header required" %>
-    <%= form.text_field(:name, required: true) %>
+  <% end %> 
+
+  <div class="d-flex align-items-center vh-100" style="background-image: url(<%= asset_path 'tamu_stock3.jpg' %>); background-size: cover;">
+      <div class="card mx-auto" style="width: 40rem;">
+          <div class="card-header">
+              <h1>New Event</h1>
+              <%= link_to("Back to List", events_path, :class => 'back-link') %>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <%= form.label :name, 'Name', class: 'form-label' %>
+                  <%= form.text_field :name, required: true, class: 'form-control' %>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <%= form.label :location, 'Location', class: 'form-label' %>
+                  <%= form.text_field :location, required: true, class: 'form-control' %>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <%= form.label :start_time, 'Start Time', class: 'form-label' %>
+                <%= form.time_field :start_time, required: true, class: 'form-control' %>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <%= form.label :end_time, 'End Time', class: 'form-label' %>
+                <%= form.time_field :end_time, required: true, class: 'form-control' %>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <%= form.label :date, 'Date', class: 'form-label' %>
+                  <%= form.date_field :date, required: true, min: Date.today - 1, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :description, 'Description', class: 'form-label' %>
+                <%= form.text_area :description, class: 'form-control' %>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <%= form.label :capacity, 'Capacity', class: 'form-label' %>
+                <%= form.number_field :capacity, min: 1, class: 'form-control' %>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <%= form.label :points, 'Points', class: 'form-label' %>
+                  <%= form.number_field :points, required: true, min: 0, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-check mb-3">
+                <%= check_box_tag :send_email, class: 'form-check-input' %>
+                <%= label_tag :send_email, 'Send email to all members', class: 'form-check-label' %>
+              </div>
+
+              <%= form.submit 'Create Event', class: 'btn btn-primary'%>
+          </div>
+      </div>
   </div>
-
-  <div class="form-field">
-    <%= form.label :"Location", class: "label-header required" %>
-    <%= form.text_field(:Location, required: true) %>
-  </div>
-
-  <div class="form-row">
-    <div>
-      <%= form.label :"Start Time", class: "label-header required" %>
-      <%= form.time_field(:start_time, required: true) %>
-    </div>
-
-    <div>
-      <%= form.label :"End Time", class: "label-header required" %>
-      <%= form.time_field(:end_time, required: true) %>
-    </div>
-
-    <div>
-      <%= form.label :"Date", class: "label-header required" %>
-      <%= form.date_field(:date, required: true, min: Date.today - 1) %>
-    </div>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :"Description", class: "label-header" %>
-    <%= form.text_area(:description, required: true) %>
-  </div>
-
-  <div class="form-row">
-    <div>
-      <%= form.label :"Capacity", class: "label-header" %>
-      <%= form.number_field(:capacity, min: 1) %>
-      <div>
-        *Leave blank if no limit
-        </div>
-    </div>
-    
-    <div>
-      <%= form.label :"Points", class: "label-header required" %>
-      <%= form.number_field(:points, required: true, min: 0) %>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <%= form.submit %>
-  <div>
 <% end %>

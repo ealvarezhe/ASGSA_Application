@@ -11,5 +11,11 @@ class PagesController < ApplicationController
             # Redirect to some page with a success message
             redirect_to root_path, notice: 'Your message was sent successfully.'
         end
-    end 
+    end
+
+    def faq_member
+    end
+
+    def faq_officer
+    end
 end
