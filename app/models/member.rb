@@ -5,13 +5,11 @@ class Member < ApplicationRecord
   pg_search_scope :search, against: [:member_id, :first_name, :last_name, :email, :position, :points, :date_joined, :res_topic], using: { tsearch: { prefix: true } }
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   # Validate presence of essential attributes
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true
+  validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
+  validates :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@tamu\.edu\z/i, message: "must be TAMU affiliated" }
   validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :position, presence: true
-  validates :date_joined, presence: true
-  validates :degree, presence: true
   validates :food_allergies, presence: true
   has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy

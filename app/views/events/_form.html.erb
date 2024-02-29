@@ -1,44 +1,64 @@
-<% if @event.errors.any? %>
-  <div style="color: red">
-    <p>Error when submitting</p>
-  </div>
-<% end %>
+<%= form_with(model: event, class: "centered-form") do |form| %>
+  <% if event.errors.any? %>
+    <div style="color: red; text-align: center">
+      <h2><%= pluralize(event.errors.count, "Error") %> prohibited this event from being saved:</h2>
 
-<table summary="Event form fields">
-  <tr>
-    <th>Name</th>
-    <td><%= f.text_field(:name, required: true) %></td>
-  </tr>
-  <tr>
-    <th>Location</th>
-    <td><%= f.text_field(:location, required: true) %></td>
-  </tr>
-  <tr>
-    <th>Start Time</th>
-    <td>
-      <%= f.time_field(:start_time, required: true) %></td>
-    </td>
-  </tr>
-  <tr>
-    <th>End Time</th>
-    <td>
-      <%= f.time_field(:end_time, required: true) %></td>
-    </td>
-  </tr>
-  <tr>
-    <th>Date</th>
-    <td><%= f.date_field(:date, required: true, min: Date.today - 1) %></td>
-  </tr>
-  <tr>
-    <th>Description</th>
-    <td><%= f.text_area(:description) %></td>
-  </tr>
-  <tr>
-    <th>Capacity</th>
-    <td><%= f.number_field(:capacity, min: 1) %> *Leave blank if there is no limit</td>
-  </tr>
-  <tr>
-    <th>Points</th>
-    <td><%= f.number_field(:points, required: true, min: 0) %></td>
-  </tr>
-</table>
+      <ul style="display: inline-block; text-align: left">
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-field">
+    <%= form.label :"Name", class: "label-header required" %>
+    <%= form.text_field(:name, required: true) %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :"Location", class: "label-header required" %>
+    <%= form.text_field(:Location, required: true) %>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <%= form.label :"Start Time", class: "label-header required" %>
+      <%= form.time_field(:start_time, required: true) %>
+    </div>
+
+    <div>
+      <%= form.label :"End Time", class: "label-header required" %>
+      <%= form.time_field(:end_time, required: true) %>
+    </div>
+
+    <div>
+      <%= form.label :"Date", class: "label-header required" %>
+      <%= form.date_field(:date, required: true, min: Date.today - 1) %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :"Description", class: "label-header" %>
+    <%= form.text_area(:description, required: true) %>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <%= form.label :"Capacity", class: "label-header" %>
+      <%= form.number_field(:capacity, min: 1) %>
+      <div>
+        *Leave blank if no limit
+        </div>
+    </div>
+    
+    <div>
+      <%= form.label :"Points", class: "label-header required" %>
+      <%= form.number_field(:points, required: true, min: 0) %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <%= form.submit %>
+  <div>
+<% end %>
