@@ -1,6 +1,6 @@
 <%= link_to "Member List", members_path %>
 <% if current_member.admin? %>
-  | <%= link_to "Delete Member", delete_confirmation_member_path(@member), method: :get %>
+  | <%= link_to "Delete Member", @member, method: :delete %>
 <% end %>
 <p style="color: green"><%= notice %></p>
 
@@ -77,9 +77,9 @@
   </div>
 
   <% if @member.id == current_member.id || current_member.officer? || current_member.admin? %>
-    <div class="event-history">
+    <div class="member-event-history">
       <h1 style="text-align: center; text-decoration: underline">Event History<h1>
-      <div class="events-list">
+      <div class="member-events-list">
         <% events_attended = Event.joins(:attendees).where(attendees: { member_id: @member.id, attended: true }).order(date: :desc, start_time: :desc).limit(5) %>
         <% if events_attended.empty? %>
           <p style="text-align: center; color: grey">*Has not attended any events*</p>

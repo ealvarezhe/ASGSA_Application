@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Email", class: "header required" %>
     <%= form.email_field(:email, required: true, disabled: true) %>
   </div>
@@ -40,38 +40,38 @@
     </div>
   </div>
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Position", class: "header required" %>
     <%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %>
   </div>
   
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Degree", class: "header" %>
     <%= form.text_field(:degree) %>
   </div>
   
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Area of Study", class: "header" %>
     <%= form.text_field(:area_of_study) %>
   </div>
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Research Topic", class: "header" %>
     <%= form.text_field(:res_topic) %>
   </div>
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Research Lab", class: "header" %>
     <%= form.text_field(:res_lab) %>
   </div>
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Research Description", class: "header" %>
     <%= form.text_area(:res_description, class: "research-description") %>
   </div>
 
 
-  <div class="member-form-field">
+  <div class="form-field">
     <%= form.label :"Food Allergies", class: "header required" %>
     <%= form.text_area(:food_allergies, required: true) %>
   </div>
