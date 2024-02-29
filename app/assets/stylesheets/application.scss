@@ -168,16 +168,17 @@ body {
 .no-highlight {
     text-decoration: none;
     color: inherit;
-  }
+}
   
-  .no-highlight:focus,
-  .no-highlight:hover,
-  .no-highlight:active {
+.no-highlight:focus,
+.no-highlight:hover,
+.no-highlight:active {
     outline: none;
     text-decoration: none;
     color: inherit;
-  }
+}
 
-  .faq {
+.btn.btn-primary {
     background-color: #500000;
-  }
+    border-color: #500000;
+}

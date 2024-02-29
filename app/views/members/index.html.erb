@@ -64,7 +64,7 @@
                         <%= link_to "<i class='fas fa-eye'></i>".html_safe, member, class: "btn btn-secondary" %>
                     <% end %>
                     <% if can_see_all_attributes %>
-                      <%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_member_path(member), class: "btn btn-primary" %>
+                      <%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_member_path(member), class: "btn btn-primary", style: "background-color: #007bff; border-color: #007bff" %>
                       <%= link_to "<i class='fas fa-trash'></i>".html_safe, delete_confirmation_member_path(member), method: :get, class: "btn btn-danger" %>
                     <% end %>
                   </td>

@@ -7,7 +7,7 @@
             <%= form_with(url: help_path, method: :post, local: true) do |form| %>
             <div class="mb-3">
                 <%= form.label :name, 'Your Name', class: 'form-label' %>
-                <%= form.text_field :name, value: current_member.first_name, readonly: true, class: 'form-control' %>
+                <%= form.text_field :name, value: "#{current_member.first_name} #{current_member.last_name}", readonly: true, class: 'form-control' %>
             </div>
 
             <div class="mb-3">
@@ -20,7 +20,7 @@
                 <%= form.text_area :issue, class: 'form-control' %>
             </div>
 
-            <%= form.submit 'Send', class: 'btn btn-primary' %>
+            <%= form.submit 'Send', class: 'btn btn-primary'%>
             <% end %>
         </div>
     </div>
