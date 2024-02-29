@@ -1,10 +1,12 @@
-<h1>Continue Signing Up</h1>
+<div>
+  <%= link_to "Back to Profile", @member %>
+</div>
+
+<h1 style="text-align: center">Edit Profile</h1>
+<p style="color: red; text-align: center">Some fields can only be changed by Officers or Admins<p>
+
+<div style="text-align: center; margin-bottom: 10px"> 
+  <%= image_tag @member.avatar_url, class: "avatar" %>
+</div>
 
 <%= render "form", member: @member %>
-
-<br>
-
-<div>
-  <%= link_to "Show this member", @member %> |
-  <%= link_to "Back to members", members_path %>
-</div>

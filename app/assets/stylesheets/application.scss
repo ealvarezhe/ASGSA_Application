@@ -21,11 +21,16 @@ $font-family-base: 'Oswald', sans-serif;
 @import "bootstrap";
 @import "font-awesome";
 
+* {
+    word-break: break-word;
+    hyphens: auto;
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
   
 .content {
     flex: 1;
@@ -169,7 +174,7 @@ body {
     text-decoration: none;
     color: inherit;
 }
-  
+
 .no-highlight:focus,
 .no-highlight:hover,
 .no-highlight:active {
@@ -181,4 +186,149 @@ body {
 .btn.btn-primary {
     background-color: #500000;
     border-color: #500000;
+}
+
+
+// Edit Page Styling
+
+.label-header {
+    display: block;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="date"],
+.form-field input[type="number"] {
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-field textarea {
+    height: 100px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.centered-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-field {
+    margin-bottom: 20px;
+    width: 25%; 
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 25%;
+}
+
+// Show Member Syling
+
+.show-member {
+    display: flex;
+    width: auto;
+}
+
+.profile {
+    // margin: auto; 
+    width: 100%;
+    // padding-right: 50px; /* Adjust spacing between details and event history */
+}
+
+.profile-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex: 1; /* Take up remaining space */
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%; /* This will make the image circular */
+}
+
+
+.profile-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    margin-right: 30px
+}
+
+.item1 { grid-area: degree; }
+.item2 { grid-area: study; }
+.item3 { grid-area: topic; }
+.item4 { grid-area: lab; }
+.item5 { grid-area: pioneer; }
+.item6 { grid-area: description; }
+.item7 { grid-area: allergies; }
+
+.additional-info {
+    height: auto;
+    // border: 2px solid black;
+    display: grid;
+    grid-template-areas:
+    'degree study . .'
+    'topic lab . .'
+    'description description allergies allergies';
+    align-items: start;
+    gap: 10px;
+    padding: 10px;
+    word-break: auto;
+}
+
+.member-event-history {
+    // border: 2px solid black;    
+    // border-left: 2px solid black;
+    right: 0;
+    width: 50%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+    justify-content: center;
+    // text-align: center;
+}
+
+.member-events-list {
+    height: 800px;
+    // border: 2px solid black;
+    font-size: medium;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+// Event Show Styling
+
+.show-event {
+
+}
+
+.event-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 35%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.event-info {
+    justify-content: center;
+    text-align: center;
 }
