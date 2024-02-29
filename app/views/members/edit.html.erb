@@ -1,12 +1,3 @@
-<div>
-  <%= link_to "Back to Profile", @member %>
+<div class="member edit">
+  <%= render "form", member: @member %>
 </div>
-
-<h1 style="text-align: center">Edit Profile</h1>
-<p style="color: red; text-align: center">Some fields can only be changed by Officers or Admins<p>
-
-<div style="text-align: center; margin-bottom: 10px"> 
-  <%= image_tag @member.avatar_url, class: "avatar" %>
-</div>
-
-<%= render "form", member: @member %>

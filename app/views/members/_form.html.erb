@@ -1,82 +1,89 @@
-<%= form_with(model: member, class: "centered-form") do |form| %>
+<%= form_with(model: member) do |form| %>
   <% if member.errors.any? %>
-    <div style="color: red; text-align: center">
-      <h2><%= pluralize(member.errors.count, "Error") %> prohibited this member from being saved:</h2>
-
-      <ul style="display: inline-block; text-align: left">
-        <% member.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div style="color: red">
+      <p>Error when submitting</p>
     </div>
   <% end %>
-  
-  <div class="form-row">
-    <div>
-      <%= form.label :"First Name", class: "label-header required" %>
-      <%= form.text_field(:first_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
+
+  <div class="d-flex align-items-center vh-50" style="background-image: url(<%= asset_path 'tamu_stock5.jpg' %>); background-size: cover; padding: 5%;">
+    <div class="card mx-auto" style="width: 60rem;">
+      <div class="card-header">
+        <%= link_to "Back to Profile", @member %>
+        <h1 style="text-align: center">Edit Profile</h1>
+        <p style="color: red; text-align: center">Some fields can only be changed by Officers or Admins<p>
+        <div style="text-align: center; margin-bottom: 10px"> 
+          <%= image_tag @member.avatar_url, class: "avatar" %>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <%= form.label :first_name, 'First Name', class: 'form-label' %>
+            <%= form.text_field :first_name, required: true, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :last_name, 'Last Name', class: 'form-label' %>
+            <%= form.text_field :last_name, required: true, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :email, 'Email', class: 'form-label' %>
+            <%= form.email_field :email, required: true, readonly: true, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <%= form.label :points, 'Points', class: 'form-label' %>
+            <%= form.number_field :points, required: true, min: 0, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :date_joined, 'Date Joined', class: 'form-label' %>
+            <%= form.date_field :date_joined, required: true, min: Date.today - 8.years, max: Date.today, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :position, 'Position', class: 'form-label' %>
+            <%= form.text_field :position, required: true, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <%= form.label :degree, 'Degree', class: 'form-label' %>
+            <%= form.text_field :degree, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <%= form.label :area_of_study, 'Area of Study', class: 'form-label' %>
+            <%= form.text_field :area_of_study, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :res_topic, 'Research Topic', class: 'form-label' %>
+          <%= form.text_field :res_topic, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :res_lab, 'Research Lab', class: 'form-label' %>
+          <%= form.text_field :res_lab, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :res_description, 'Research Description', class: 'form-label' %>
+          <%= form.text_area :res_description, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :food_allergies, 'Food Allergies', class: 'form-label' %>
+          <%= form.text_area :food_allergies, required: true, class: 'form-control' %>
+        </div>
+
+        <%= form.submit 'Update Profile', class: 'btn btn-primary'%>
+      </div>
     </div>
-    
-    <div>
-      <%= form.label :"Last Name", class: "label-header required" %>
-      <%= form.text_field(:last_name, required: true, disabled: !(current_member.officer? || current_member.admin?)) %>
-    </div>
   </div>
-
-  <div class="form-field">
-    <%= form.label :"Email", class: "label-header required" %>
-    <%= form.email_field(:email, required: true, disabled: true) %>
-  </div>
-
-  <div class="form-row">
-    <div>
-      <%= form.label :"Points", class: "label-header required" %>
-      <%= form.number_field(:points, required: true, min: 0, disabled: !(current_member.officer? || current_member.admin?)) %>
-    </div>
-  
-    <div>
-    <%= form.label :"Date Joined", class: "label-header" %>
-    <%= form.date_field(:date_joined, min: (Date.today - 8.years), max: Date.today, size: 5) %>
-    </div>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :"Position", class: "label-header required" %>
-    <%= form.text_field(:position, required: true, disabled: !(current_member.admin?)) %>
-  </div>
-  
-  <div class="form-field">
-    <%= form.label :"Degree", class: "label-header" %>
-    <%= form.text_field(:degree) %>
-  </div>
-  
-  <div class="form-field">
-    <%= form.label :"Area of Study", class: "label-header" %>
-    <%= form.text_field(:area_of_study) %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :"Research Topic", class: "label-header" %>
-    <%= form.text_field(:res_topic) %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :"Research Lab", class: "label-header" %>
-    <%= form.text_field(:res_lab) %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :"Research Description", class: "label-header" %>
-    <%= form.text_area(:res_description, class: "research-description") %>
-  </div>
-
-
-  <div class="form-field">
-    <%= form.label :"Food Allergies", class: "label-header required" %>
-    <%= form.text_area(:food_allergies, required: true) %>
-  </div>
-
-  <div class="form-row">
-    <%= form.submit %>
-  <div>
 <% end %>
