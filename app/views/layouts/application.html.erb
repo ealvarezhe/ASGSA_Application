@@ -28,36 +28,92 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto mr-5">
           <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
-          <% if member_signed_in? && current_member.admin? %>
+          <% if member_signed_in? %> <!-- Need to add back "current_member.admin?" in if-statement -->
             <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
           <% end %>
-          <% if member_signed_in? %>
-            <li class="nav-item"><%= link_to "Sign Out", destroy_member_session_path, class: "nav-link" %></li>
-          <% end %>
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item nav-item-flex">
-            <%= link_to notifications_path, class: 'nav-link' do %>
-              <i class="fa fa-bell"></i>
-            <% end %>
-          </li>
+        <ul class="navbar-nav">
           <% if member_signed_in? %>
-            <li class="nav-item nav-item flex">
-              <%= link_to member_path(current_member), class: 'nav-link' do %>
-                <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+            <li class="nav-item nav-item-flex">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <i class="fa fa-bell"></i>
               <% end %>
             </li>
+            <li class="nav-item dropdown">
+              <input type="checkbox" id="profileDropdownCheck" class="dropdown-toggle-check">
+              <label for="profileDropdownCheck" class="nav-link dropdown-toggle" id="profileDropdown">
+                <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+              </label>
+              <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                <%= link_to 'View Profile', member_path(current_member), class: 'dropdown-item' %>
+                <%= link_to 'Sign Out', destroy_member_session_path, class: 'dropdown-item' %>
+              </div>
+            </li>
+          <% else %>
+            <%= button_to member_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary', style: 'color: #500000; background-color: white; border-color: white;' do %>
+              <i class="fab fa-google"></i> Sign in with Google
+            <% end %>
           <% end %>
         </ul>
       </div>
     </nav>
-    <div class="container-fluid">
+    
+    <div>
       <%= yield %>
     </div>
+    <div class="footer">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="display-4" style="font-size: 3rem; font-style: italic;">Connect With Us</h1>
+        <div class="social-icons">
+          <%= link_to "https://www.instagram.com/asgsa.tamu", target: "_blank", style: "color: white; text-decoration: none" do %>
+            <i class="fa-brands fa-instagram fa-xl"></i> - @asgsa.tamu
+          <% end %>
+          <br>
+          <%= link_to "https://www.facebook.com/tamuasgsa", target: "_blank", style: "color: white; text-decoration: none" do %>
+            <i class="fa-brands fa-facebook fa-xl"></i> - Texas A&M Animal Science Graduate Student Association
+          <% end %>
+          <br>
+          <%= link_to "https://twitter.com/TAMU_ASGSA_", target: "_blank", style: "color: white; text-decoration: none" do %>
+            <i class="fa-brands fa-x-twitter fa-xl"></i> - @TAMU_ASGSA_
+          <% end %>
+          <br>
+          <i class="fa-solid fa-envelope fa-xl"></i> - asgsa@ag.tamu.edu
+        </div>
+      </div>
+      <div class="col-md-4" style="margin-left: 1%; margin-right: -1%;">
+        <h2 class="display-4" style="font-size: 3rem; font-style: italic;">Active Member Requirements</h2>
+        <div class="requirements">
+          <i class="fa-regular fa-square-check"></i> Pay membership dues (Fall Semester - by the October club meeting, Spring Semester - by the March club meeting)
+          <br><br>
+          <i class="fa-regular fa-square-check"></i> Attend no less than 50% of the regular club meetings of their membership period
+          <br><br>
+          <i class="fa-regular fa-square-check"></i> Participate in at least one philanthropic event and one social event within their membership period
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2 class="display-4" style="font-size: 3rem; margin-left: 20%; font-style: italic;">Help</h2>
+        <div class="help">
+          <% if member_signed_in? && policy(current_member).admin_officer? %>
+            <%= link_to faq_officer_path , style: "color: white; text-decoration: none" do %>
+              <i class="fa-solid fa-question fa-xl"></i>  FAQs
+            <% end %>
+          <% else %>
+            <%= link_to faq_member_path , style: "color: white; text-decoration: none" do %>
+              <i class="fa-solid fa-question fa-xl"></i>  FAQs
+            <% end %>
+          <% end %>
+          <br>
+          <%= link_to help_path, style: "color: white; text-decoration: none" do %>
+            <i class="fa-solid fa-address-book fa-xl"></i>  Contact Us
+          <% end %>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

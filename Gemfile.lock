@@ -75,6 +75,9 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    add_to_calendar (0.4.0)
+      tzinfo (>= 1.1, < 3)
+      tzinfo-data (~> 1.2020)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
@@ -222,6 +225,8 @@ GEM
     public_suffix (5.0.4)
     puma (6.4.2)
       nio4r (~> 2.0)
+    pundit (2.3.1)
+      activesupport (>= 3.0.0)
     racc (1.7.3)
     rack (3.0.9)
     rack-protection (4.0.0)
@@ -358,6 +363,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2024.1)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.5.0)
     uri (0.13.0)
     version_gem (1.1.3)
@@ -389,6 +396,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  add_to_calendar
   bootsnap
   bootstrap (~> 4.1)
   capybara
@@ -405,6 +413,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pg_search (~> 2.3)
   puma (>= 5.0)
+  pundit
   rails (~> 7.1.3)
   rspec-rails
   rubocop

@@ -14,26 +14,50 @@
  *= require_self
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans+Narrow&display=swap');
+
+$font-family-base: 'Oswald', sans-serif;
+
 @import "bootstrap";
 @import "font-awesome";
 
-$font-family-base: 'Oswald';
+* {
+    word-break: break-word;
+    hyphens: auto;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+  
+.content {
+    flex: 1;
+}
 
 .navbar-custom {
     background-color: #500000;
 }
 
 .navbar-brand {
-    max-height: 100px;
+    max-height: 12vh;
     width: auto;
 }
 
 .nav-link {
     color: white;
+    font-size: 1.2rem;
 }
 
 .profile-icon {
-    max-height: 50px;
+    max-height: 5vh;
+    width: auto;
+    border-radius: 50%;
+}
+
+.profile-icon2 {
+    max-height: 4vh;
     width: auto;
     border-radius: 50%;
 }
@@ -47,9 +71,6 @@ $font-family-base: 'Oswald';
 .container {
     text-align: center;
     width: 100%;
-    background-image: url('tamu_stock.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .intro {
@@ -66,3 +87,248 @@ $font-family-base: 'Oswald';
     margin-bottom: 1em;
 }
 
+.header {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    margin-top: 3.5em;
+}
+
+.upcoming-events {
+    width: 75%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid #ccc; /* Adjust color as needed */
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+}
+
+.footer {
+    background-color: #500000;
+    color: white;
+    padding: 5%;
+    height: auto;
+    margin-top: auto;
+    font-weight: 300;
+}
+
+.social-icons {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+}
+
+.social-icons i {
+    margin: 2rem 0;
+}
+
+.requirements {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+    margin-bottom: 40%;
+}
+
+.requirements i {
+    margin: 0.5rem 0;
+}
+
+.help {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+    margin-left: 20%
+}
+
+.help i {
+    margin: 2rem 0;
+}
+
+.dropdown-toggle-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+  
+.dropdown-toggle-check:checked ~ .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.no-highlight {
+    text-decoration: none;
+    color: inherit;
+}
+
+.no-highlight:focus,
+.no-highlight:hover,
+.no-highlight:active {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn.btn-primary {
+    background-color: #500000;
+    border-color: #500000;
+}
+
+
+// Edit Page Styling
+
+.label-header {
+    display: block;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="date"],
+.form-field input[type="number"] {
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-field textarea {
+    height: 100px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.centered-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-field {
+    margin-bottom: 20px;
+    width: 25%; 
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 25%;
+}
+
+// Show Member Syling
+
+.show-member {
+    display: flex;
+    width: auto;
+}
+
+.profile {
+    // margin: auto; 
+    width: 100%;
+    // padding-right: 50px; /* Adjust spacing between details and event history */
+}
+
+.profile-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex: 1; /* Take up remaining space */
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%; /* This will make the image circular */
+}
+
+
+.profile-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    margin-right: 30px
+}
+
+.item1 { grid-area: degree; }
+.item2 { grid-area: study; }
+.item3 { grid-area: topic; }
+.item4 { grid-area: lab; }
+.item5 { grid-area: pioneer; }
+.item6 { grid-area: description; }
+.item7 { grid-area: allergies; }
+
+.additional-info {
+    height: auto;
+    // border: 2px solid black;
+    display: grid;
+    grid-template-areas:
+    'degree study . .'
+    'topic lab . .'
+    'description description allergies allergies';
+    align-items: start;
+    gap: 10px;
+    padding: 10px;
+    word-break: auto;
+}
+
+.member-event-history {
+    // border: 2px solid black;    
+    // border-left: 2px solid black;
+    right: 0;
+    width: 50%; /* Adjust as needed */
+    // padding-left: 20px; /* Adjust spacing between details and event history */
+    justify-content: center;
+    // text-align: center;
+}
+
+.member-events-list {
+    height: 800px;
+    // border: 2px solid black;
+    font-size: medium;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+// Event Show Styling
+
+.show-event {
+
+}
+
+.event-header {
+    // border: 2px solid black;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 35%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.event-info {
+    justify-content: center;
+    text-align: center;
+}
