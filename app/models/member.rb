@@ -11,6 +11,7 @@ class Member < ApplicationRecord
   validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :position, presence: true
   validates :food_allergies, presence: true
+  has_many :attendees
   has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
