@@ -14,4 +14,166 @@
  *= require_self
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans+Narrow&display=swap');
+
+$font-family-base: 'Oswald', sans-serif;
+
 @import "bootstrap";
+@import "font-awesome";
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+.content {
+    flex: 1;
+}
+
+.navbar-custom {
+    background-color: #500000;
+}
+
+.navbar-brand {
+    max-height: 12vh;
+    width: auto;
+}
+
+.nav-link {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.profile-icon {
+    max-height: 5vh;
+    width: auto;
+    border-radius: 50%;
+}
+
+.profile-icon2 {
+    max-height: 4vh;
+    width: auto;
+    border-radius: 50%;
+}
+
+.nav-item-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+}
+
+.intro {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.mission-statement, .upcoming-events {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.event:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.header {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    margin-top: 3.5em;
+}
+
+.upcoming-events {
+    width: 75%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid #ccc; /* Adjust color as needed */
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+}
+
+.footer {
+    background-color: #500000;
+    color: white;
+    padding: 5%;
+    height: auto;
+    margin-top: auto;
+    font-weight: 300;
+}
+
+.social-icons {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+}
+
+.social-icons i {
+    margin: 2rem 0;
+}
+
+.requirements {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+    margin-bottom: 40%;
+}
+
+.requirements i {
+    margin: 0.5rem 0;
+}
+
+.help {
+    max-height: 10vh;
+    width: auto;
+    margin: 1em 0;
+    font-size: 1.5rem;
+    margin-left: 20%
+}
+
+.help i {
+    margin: 2rem 0;
+}
+
+.dropdown-toggle-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+  
+.dropdown-toggle-check:checked ~ .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.no-highlight {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .no-highlight:focus,
+  .no-highlight:hover,
+  .no-highlight:active {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+  }

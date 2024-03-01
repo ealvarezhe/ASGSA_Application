@@ -18,22 +18,42 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto mr-5">
           <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
+          <% if member_signed_in? && current_member.admin? %>
+            <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
+          <% end %>
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to notifications_path, class: 'nav-link' do %>
-              <i class="fa fa-bell"></i>
+        <ul class="navbar-nav">
+          <% if member_signed_in? %>
+            <li class="nav-item nav-item-flex">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <i class="fa fa-bell"></i>
+              <% end %>
+            </li>
+            <li class="nav-item dropdown">
+              <input type="checkbox" id="profileDropdownCheck" class="dropdown-toggle-check">
+              <label for="profileDropdownCheck" class="nav-link dropdown-toggle" id="profileDropdown">
+                <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+              </label>
+              <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                <%= link_to 'View Profile', member_path(current_member), class: 'dropdown-item' %>
+                <%= link_to 'Sign Out', destroy_member_session_path, class: 'dropdown-item' %>
+              </div>
+            </li>
+          <% else %>
+            <%= button_to member_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary', style: 'color: #500000; background-color: white; border-color: white;' do %>
+              <i class="fab fa-google"></i> Sign in with Google
             <% end %>
-          </li>
+          <% end %>
         </ul>
       </div>
     </nav>
-    <div class="container-fluid">
+    
+    <div>
       <%= yield %>
     </div>
   </body>

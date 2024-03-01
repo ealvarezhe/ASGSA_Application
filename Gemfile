@@ -81,6 +81,16 @@ gem "bootstrap", "~> 4.1"
 
 gem 'yaml_db'
 
+gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+
+gem "font-awesome-sass", "~> 6.5.1"
+
+gem 'pundit' 
+
+
 gem 'rexml'
 gem 'brakeman'
 gem 'webdrivers'

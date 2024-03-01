@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'help', to: 'pages#help'
+  post 'help', to: 'pages#help'
+
   resources :roles
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -73,4 +73,22 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  ENV['GOOGLE_OAUTH_CLIENT_ID'] = '722258478896-8an07lvak8ejvtsk90lqhqjf1aa1t33f.apps.googleusercontent.com'
+  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
+
+  config.action_mailer.delivery_method = :smtp
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'asgsatamu1@gmail.com',
+    password:             'canxmizknrgfqcdt',
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 
+  }
 end

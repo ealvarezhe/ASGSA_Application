@@ -1,9 +1,21 @@
 class MemberRolesController < ApplicationController
   before_action :set_member_role, only: %i[ show edit update destroy ]
 
-  # GET /member_roles or /member_roles.json
   def index
     @member_roles = MemberRole.all
+    @member_roles = @member_roles.search(params[:query]) if params[:query].present?
+    @pagy, @member_roles = pagy @member_roles.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    if params[:role].present?
+      @member_roles = @member_roles.joins(:role).where(roles: { name: params[:role] })
+    end
+  end
+
+  def sort_column
+    %w{ member_id first_name last_name role }.include?(params[:sort]) ? params[:sort] : "member_id"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /member_roles/1 or /member_roles/1.json
@@ -60,7 +72,7 @@ class MemberRolesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member_role
-      @member_role = MemberRole.find(params[:member_role_id])
+      @member_role = MemberRole.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

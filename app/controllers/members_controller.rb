@@ -1,32 +1,46 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy delete_confirmation]
 
-  # GET /members or /members.json
   def index
     @members = Member.all
+    @members = @members.search(params[:query]) if params[:query].present?
+    @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ member_id first_name last_name position points date_joined res_topic }.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /members/1 or /members/1.json
   def show
+    authorize @member
   end
 
   # GET /members/new
   def new
     @member = Member.new
+    authorize @member
   end
 
   # GET /members/1/edit
   def edit
+    authorize @member
   end
 
   # GET /members/1/delete_confirmation
   def delete_confirmation
+    authorize @member
     # Render delete_confirmation view
   end
 
   # POST /members or /members.json
   def create
     @member = Member.new(member_params)
+    authorize @member
 
     respond_to do |format|
       if @member.save
@@ -41,6 +55,7 @@ class MembersController < ApplicationController
 
   # PATCH/PUT /members/1 or /members/1.json
   def update
+    authorize @member
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
@@ -54,6 +69,7 @@ class MembersController < ApplicationController
 
   # DELETE /members/1 or /members/1.json
   def destroy
+    authorize @member
     @member.destroy!
 
     respond_to do |format|
@@ -72,4 +88,5 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:first_name, :last_name, :email, :points, :position, :date_joined, :degree, :food_allergies, :res_topic, :res_lab, :res_pioneer, :res_description, :area_of_study)
     end
+
 end
