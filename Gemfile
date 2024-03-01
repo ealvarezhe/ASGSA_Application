@@ -90,6 +90,7 @@ gem "font-awesome-sass", "~> 6.5.1"
 
 gem 'pundit' 
 
+gem 'add_to_calendar'
 
 gem 'rexml'
 gem 'brakeman'

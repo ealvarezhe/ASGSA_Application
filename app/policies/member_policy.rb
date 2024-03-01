@@ -51,4 +51,8 @@ class MemberPolicy < ApplicationPolicy
   def admin_officer?
     user.admin? || user.officer?
   end
+
+  def admin?
+    user.admin?
+  end
 end

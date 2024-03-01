@@ -1,14 +1,105 @@
+<%= link_to "Member List", members_path %>
+<% if current_member.admin? %>
+  | <%= link_to "Delete Member", @member, method: :delete %>
+<% end %>
 <p style="color: green"><%= notice %></p>
 
-<h1>Member Details</h1>
-<%= render @member %>
+<div class="show-member">
 
-<div>
-  <% if policy(current_member).admin_officer? %>
-    <%= link_to "Edit this member", edit_member_path(@member) %> | 
+  <div class="profile">
+    <div class="profile-header">
+      <div class="profile-image", style="margin-right: 30px"> 
+        <%= image_tag @member.avatar_url, class: "avatar" %>
+      </div>
+
+      <div class="profile-center">
+        <h2><%= @member.first_name %>  <%= @member.last_name %></h2>
+      </div>
+        
+      <div class="profile-center">
+        <strong>Position</strong>
+        <%= @member.position %>
+      </div>
+
+      <div class="profile-center">
+        <strong>Member Since</strong>
+        <%= @member.date_joined %>
+      </div>
+
+      <div class="profile-center">
+        <strong>Email Address</strong>
+        <%= @member.email %>
+      </div>
+      
+      <% if policy(current_member).admin_officer_member_info? %>
+        <div class="profile-center">
+          <strong>Current Points</strong>
+          <%= @member.points %>
+        </div>
+        
+        <%= link_to "Edit", edit_member_path(@member) %>
+      <% end %>
+    </div>
+
+    <div class="additional-info">
+      <div class="profile-center item1">
+        <strong> Degree </strong>
+        <%= @member.degree  %>
+      </div>
+
+      <div class="profile-center item2">
+        <strong> Area of Study </strong>
+        <%= @member.area_of_study %>
+      </div>
+
+      <div class="profile-center item3">
+        <strong> Research Topic </strong>
+        <%= @member.res_topic  %>
+      </div>
+
+      <div class="profile-center item4">
+        <strong> Research Lab </strong>
+        <%= @member.res_lab  %>
+      </div>
+      
+      <div class="profile-center item6">
+        <strong> Research Description </strong>
+        <%= @member.res_description  %>
+      </div>
+
+      <div class="profile-center item7">
+        <strong> Food Allergies </strong>
+        <%= @member.food_allergies  %>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <% if policy(current_member).admin_officer_member_info? %>
+    <div class="member-event-history">
+      <h1 style="text-align: center; text-decoration: underline">Event History<h1>
+      <div class="member-events-list">
+        <% events_attended = Event.joins(:attendees).where(attendees: { member_id: @member.id, attended: true }).order(date: :desc, start_time: :desc).limit(5) %>
+        <% if events_attended.empty? %>
+          <p style="text-align: center; color: grey">*Has not attended any events*</p>
+        <% else %>
+          <% events_attended.each do |event| %>
+            <div class="event card mb-3 col" style="margin-top: 3%; font-weight: 400; width: 75%; margin: auto;">
+              <div class="card-body">
+                <h3 class="card-title"><%= event.name %></h3>
+                <p class="card-subtitle mb-2 text-muted">Date: <%= event.date.strftime('%m/%d') %></p>
+                <p class="card-subtitle mb-2 text-muted">Points: <%= event.points %></p>
+                <p class="card-text"><%= event.description %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+
+      </div>
+    </div>
   <% end %>
-  <%= link_to "Back to members", members_path %>
-  <% if policy(current_member).admin_officer? %>
-    <%= button_to "Delete this member", delete_confirmation_member_path(@member), method: :get %>
-  <% end %>
+
 </div>

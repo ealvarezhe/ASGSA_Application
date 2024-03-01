@@ -1,10 +1,12 @@
 class Event < ApplicationRecord
+    include PgSearch::Model
+    pg_search_scope :search, against: [:member_id], using: { tsearch: { prefix: true } }
     validates :name, presence: true
     validates :location, presence: true
     validates :start_time, presence: true
     validates :end_time, presence: true
     validates :date, presence: true
-    # validates :description
+    validates :description, presence: false
     validates :capacity, numericality: {only_integer: true, greater_than_or_equal_to: 0}, allow_blank: true
     validates :points, numericality: {only_integer: true, greater_than_or_equal_to: 0}
     validate :end_time_after_start_time
