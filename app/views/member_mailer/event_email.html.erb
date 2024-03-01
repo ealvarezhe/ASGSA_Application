@@ -6,17 +6,19 @@
   <body>
     <a href="<%= @calendar_link.google_url %>">Add to Google Calendar</a>
     <br>
-    <h3 class="card-title"><%= @event.date.strftime('%m/%d') %> - <%= @event.name %></h3>
+    <h2 class="card-title"><%= @event.name %></h2>
     <p>
-        <%= @event.description %>
+        <strong>Date: </strong><%= @event.date.strftime('%m/%d') %>
         <br>
-        Location: <%= @event.location %>
+        <strong>Time: </strong><%= @event.start_time.strftime('%I:%M %p') %> - <%= @event.end_time.strftime('%I:%M %p') %>
         <br>
-        Time: <%= @event.start_time.strftime('%I:%M %p') %> - <%= @event.end_time.strftime('%I:%M %p') %>
+        <strong>Location: </strong><%= @event.location %>
         <br>
-        Capacity: <%= @event.capacity %>
+        <strong>Capacity: </strong><%= @event.capacity || 'No Limit' %>
         <br>
-        Points: <%= @event.points %>
+        <strong>Points: </strong><%= @event.points %>
+        <br>
+        <strong>Description: </strong><%= @event.description %>
     </p>
 </body>
 </html>
