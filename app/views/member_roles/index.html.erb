@@ -22,7 +22,7 @@
               Search 
             </div>
             <div class="col-auto">
-              <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control" %>
+              <%= form.search_field :query, value: params[:query], onchange: "this.form.requestSubmit()", class: "form-control" %>
             </div>
           </div>
 

@@ -3,6 +3,16 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @events = @events.search(params[:query]) if params[:query].present?
+    @pagy, @events = pagy @events.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ name date start_time end_time capacity points }.include?(params[:sort]) ? params[:sort] : "date"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def show
