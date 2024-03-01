@@ -37,7 +37,7 @@ class AttendeesController < ApplicationController
 
     @member.update(points: currentPoints)
     @attendee.update(attended: !@attendee.attended)
-    redirect_to event_attendees_path(@event)
+    redirect_to check_in_event_attendees_path(@event)
   end
 
   # POST /attendees or /attendees.json
@@ -47,7 +47,12 @@ class AttendeesController < ApplicationController
 
     if Member.exists?(member_id: attendee_params[:member_id]) && @attendee.save
       respond_to do |format|
-        format.html { redirect_to event_attendees_path(@event), notice: "RSVP was successfully created." }
+        if @attendee.rsvp
+          format.html { redirect_to event_attendees_path(@event), notice: "RSVP was successfully created." }
+        else
+          @attendee.update(rsvp: true)
+          format.html { redirect_to check_in_event_attendees_path(@event), notice: "Member was successfully checked in." }
+        end
         format.json { render :show, status: :created, location: @attendee }
       end
     else
@@ -89,6 +94,27 @@ class AttendeesController < ApplicationController
   def attended
     @event = Event.find(params[:event_id])
     @attendees = @event.attendees.where(attended: true)
+  end
+
+  def check_in
+    @members = Member.all
+    @members = @members.search(params[:query]) if params[:query].present?
+    @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    @event = Event.find(params[:event_id])
+  end
+
+  def sort_column
+    %w{ member_id first_name last_name position points date_joined res_topic }.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def new_check_in
+    @attendee = Attendee.new
+    @event = Event.find(params[:event_id])
+    @member = Member.find(params[:member_id])
   end
 
   private

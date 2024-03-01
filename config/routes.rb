@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :attendees do
       collection do
         get 'attended'
+        get 'check_in'
+        get 'new_check_in'
       end
       member do
         get 'delete'
