@@ -1,0 +1,27 @@
+<div class="d-flex align-items-center vh-100" style="background-image: url(<%= asset_path 'tamu_stock3.jpg' %>); background-size: cover;">
+    <div class="card mx-auto" style="width: 30rem;">
+        <div class="card-header">
+            <h1>Contact Us</h1>
+        </div>
+        <div class="card-body">
+            <%= form_with(url: help_path, method: :post, local: true) do |form| %>
+            <div class="mb-3">
+                <%= form.label :name, 'Your Name', class: 'form-label' %>
+                <%= form.text_field :name, value: "#{current_member.first_name} #{current_member.last_name}", readonly: true, class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+                <%= form.label :email, 'Your Email', class: 'form-label' %>
+                <%= form.email_field :email, value: current_member.email, readonly: true, class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+                <%= form.label :issue, 'Your Issue', class: 'form-label' %>
+                <%= form.text_area :issue, class: 'form-control' %>
+            </div>
+
+            <%= form.submit 'Send', class: 'btn btn-primary'%>
+            <% end %>
+        </div>
+    </div>
+</div>

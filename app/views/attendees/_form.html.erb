@@ -11,20 +11,33 @@
     </div>
   <% end %>
 
-  <p><%= "Name: " + @event.name %></p>
+  <p><%= "Event Name: " + @event.name %></p>
 
   <p>
     <label>
-    Member Id: 
+    Member Name: 
     </label>
-    <%= form.text_field(:member_id) %></p>
+    <%= current_member.first_name + " " + current_member.last_name %></p>
 
-
+  <%= form.hidden_field :member_id, value: current_member.member_id %>
   <%= form.hidden_field :event_id, value: @event.event_id %>
   <%= form.hidden_field :rsvp, value: true %>
   <%= form.hidden_field :attended, value: false %>
 
   <div>
-    <%=form.submit "Confirm RSVP" %>
+    <% attendeeCount = Attendee.where(event_id: @event.event_id).count %>
+    <% if attendeeCount != nil && attendeeCount == @event.capacity %>
+      Event is at max capacity. <br>
+    <% else %>
+      <% if Attendee.find_by(member_id: current_member.member_id, event_id: @event.event_id) %>
+        You have already RSVP'd for this event. <br>
+        <%= link_to("Delete RSVP", delete_event_attendee_path(@event, Attendee.find_by(member_id: current_member.member_id, event_id: @event.event_id)), class: 'action delete') %>
+      <% elsif @current_time > @event_time %>
+        The sign-up window for this event has closed.
+      <% else %>
+        <%=form.submit "Confirm RSVP" %>
+      <% end %>
+    <% end %>
+
   </div>
 <% end %>

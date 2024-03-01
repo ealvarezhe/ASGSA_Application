@@ -1,4 +1,4 @@
-<%= form_with(model: member_role) do |form| %>
+<%= form_with(model: member_role, html: { onsubmit: "return confirm('Are you sure you want to proceed?');" }) do |form| %>
   <% if member_role.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(member_role.errors.count, "error") %> prohibited this member_role from being saved:</h2>
