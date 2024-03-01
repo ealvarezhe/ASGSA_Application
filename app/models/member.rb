@@ -6,7 +6,7 @@ class Member < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   # Validate presence of essential attributes
   validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
-  validates :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
+  validates :last_name, presence: true
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@tamu\.edu\z/i, message: "must be TAMU affiliated" }
   validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :position, presence: true
