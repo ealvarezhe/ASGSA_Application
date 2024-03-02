@@ -1,16 +1,32 @@
 require 'rails_helper'
 
-RSpec.describe "Google Omniauth", type: :request do
-  it "can sign in with Google account" do
-    get '/members/auth/google_oauth2'
-    expect(response).to redirect_to('/members/auth/google_oauth2/callback')
+RSpec.describe "Google Omniauth", type: :feature do
+  before do
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: "john@tamu.edu",
+        first_name: "John",
+        last_name: "Doe",
+        image: "https://example.com/image.jpg"
+      },
+      credentials: {
+        token: "token",
+        refresh_token: "refresh token",
+        expires_at: DateTime.now,
+      }
+    })
 
-    follow_redirect!
+    @member1 = create(:member, :admin)
 
-    expect(response).to redirect_to(root_path)
-    follow_redirect!
-
-    expect(response.body).to include('Successfully authenticated from Google account.')
-    expect(response.body).to include('mockuser')
+    # Route to trigger the OmniAuth callback directly for testing
+    visit member_google_oauth2_omniauth_callback_path
+  end
+  
+  scenario "Admin View" do
+    expect(page).to have_content("Role Management")
+    expect(page).to have_content("Role Views")
   end
 end
