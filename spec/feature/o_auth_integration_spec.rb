@@ -25,7 +25,8 @@ RSpec.describe "Google Omniauth", type: :feature do
     visit member_google_oauth2_omniauth_callback_path
   end
   
-  scenario "Admin View" do
+  scenario "Member View" do
+    expect(page).to have_content("Successfully authenticated from Google account")
     expect(page).to have_content("Role Management")
     expect(page).to have_content("Role Views")
   end

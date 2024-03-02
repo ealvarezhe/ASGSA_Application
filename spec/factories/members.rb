@@ -8,7 +8,7 @@ FactoryBot.define do
         date_joined { Date.today }
         degree { "Bachelor" }
         food_allergies { "None" }
-        position { "Member" }
+        position { "Admin" }
 
         after(:create) do |member, evaluator|
         role = Role.find_by(name: member.position)
@@ -16,12 +16,13 @@ FactoryBot.define do
         end
 
         trait :admin do
-        position { "Admin" }
+            position { "Admin" }
+        end
+    
+        trait :officer do
+            position { "Officer" }
         end
 
-        trait :officer do
-        position { "Officer" }
-        end
     end
 end
   
