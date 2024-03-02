@@ -122,6 +122,13 @@ GEM
     error_highlight (0.6.0)
     erubi (1.12.0)
     execjs (2.9.1)
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
+    faker (3.2.3)
+      i18n (>= 1.8.11, < 2)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
@@ -228,6 +235,8 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.9.0)
+      rspec-rails (>= 3.0.0)
     racc (1.7.3)
     rack (3.0.9)
     rack-protection (4.0.0)
@@ -404,6 +413,8 @@ DEPENDENCIES
   debug
   devise
   error_highlight (>= 0.4.0)
+  factory_bot_rails
+  faker
   font-awesome-sass (~> 6.5.1)
   importmap-rails
   jbuilder
@@ -415,6 +426,7 @@ DEPENDENCIES
   pg_search (~> 2.3)
   puma (>= 5.0)
   pundit
+  pundit-matchers (~> 1.6)
   rails (~> 7.1.3)
   rspec-rails
   rubocop

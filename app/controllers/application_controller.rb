@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     include Pagy::Backend
     before_action :authenticate_member!
     
-    include Pundit
+    include Pundit::Authorization
     protect_from_forgery
 
     def pundit_user
