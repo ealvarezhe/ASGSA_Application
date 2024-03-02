@@ -5,8 +5,8 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'pundit/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -63,18 +63,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: 'google_oauth2',
-    uid: '123545',
-    info: {
-      name: 'mockuser',
-      email: 'mockuser@gmail.com'
-    },
-    credentials: {
-      token: 'mock_token',
-      expires_at: Time.now + 1.week
-    }
-  })
+  config.include Pundit::Matchers, type: :policy
+  config.include FactoryBot::Syntax::Methods
 end
