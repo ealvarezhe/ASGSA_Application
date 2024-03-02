@@ -45,10 +45,11 @@ RSpec.feature "MemberFeatures", type: :feature do
   end
 
   scenario "Update a member's information" do
+    save_page
     visit edit_member_path(@member1)
 
     fill_in "member[res_lab]", with: "Lab A"
-    click_button "Update Member"
+    click_button "Update Profile"
 
     expect(page).to have_content("Member was successfully updated")
     expect(page).to have_content("Lab A")
