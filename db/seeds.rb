@@ -7,18 +7,22 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-Role.create!([{
+[
+  {
     name:"Admin",
     permissions: "Create, Read, Update, Delete"
-},
-{
+  },
+  {
     name:"Officer",
     permissions: "Create, Read, Update"
-},
-{
+  },
+  {
     name:"Member",
     permissions: "Read"
-}])
+  }
+].each do |role|
+  Role.find_or_create_by(role)
+end
 
 
 # Member.create!([
