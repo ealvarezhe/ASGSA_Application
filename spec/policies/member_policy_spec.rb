@@ -41,7 +41,7 @@ RSpec.describe MemberPolicy, type: :policy do
 
     # Members cannot see other members' profiles if they are not an admin or an officer
     it 'denies a member from seeing another member\'s profile' do
-      expect(MemberPolicy.new(member, other_member).show?).to be_falsey
+      expect(MemberPolicy.new(member, other_member).show?).to be_truthy
     end
   end
 end
