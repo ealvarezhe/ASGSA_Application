@@ -19,10 +19,10 @@ FactoryBot.define do
             position { "Officer" }
         end
     
-        # after(:create) do |member, evaluator|
-        #     role_id = Role.find_by(name: member.position).id
-        #     MemberRole.create!(member_id: member.member_id, role_id: role_id)
-        # end
+        after(:create) do |member, evaluator|
+            role_id = Role.find_by(name: member.position).id
+            MemberRole.create!(member_id: member.member_id, role_id: role_id)
+        end
 
     end
 end
