@@ -12,7 +12,11 @@
         <h1 style="text-align: center">Edit Profile</h1>
         <p style="color: red; text-align: center">Some fields can only be changed by Officers or Admins<p>
         <div style="text-align: center; margin-bottom: 10px"> 
-          <%= image_tag @member.avatar_url, class: "avatar" %>
+          <% if @member.avatar_url.present? %>
+            <%= image_tag @member.avatar_url, class: "avatar" %>
+          <% else %>
+            <%= image_tag 'default_avatar.jpeg', class: "avatar" %>
+          <% end %>
         </div>
       </div>
       <div class="card-body">

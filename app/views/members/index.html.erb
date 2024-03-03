@@ -51,7 +51,13 @@
             <tbody>
               <% @members.each do |member| %>
                 <tr>
-                  <td><%= image_tag(member.avatar_url, alt: member.first_name, class: 'profile-icon2') %></td>
+                  <td>
+                    <% if member.avatar_url.present? %>
+                      <%= image_tag(member.avatar_url, alt: member.first_name, class: 'profile-icon2') %>
+                    <% else %>
+                      <%= image_tag('default_avatar.jpeg', alt: member.first_name, class: 'profile-icon2') %>
+                    <% end %>
+                  </td>
                   <td><%= member.first_name %></td>
                   <td><%= member.last_name %></td>
                   <td><%= member.email %></td>

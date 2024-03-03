@@ -52,8 +52,10 @@
             <li class="nav-item dropdown">
               <input type="checkbox" id="profileDropdownCheck" class="dropdown-toggle-check">
               <label for="profileDropdownCheck" class="nav-link dropdown-toggle" id="profileDropdown">
-                <% if current_member.avatar_url %>
+                <% if current_member.avatar_url.present? %>
                   <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+                <% else %>
+                  <%= image_tag('default_avatar.jpeg', alt: 'Default Avatar', class: 'profile-icon2') %>
                 <% end %>
               </label>
               <div class="dropdown-menu" aria-labelledby="profileDropdown">

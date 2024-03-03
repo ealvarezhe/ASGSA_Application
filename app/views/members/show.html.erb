@@ -9,7 +9,11 @@
   <div class="profile">
     <div class="profile-header">
       <div class="profile-image", style="margin-right: 30px"> 
-        <%= image_tag @member.avatar_url, class: "avatar" %>
+        <% if @member.avatar_url.present? %>
+          <%= image_tag @member.avatar_url, class: "avatar" %>
+        <% else %>
+          <%= image_tag 'default_avatar.jpeg', class: "avatar" %>
+        <% end %>
       </div>
 
       <div class="profile-center">
