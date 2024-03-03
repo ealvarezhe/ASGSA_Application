@@ -1,16 +1,19 @@
 <div id="<%= dom_id member_notification %>">
-  <p>
-    <strong>Member:</strong>
-    <%= member_notification.member.first_name%>
-  </p>
-
-  <p>
-    <strong>Notification:</strong>
-    <%= member_notification.notification.description %>
-  </p>
-
-  <p>
-    <strong>Seen:</strong>
-    <%= member_notification.seen %>
+  <p>   
+    <strong><%= member_notification.notification.title %></strong><br>
+    Description: <%= member_notification.notification.description %><br>
+    <% if member_notification.notification.event %>
+    Event: <%= member_notification.notification.event.name %><br>
+      Time: <%= member_notification.notification.event.start_time&.strftime("%I:%M %p") %> - <%= member_notification.notification.event.end_time&.strftime("%I:%M %p") %><br>
+      Date: <%= member_notification.notification.event.date %><br>
+      Capacity: <%= member_notification.notification.event.capacity || 'No Limit' %><br>
+      Points: <%= member_notification.notification.event.points %>
+    <% end %>
+    Seen: 
+    <% if member_notification.seen %>
+      <i class="far fa-check-square"></i>
+    <% else %>
+      <i class="fa-regular fa-square"></i>
+    <% end %>
   </p>
 </div>

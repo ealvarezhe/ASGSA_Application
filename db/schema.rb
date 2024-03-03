@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_27_024308) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_113615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,12 +79,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_27_024308) do
 
   create_table "notifications", primary_key: "notification_id", force: :cascade do |t|
     t.string "description"
-    t.time "send_time"
-    t.date "send_date"
-    t.boolean "is_sent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.string "title"
+    t.date "date"
   end
 
   create_table "roles", primary_key: "role_id", force: :cascade do |t|

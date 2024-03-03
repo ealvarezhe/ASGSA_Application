@@ -33,4 +33,10 @@ class MemberMailer < ApplicationMailer
         mail(to: Member.pluck(:email), subject: 'ASGSA: New Upcoming Event!')
     end
 
+    def notification_email(notification)
+        @notification = notification
+
+        mail(to: Member.pluck(:email), subject: 'ASGSA: Notification')
+    end
+
 end

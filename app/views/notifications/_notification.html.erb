@@ -1,32 +1,10 @@
 <div id="<%= dom_id notification %>">
-  
-  <p>
-    <strong>Description:</strong>
-    <%= notification.description %>
-  </p>
-
-  <p>
-    <strong>Event:</strong>
-    <% if notification.event %>
-      <%= notification.event.name %>
-    <% else %>
-      N/a
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Send time:</strong>
-    <%= notification.send_time.strftime("%I:%M %p")%>
-  </p>
-
-  <p>
-    <strong>Send date:</strong>
-    <%= notification.send_date %>
-  </p>
-
-  <p>
-    <strong>Is sent:</strong>
-    <%= notification.is_sent %>
-  </p>
-
+  <li>
+      <strong><%= notification.title %></strong><br>
+      Description: <%= notification.description %><br>
+      Date: <%= notification.date %><br>
+      <% if notification.event %>
+        Event:<%= notification.event.name %><br>
+      <% end %>
+  </li> 
 </div>

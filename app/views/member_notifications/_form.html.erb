@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :member_id, style: "display: block" %>
-    <%= form.select :member_id, options_for_select(Member.all.map{|m|[m.first_name, m.id]})%>
-  </div>
+  <strong><%= member_notification.notification.title %></strong><br>
+    Description: <%= member_notification.notification.description %><br>
+    <% if member_notification.notification.event %>
+      Event: <%= member_notification.notification.event.name %><br>
+         Time: <%= member_notification.notification.event.start_time&.strftime("%I:%M %p") %> - <%= member_notification.notification.event.end_time&.strftime("%I:%M %p") %><br>
+         Date: <%= member_notification.notification.event.date %><br>
+         Capacity: <%= member_notification.notification.event.capacity || 'No Limit' %><br>
+         Points: <%= member_notification.notification.event.points %>
+    <% end %>
 
   <div>
-    <%= form.label :notification_id, style: "display: block" %>
-    <%= form.select :notification_id, options_for_select(Notification.all.map{|n|[n.description, n.id]})%>
-  </div>
-
-  <div>
-    <%= form.label :seen, style: "display: block" %>
+    <%= form.label :seen %>
     <%= form.check_box :seen %>
 
   <div>

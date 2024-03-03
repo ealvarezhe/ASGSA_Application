@@ -1,0 +1,12 @@
+<h1>Are you sure you want to delete this Notification?</h1>
+
+<strong>*Deleting this notification will delete it for all members*</strong>
+
+<%= render @notification %>
+
+</br>
+<div>
+  <%= button_to "Delete this notification", @notification, method: :delete, form: { style: "display: inline;"} %>
+  <%= button_to "Cancel", notifications_path, method: :get, form: { style: "display: inline;"}%>
+</div>
+

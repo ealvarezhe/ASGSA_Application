@@ -11,33 +11,56 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
+  <div class="d-flex align-items-center vh-100" style="background-image: url(<%= asset_path 'tamu_stock5.jpg' %>); background-size: cover;">
+      <div class="card mx-auto" style="width: 40rem;">
+          <div class="card-header">
+            <% if notification.new_record? %>
+              <h1>New Notification</h1>
+            <% else %>
+              <h1>Edit Notification</h1>
+            <% end %>
+            <%= link_to("Back to List", notifications_path, :class => 'back-link') %>
+          </div>
 
-  <div>
-    <%= form.label :send_time, style: "display: block" %>
-    <%= form.time_field :send_time %>
-  </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <%= form.label :title, 'Title', class: 'form-label' %>
+              <%= form.text_field :title, required: true, class: 'form-control' %>
+            </div>
 
-  <div>
-    <%= form.label :send_date, style: "display: block" %>
-    <%= form.date_field :send_date, min: Date.today %>
-  </div>
+            <div class="mb-3">
+              <%= form.label :description, 'Description', class: 'form-label' %>
+              <%= form.text_area :description, class: 'form-control' %>
+            </div>
 
-  <div>
-    <%= form.label :is_sent, style: "display: block" %>
-    <%= form.check_box :is_sent %>
-  </div>
+            <div class="mb-3">
+              <%= form.label :event, 'Event', class: 'form-label' %>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}, selected: notification.event_id || nil), {include_blank: true}, {class: 'form-control'} %>
+              </div>
 
-  <div>
-    <%= form.label :event, style: "display: block" %>
-    <div><%= form.select :event_id, options_for_select(Event.all.map{|e|[e.name, e.id]}), include_blank: true %>
-    <p> Leave blank if the notification isn't for an event</p> </div>        
-  </div>
+              <div class="col-md-6 mb-3"
+                <p class="card-text"> Leave blank if this notification isn't for an event </p> 
+              </div>
+            </div>
+            </div>
 
-  <div>
-    <%= form.submit %>
+            <% if notification.new_record? %>
+              <div class="form-check mb-3">
+                <%= check_box_tag :send_email, class: 'form-check-input' %>
+                <%= label_tag :send_email, 'Send email to all members', class: 'form-check-label' %>
+              </div>
+
+              <%= form.hidden_field :date, :value => Date.today %>
+              
+            <% end %>
+              <% if notification.new_record? %>
+                <%= form.submit 'Create Event', class: 'btn btn-primary'%>
+              <% else %>
+                <%= form.submit 'Edit Event', class: 'btn btn-primary'%>
+              <% end %>
+          </div>
+      </div>
   </div>
 <% end %>

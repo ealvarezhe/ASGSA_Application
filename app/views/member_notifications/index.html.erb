@@ -1,16 +1,76 @@
-<p style="color: green"><%= notice %></p>
+<div style="padding: 5%; background-image: url(<%= asset_path 'tamu_stock4.jpg' %>); background-size: cover; height: 100vh;">
+  <div class="card">
+    <div class="card-header">
+      <h1>Notifications</h1>
+    </div>
+    <div class="card-body">
+      <%= turbo_frame_tag "member_notifications" do %>
+        <p id="notice" class="mb-4"><%= notice %></p>
 
-<h1>Member notifications</h1>
+        <%= form_with url: "", method: :get, data: { turbo_frame: "member_notifcations", turbo_action: "advance" } do |form| %>
+          <div class="form-row align-items-center mb-3">
+            <div class="col-auto">
+              Show 
+            </div>
+            <div class="col-auto">
+              <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control" } %>
+            </div>
+          </div>
 
-<div id="member_notifications">
-  <% @member_notifications.each do |member_notification| %>
-    <% if member_notification.member_id == current_member.id %> 
-      <%= render member_notification %>
-      <p>
-        <%= link_to "Show this member notification", member_notification %>
-      </p>
-    <% end %>
-  <% end %>
+          <div class="form-row align-items-center mb-3">
+            <div class="col-auto invisible">
+             <%# Search 
+            </div>
+            <div class="col-auto">
+              <%= form.search_field :query, value: params[:query], onchange: "this.form.requestSubmit()", class: "form-control" %>
+            #%></div>
+          </div> 
+          
+        <% end %>
+          
+        <div class="table-responsive">
+          <table class="table table-hover table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Event</th>
+                <th scope="col">Seen</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @member_notifications.each do |member_notification| %>
+                <tr>
+                  <td><%= member_notification.notification.title %></td>
+                  <td><%= member_notification.notification.description %></td>
+                  <% if member_notification.notification.event %>
+                    <td><%= member_notification.notification.event.name %></td>
+                  <% else %>
+                    <td>N/a</td>
+                  <% end %>
+                  <td>
+                    <% if member_notification.seen %>
+                      <i class="far fa-check-square"></i>
+                    <% else %>
+                      <i class="fa-regular fa-square"></i>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= button_to mark_seen_member_notification_path(member_notification), method: :patch, class: "btn btn-secondary" do%>
+                      <i class='fas fa-eye'></i>
+                    <% end %>
+                    <%= button_to member_notification_path(member_notification), method: :delete, class: "btn btn-danger" do%>
+                      <i class='fas fa-trash'></i>
+                    <% end %>
+                    </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <%== pagy_nav @pagy %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New member notification", new_member_notification_path %>

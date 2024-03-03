@@ -1,9 +1,19 @@
 class MemberNotificationsController < ApplicationController
-  before_action :set_member_notification, only: %i[ show edit update destroy ]
+  before_action :set_member_notification, only: %i[ show edit update destroy mark_seen]
 
   # GET /member_notifications or /member_notifications.json
   def index
-    @member_notifications = MemberNotification.all
+    @member_notifications = MemberNotification.where(member_id: current_member.id).all
+    @member_notifications = @member_notifications.search(params[:query]) if params[:query].present?
+    @pagy, @member_notifcations = pagy @member_notifications.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ title, description, event, seen }.include?(params[:sort]) ? params[:sort] : "seen"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /member_notifications/1 or /member_notifications/1.json
@@ -17,6 +27,20 @@ class MemberNotificationsController < ApplicationController
 
   # GET /member_notifications/1/edit
   def edit
+  end
+
+  def mark_seen
+    @member_notification = MemberNotification.find(params[:id])
+
+    respond_to do |format|
+      if @member_notification.update(seen: true)
+        format.html { redirect_to member_notification_url((@member_notification)), notice: "Member notification was marked as read" }
+        format.json { render :show, status: :ok, location: @member_notification }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @member_notification.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /member_notifications or /member_notifications.json
