@@ -7,7 +7,7 @@
       Time: <%= member_notification.notification.event.start_time&.strftime("%I:%M %p") %> - <%= member_notification.notification.event.end_time&.strftime("%I:%M %p") %><br>
       Date: <%= member_notification.notification.event.date %><br>
       Capacity: <%= member_notification.notification.event.capacity || 'No Limit' %><br>
-      Points: <%= member_notification.notification.event.points %>
+      Points: <%= member_notification.notification.event.points %><br>
     <% end %>
     Seen: 
     <% if member_notification.seen %>
