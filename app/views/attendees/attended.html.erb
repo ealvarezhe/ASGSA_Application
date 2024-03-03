@@ -2,7 +2,9 @@
   Members checked in for event: <%= @event.name %>
 </h1>
 
-<%= link_to("Check Members In", check_in_event_attendees_path) %>
+<% if Role.find(MemberRole.find(current_member.member_id).role_id).name != "Member" %>
+  <%= link_to("Check Members In", check_in_event_attendees_path) %>
+<% end %>
 
 <div id="attendees">
   <% @attendees.each do |attendee| %>
