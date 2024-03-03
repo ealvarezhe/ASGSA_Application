@@ -14,7 +14,7 @@ class MemberMailer < ApplicationMailer
         mail(to: 'asgsatamu1@gmail.com', subject: 'New Support Request')
     end
 
-    def event_email(event)
+    def event_email(event, recipients)
         @event = event
 
         
@@ -30,7 +30,7 @@ class MemberMailer < ApplicationMailer
         ics_content = CGI.unescape(@calendar_link.ical_url.split(',')[1])
         attachments['event.ics'] = { mime_type: 'text/calendar', content: ics_content }
 
-        mail(to: Member.pluck(:email), subject: 'ASGSA: New Upcoming Event!')
+        mail(to: recipients.pluck(:email), subject: 'ASGSA: New Upcoming Event!')
     end
 
     def notification_email(notification)
