@@ -17,12 +17,54 @@ RSpec.describe "/member_notifications", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # MemberNotification. As you add validations to MemberNotification, be sure to
   # adjust the attributes here as well.
+  let(:valid_event) { Event.create!(
+    name: "Test Event",
+    location: "College Station",
+    start_time: Time.now,
+    end_time: Time.current + 2.hour,
+    date: Date.today,
+    description: "This is a description for test event",
+    capacity: 20,
+    points: 3
+  ) }
+  let(:valid_notification){ Notification.create!(
+      title: "Test notification",
+      description: "A test description",
+      date: Date.today,
+      event_id: valid_event.id
+    )
+  }
+  let(:valid_member) {Member.create!(
+      first_name: "John",
+      last_name: "Doe",
+      email: "john.doe@tamu.edu",
+      points: 100,
+      position: "Member",
+      date_joined: Date.today,
+      degree: "Bachelor",
+      res_topic: "Topic",
+      res_lab: "Lab",
+      res_pioneer: "Pioneer",
+      res_description: "Description",
+      area_of_study: "Study Area",
+      food_allergies: "None"
+    )
+  }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      member_id: valid_member.id,
+      notification_id: valid_notification.id,
+      seen: false
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      member_id: false,
+      notification_id: false,
+      seen: nil 
+    }
   }
 
   describe "GET /index" do

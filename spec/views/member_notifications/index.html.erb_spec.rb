@@ -5,11 +5,13 @@ RSpec.describe "member_notifications/index", type: :view do
     assign(:member_notifications, [
       MemberNotification.create!(
         member_id: 2,
-        notification_id: 3
+        notification_id: 3,
+        seen: false
       ),
       MemberNotification.create!(
         member_id: 2,
-        notification_id: 3
+        notification_id: 3,
+        seen: false
       )
     ])
   end

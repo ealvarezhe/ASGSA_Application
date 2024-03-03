@@ -4,7 +4,8 @@ RSpec.describe "member_notifications/new", type: :view do
   before(:each) do
     assign(:member_notification, MemberNotification.new(
       member_id: 1,
-      notification_id: 1
+      notification_id: 1,
+      seen: false
     ))
   end
 

@@ -4,8 +4,8 @@ RSpec.describe Notification, type: :model do
   let(:valid_event) { Event.create!(
     name: "Test Event",
     location: "College Station",
-    start_time: Time.now + 2.hour,
-    end_time: Time.current,
+    start_time: Time.now ,
+    end_time: Time.current + 2.hour,
     date: Date.today,
     description: "This is a description for test event",
     capacity: 20,
@@ -14,10 +14,9 @@ RSpec.describe Notification, type: :model do
   #Define a valid member
   let(:valid_attributes){
     {
+      title: "Test notification",
       description: "A test description",
-      send_time: Time.new(),
-      send_date: Date.today,
-      is_sent: false,
+      date: Date.today,
       event_id: valid_event.id
     }
   }
@@ -29,19 +28,19 @@ RSpec.describe Notification, type: :model do
       expect(notification).to be_valid
     end
 
-    it 'is not valid without a send time' do
-      invalid_attributes = valid_attributes.merge(send_time: nil)
+    it 'is not valid without a title' do
+      invalid_attributes = valid_attributes.merge(title: nil)
       notification = Notification.new(invalid_attributes)
       expect(notification).not_to be_valid
     end
 
-    it 'is not valid without a send date' do
-      invalid_attributes = valid_attributes.merge(send_date: nil)
+    it 'is not valid without a date' do
+      invalid_attributes = valid_attributes.merge(date: nil)
       notification = Notification.new(invalid_attributes)
       expect(notification).not_to be_valid
     end
 
-    it 'is not valid withput a description' do
+    it 'is not valid without a description' do
       notification = Notification.new(valid_attributes.merge(description: nil))
       expect(notification).not_to be_valid
     end

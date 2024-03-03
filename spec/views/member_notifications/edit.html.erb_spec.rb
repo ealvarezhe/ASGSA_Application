@@ -4,7 +4,8 @@ RSpec.describe "member_notifications/edit", type: :view do
   let(:member_notification) {
     MemberNotification.create!(
       member_id: 1,
-      notification_id: 1
+      notification_id: 1,
+      seen: false
     )
   }
 
