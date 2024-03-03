@@ -18,24 +18,24 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-4 mb-3">
-            <%= form.label :first_name, 'First Name', class: 'form-label' %>
-            <%= form.text_field :first_name, required: true, class: 'form-control' %>
+            <%= form.label :first_name, 'First Name', class: 'form-label required' %>
+            <%= form.text_field :first_name, required: true, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
           </div>
 
           <div class="col-md-4 mb-3">
-            <%= form.label :last_name, 'Last Name', class: 'form-label' %>
-            <%= form.text_field :last_name, required: true, class: 'form-control' %>
+            <%= form.label :last_name, 'Last Name', class: 'form-label required' %>
+            <%= form.text_field :last_name, required: true, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
           </div>
 
           <div class="col-md-4 mb-3">
-            <%= form.label :email, 'Email', class: 'form-label' %>
+            <%= form.label :email, 'Email', class: 'form-label required' %>
             <%= form.email_field :email, required: true, readonly: true, class: 'form-control' %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-4 mb-3">
-            <%= form.label :points, 'Points', class: 'form-label' %>
+            <%= form.label :points, 'Points', class: 'form-label required' %>
             <%= form.number_field :points, required: true, min: 0, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
           </div>
 
@@ -45,8 +45,8 @@
           </div>
 
           <div class="col-md-4 mb-3">
-            <%= form.label :position, 'Position', class: 'form-label' %>
-            <%= form.text_field :position, required: true, class: 'form-control', readonly: (!policy(current_member).admin_officer? ? true : false) %>
+            <%= form.label :position, 'Position', class: 'form-label required' %>
+            <%= form.text_field :position, required: true, class: 'form-control', readonly: (!policy(current_member).admin? ? true : false) %>
           </div>
         </div>
 
@@ -78,7 +78,7 @@
         </div>
 
         <div class="mb-3">
-          <%= form.label :food_allergies, 'Food Allergies', class: 'form-label' %>
+          <%= form.label :food_allergies, 'Food Allergies', class: 'form-label required' %>
           <%= form.text_area :food_allergies, required: true, class: 'form-control' %>
         </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_113615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "member_notifications", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "notification_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "seen"
+  end
+
   create_table "member_roles", primary_key: "member_role_id", force: :cascade do |t|
     t.integer "member_id"
     t.integer "role_id"
@@ -46,7 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
   create_table "members", primary_key: "member_id", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
+    t.string "email", default: "", null: false
     t.integer "points"
     t.string "position"
     t.datetime "created_at", null: false
@@ -59,16 +67,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
     t.string "res_pioneer"
     t.string "res_description"
     t.text "area_of_study"
+    t.string "encrypted_password", default: "", null: false
+    t.string "uid"
+    t.string "avatar_url"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_members_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
   create_table "notifications", primary_key: "notification_id", force: :cascade do |t|
     t.string "description"
-    t.time "send_time"
-    t.date "send_date"
-    t.boolean "is_sent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.string "title"
+    t.date "date"
   end
 
   create_table "roles", primary_key: "role_id", force: :cascade do |t|
@@ -80,6 +95,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164100) do
 
   add_foreign_key "attendees", "events", primary_key: "event_id"
   add_foreign_key "attendees", "members", primary_key: "member_id"
+  add_foreign_key "member_notifications", "members", primary_key: "member_id"
+  add_foreign_key "member_notifications", "notifications", primary_key: "notification_id"
   add_foreign_key "member_roles", "members", primary_key: "member_id"
   add_foreign_key "member_roles", "roles", primary_key: "role_id"
   add_foreign_key "notifications", "events", primary_key: "event_id"

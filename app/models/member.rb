@@ -6,7 +6,7 @@ class Member < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   # Validate presence of essential attributes
   validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
-  validates :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "can only contain letters" }
+  validates :last_name, presence: true
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@tamu\.edu\z/i, message: "must be TAMU affiliated" }
   validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :position, presence: true
@@ -15,6 +15,8 @@ class Member < ApplicationRecord
   has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
+  has_many :member_notifications, dependent: :destroy
+  has_many :notifications, through: :member_notifications
 
   def admin?
     member_roles.exists?(role_id: Role.find_by(name: 'Admin').id)
@@ -32,7 +34,7 @@ class Member < ApplicationRecord
     first_time = !Member.exists?(email: email)
     return nil unless email =~ /@tamu.edu\z/
     member = create_with(uid: uid, first_name: first_name, last_name: last_name, avatar_url: avatar_url, points: 0, position: "Member", date_joined: Time.current, degree: "MS", food_allergies: "None").find_or_create_by!(email: email)
-    admin_role_id = Role.find_by(name: 'Member').id
+    admin_role_id = Role.find_by(name: 'Admin').id
     MemberRole.find_or_create_by!(member_id: member.member_id, role_id: admin_role_id) if first_time
     MemberMailer.with(member: member).new_member_email.deliver_now if first_time
     [member, first_time]

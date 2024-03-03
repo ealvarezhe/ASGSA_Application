@@ -33,21 +33,24 @@
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
           <% if member_signed_in? && policy(current_member).admin? %> <!-- Need to add back "current_member.admin?" in if-statement -->
-            <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Notifications', notifications_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to "Role Management", member_roles_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
           <% end %>
         </ul>
         <ul class="navbar-nav">
           <% if member_signed_in? %>
             <li class="nav-item nav-item-flex">
-              <%= link_to notifications_path, class: 'nav-link' do %>
+              <%= link_to member_notifications_path, class: 'nav-link' do %>
                 <i class="fa fa-bell"></i>
               <% end %>
             </li>
             <li class="nav-item dropdown">
               <input type="checkbox" id="profileDropdownCheck" class="dropdown-toggle-check">
               <label for="profileDropdownCheck" class="nav-link dropdown-toggle" id="profileDropdown">
-                <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+                <% if current_member.avatar_url %>
+                  <%= image_tag(current_member.avatar_url, alt: current_member.first_name, class: 'profile-icon') %>
+                <% end %>
               </label>
               <div class="dropdown-menu" aria-labelledby="profileDropdown">
                 <%= link_to 'View Profile', member_path(current_member), class: 'dropdown-item' %>
