@@ -1,0 +1,25 @@
+<%= form_with(model: [@event, @attendee]) do |form| %>
+  <% if @attendee.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@attendee.errors.count, "error") %> prohibited this attendee from being saved:</h2>
+
+      <ul>
+        <% @attendee.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    Member: <%= member.first_name + " " + member.last_name%>
+  </p>
+
+  <%= form.hidden_field :member_id, value: @member.member_id %>
+  <%= form.hidden_field :event_id, value: @event.event_id %>
+  <%= form.hidden_field :rsvp, value: false %>
+  <%= form.hidden_field :attended, value: true %>
+
+    <%=form.submit "Confirm Check In" %>
+
+<% end %>

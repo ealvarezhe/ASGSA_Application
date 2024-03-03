@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3 class="card-title"> <%= @notification.title %></h3>
+    <p>
+        <%= @notification.description %>
+        <br>
+        <% if @notification.event %>
+            Event: <%= @notification.event.name %><br>
+            Time: <%= @notification.event.start_time&.strftime("%I:%M %p") %> - <%= @notification.event.end_time&.strftime("%I:%M %p") %><br>
+            Date: <%= @notification.event.date %><br>
+            Capacity: <%= @notification.event.capacity || 'No Limit' %><br>
+            Points: <%= @notification.event.points %>
+        <% end %>
+    </p>
+</body>
+</html>

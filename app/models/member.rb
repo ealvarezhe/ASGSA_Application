@@ -15,6 +15,8 @@ class Member < ApplicationRecord
   has_many :attendees, dependent: :destroy
   has_many :member_roles, dependent: :destroy
   has_many :roles, through: :member_roles
+  has_many :member_notifications, dependent: :destroy
+  has_many :notifications, through: :member_notifications
 
   def admin?
     member_roles.exists?(role_id: Role.find_by(name: 'Admin').id)
@@ -26,6 +28,10 @@ class Member < ApplicationRecord
 
   def member?
     member_roles.exists?(role_id: Role.find_by(name: 'Member').id)
+  end
+
+  def unseen_notifications_count
+    member_notifications.where(seen: false).count
   end
 
   def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)

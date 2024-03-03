@@ -2,20 +2,17 @@
 
 <h1>Notifications</h1>
 
-<div id="notifications">
-  <% @notifications.each do |notification| %>
-    <p>
-      <strong>Event:</strong>
-      <%= notification.event.name %>
-    </p>
-    <p>
-      <strong>Description:</strong>
-      <%= notification.description %>
-    </p>
-    <p>
-      <%= link_to "Show this notification", notification %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New notification", new_notification_path %>
+
+<div id="notifications">
+  <ul>
+    <% @notifications.each do |notification| %>
+      <%= render notification %>
+      <p>
+        <%= link_to "Show", notification %> |
+        <%= link_to "Edit", edit_notification_path(notification) %> |
+        <%= link_to "Delete", delete_confirmation_notification_path(notification) %>
+      </p>
+    <% end %>
+  </ul>
+</div>

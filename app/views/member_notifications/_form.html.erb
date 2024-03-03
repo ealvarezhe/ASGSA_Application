@@ -1,0 +1,31 @@
+<%= form_with(model: member_notification) do |form| %>
+  <% if member_notification.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(member_notification.errors.count, "error") %> prohibited this member_notification from being saved:</h2>
+
+      <ul>
+        <% member_notification.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong><%= member_notification.notification.title %></strong><br>
+    Description: <%= member_notification.notification.description %><br>
+    <% if member_notification.notification.event %>
+      Event: <%= member_notification.notification.event.name %><br>
+         Time: <%= member_notification.notification.event.start_time&.strftime("%I:%M %p") %> - <%= member_notification.notification.event.end_time&.strftime("%I:%M %p") %><br>
+         Date: <%= member_notification.notification.event.date %><br>
+         Capacity: <%= member_notification.notification.event.capacity || 'No Limit' %><br>
+         Points: <%= member_notification.notification.event.points %>
+    <% end %>
+
+  <div>
+    <%= form.label :seen %>
+    <%= form.check_box :seen %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
