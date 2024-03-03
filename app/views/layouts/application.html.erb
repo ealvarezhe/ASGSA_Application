@@ -43,6 +43,10 @@
             <li class="nav-item nav-item-flex">
               <%= link_to member_notifications_path, class: 'nav-link' do %>
                 <i class="fa fa-bell"></i>
+                <% notifications_count = current_member.unseen_notifications_count %>
+                <% if notifications_count > 0 %>
+                  <span class="badge badge-danger"><%= notifications_count %></span>
+                <% end %>
               <% end %>
             </li>
             <li class="nav-item dropdown">

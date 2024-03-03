@@ -30,6 +30,10 @@ class Member < ApplicationRecord
     member_roles.exists?(role_id: Role.find_by(name: 'Member').id)
   end
 
+  def unseen_notifications_count
+    member_notifications.where(seen: false).count
+  end
+
   def self.from_google(email:, first_name:, last_name:, uid:, avatar_url:)
     first_time = !Member.exists?(email: email)
     return nil unless email =~ /@tamu.edu\z/
