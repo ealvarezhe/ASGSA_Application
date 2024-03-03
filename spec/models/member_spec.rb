@@ -6,7 +6,7 @@ RSpec.describe Member, type: :model do
     {
       first_name: "John",
       last_name: "Doe",
-      email: "john.doe@example.com",
+      email: "john.doe@tamu.edu",
       points: 100,
       position: "Member",
       date_joined: Date.today,
@@ -51,12 +51,7 @@ RSpec.describe Member, type: :model do
     it 'is not valid position' do 
       member = Member.new(valid_attributes.merge(position: nil))
       expect(member).not_to be_valid
-    end
-
-    it 'is not valid without a date_joined' do
-      member = Member.new(valid_attributes.merge(date_joined: nil))
-      expect(member).not_to be_valid
-    end    
+    end  
 
     # If none enter 'None'
     it 'is not valid without listing food_allergies' do

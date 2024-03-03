@@ -32,9 +32,9 @@
           <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Members', members_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Events', events_path, class: 'nav-link' %></li>
-          <% if member_signed_in? && current_member.admin? %> 
-            <li class="nav-item"><%= link_to 'Notifications', notifications_path, class: 'nav-link' %></li> 
-            <li class="nav-item"><%= link_to "Role Managment", member_roles_path, class: "nav-link" %></li>
+          <% if member_signed_in? && policy(current_member).admin? %> <!-- Need to add back "current_member.admin?" in if-statement -->
+            <li class="nav-item"><%= link_to 'Notifications', notifications_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to "Role Management", member_roles_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to 'Roles', roles_path, class: 'nav-link' %></li>
           <% end %>
         </ul>
