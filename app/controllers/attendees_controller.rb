@@ -1,9 +1,9 @@
 class AttendeesController < ApplicationController
-  before_action :set_attendee, only: %i[ show edit update destroy ]
+  before_action :set_attendee, only: %i[ show edit update destroy delete ]
+  before_action :set_event, only: %i[ index new edit delete attended check_in new_check_in ]
 
   # GET /attendees or /attendees.json
   def index
-    @event = Event.find(params[:event_id])
     @attendees = Attendee.where('event_id = '+params[:event_id])
   end
 
@@ -14,7 +14,6 @@ class AttendeesController < ApplicationController
   # GET /attendees/new
   def new
     @attendee = Attendee.new
-    @event = Event.find(params[:event_id])
     @current_time = Time.zone.now
 
     date = @event.date
@@ -24,8 +23,6 @@ class AttendeesController < ApplicationController
 
   # GET /attendees/1/edit
   def edit
-    @event = Event.find(params[:event_id])
-    @attendee = Attendee.find(params[:id])
     @member = Member.find(@attendee.member_id)
     currentPoints = @member.points
 
@@ -69,8 +66,6 @@ class AttendeesController < ApplicationController
   end
 
   def delete
-    @event = Event.find(params[:event_id])
-    @attendee = Attendee.find(params[:id])
   end
 
   # DELETE /attendees/1 or /attendees/1.json
@@ -92,7 +87,6 @@ class AttendeesController < ApplicationController
   end
 
   def attended
-    @event = Event.find(params[:event_id])
     @attendees = @event.attendees.where(attended: true)
   end
 
@@ -100,7 +94,6 @@ class AttendeesController < ApplicationController
     @members = Member.all
     @members = @members.search(params[:query]) if params[:query].present?
     @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
-    @event = Event.find(params[:event_id])
   end
 
   def sort_column
@@ -113,7 +106,6 @@ class AttendeesController < ApplicationController
 
   def new_check_in
     @attendee = Attendee.new
-    @event = Event.find(params[:event_id])
     @member = Member.find(params[:member_id])
   end
 
@@ -121,6 +113,10 @@ class AttendeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_attendee
       @attendee = Attendee.find(params[:id])
+    end
+
+    def set_event
+      @event = Event.find(params[:event_id])
     end
 
     # Only allow a list of trusted parameters through.
