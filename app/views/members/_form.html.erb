@@ -1,9 +1,4 @@
 <%= form_with(model: member) do |form| %>
-  <% if member.errors.any? %>
-    <div style="color: red">
-      <p>Error when submitting</p>
-    </div>
-  <% end %>
 
   <div class="d-flex align-items-center vh-50" style="background-image: url(<%= asset_path 'tamu_stock5.jpg' %>); background-size: cover; padding: 5%;">
     <div class="card mx-auto" style="width: 60rem;">
@@ -14,6 +9,15 @@
         <div style="text-align: center; margin-bottom: 10px"> 
           <%= image_tag @member.avatar_url, class: "avatar" %>
         </div>
+        <% if @member.errors.any? %>
+          <div style="color: red; text-align: center">
+              <% member.errors.each do |error| %>
+                <div>
+                  <%= error.full_message %>
+                </div>
+              <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="card-body">
         <div class="row">
@@ -74,12 +78,12 @@
 
         <div class="mb-3">
           <%= form.label :res_description, 'Research Description', class: 'form-label' %>
-          <%= form.text_area :res_description, class: 'form-control' %>
+          <%= form.text_area :res_description, class: 'form-control', style: 'height: 100px' %>
         </div>
 
         <div class="mb-3">
           <%= form.label :food_allergies, 'Food Allergies', class: 'form-label required' %>
-          <%= form.text_area :food_allergies, required: true, class: 'form-control' %>
+          <%= form.text_area :food_allergies, required: true, class: 'form-control', style: 'height: 100px' %>
         </div>
 
         <%= form.submit 'Update Profile', class: 'btn btn-primary'%>
