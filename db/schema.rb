@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_113615) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "member_notifications", force: :cascade do |t|
+  create_table "member_notifications", primary_key: "member_notification_id", force: :cascade do |t|
     t.integer "member_id"
     t.integer "notification_id"
     t.datetime "created_at", null: false

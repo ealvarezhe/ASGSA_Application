@@ -25,6 +25,11 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def delete_confirmation
+    # Render delete_confirmation view
+    @event = Event.find(params[:id])
+  end
+
   def create
     @event = Event.new(event_params)
 

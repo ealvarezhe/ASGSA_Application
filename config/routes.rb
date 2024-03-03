@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   root "dashboards#show"
 
   resources :events do
+    get 'delete_confirmation', on: :member
     # attendees resources
     resources :attendees do
       collection do

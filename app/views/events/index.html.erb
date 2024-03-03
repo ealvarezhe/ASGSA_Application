@@ -54,7 +54,7 @@
                   <%= link_to "<i class='fas fa-eye'></i>".html_safe, event, class: "btn btn-secondary" %>
                     <% if can_see_all_attributes %>
 						<%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_event_path(event), class: "btn btn-primary", style: "background-color: #007bff; border-color: #007bff" %>
-                      <%= link_to "<i class='fas fa-trash'></i>".html_safe, delete_event_path(event), method: :get, class: "btn btn-danger" %>
+                      <%= link_to "<i class='fas fa-trash'></i>".html_safe, delete_confirmation_event_path(event), method: :get, class: "btn btn-danger" %>
                     <% end %>
                   </td>
                 </tr>
@@ -64,7 +64,9 @@
         </div>
         <%== pagy_nav @pagy %>
       <% end %>
-	  <%= link_to("Add New Event", new_event_path, class: 'btn btn-primary') %>
+	  <% if can_see_all_attributes %>
+	  	<%= link_to("Add New Event", new_event_path, class: 'btn btn-primary') %>
+	  <% end %>
     </div>
   </div>
 </div>
