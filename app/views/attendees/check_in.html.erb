@@ -44,6 +44,7 @@
                   <th scope="col">Last Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Position</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -57,17 +58,19 @@
                     <td><%= member.email %></td>
                     <td><%= member.position %></td>
                     <% if attendee == nil %>
+                      <td> Non-RSVP </td>
                       <td>
-                        Member has not RSVP'd for event <br>
-                        <%= link_to "Check Member In", new_check_in_event_attendees_path(@event, member_id: member.member_id), class: "btn btn-secondary" %>
+                        <%= link_to "Check In", new_check_in_event_attendees_path(@event, member_id: member.member_id, member_filter: params[:member_filter]), class: "btn btn-secondary" %>
                       </td>
                     <% elsif !attendee.attended %>
+                      <td> RSVP </td>
                       <td>
-                        <%= link_to "Check Member In", edit_event_attendee_path(@event, attendee), class: "btn btn-secondary" %>
+                        <%= link_to "Check In", edit_event_attendee_path(@event, attendee, member_filter: params[:member_filter]), class: "btn btn-secondary" %>
                       </td>
                     <% else %>
+                      <td> Attended </td>
                       <td>
-                        <%= link_to "Uncheck Member", edit_event_attendee_path(@event, attendee), class: "btn btn-secondary" %>
+                        <%= link_to "Uncheck Member", edit_event_attendee_path(@event, attendee, member_filter: params[:member_filter]), class: "btn btn-secondary" %>
                       </td>
                     <% end %>
                   </tr>

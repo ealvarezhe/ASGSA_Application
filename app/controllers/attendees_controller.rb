@@ -34,10 +34,15 @@ class AttendeesController < ApplicationController
     else
       currentPoints += @event.points
     end
-
+    puts "TEST"
+    puts params
     @member.update(points: currentPoints)
     @attendee.update(attended: !@attendee.attended)
-    redirect_to check_in_event_attendees_path(@event)
+    if params[:member_filter]
+      redirect_to check_in_event_attendees_path(@event, member_filter: params[:member_filter])
+    else
+      redirect_to check_in_event_attendees_path(@event)
+    end
   end
 
   # POST /attendees or /attendees.json
