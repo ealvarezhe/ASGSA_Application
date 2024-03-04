@@ -94,9 +94,19 @@ class AttendeesController < ApplicationController
   end
 
   def check_in
+    attendees = Attendee.where('event_id = '+params[:event_id])
     @members = Member.all
     @members = @members.search(params[:query]) if params[:query].present?
     @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+
+    case params[:member_filter]
+    when "Attended"
+      @members = attendees.where(attended: true).map(&:member)
+    when "RSVP"
+      @members = attendees.where(rsvp: true).map(&:member)
+    when "Non-RSVP"
+      @members = Member.where.not(member_id: attendees.pluck(:member_id))
+    end
   end
 
   def sort_column
