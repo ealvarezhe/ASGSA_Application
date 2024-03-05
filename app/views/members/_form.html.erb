@@ -48,7 +48,7 @@
           </div>
 
           <div class="col-md-4 mb-3">
-            <%= form.label :date_joined, 'Date Joined', class: 'form-label' %>
+            <%= form.label :date_joined, 'Date Joined', class: 'form-label required' %>
             <%= form.date_field :date_joined, required: true, min: Date.today - 8.years, max: Date.today, class: 'form-control' %>
           </div>
 
