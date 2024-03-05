@@ -4,16 +4,18 @@ RSpec.feature "EventsFeature", type: :feature do
   before do
     Rails.application.load_seed
 
+    @member1 = create(:member, :admin)
+
     # Setup mock OmniAuth user
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456789',
       info: {
-        email: "john@tamu.edu",
-        first_name: "John",
-        last_name: "Doe",
-        image: "https://example.com/image.jpg"
+        email: @member1.email,
+        first_name: @member1.first_name,
+        last_name: @member1.last_name,
+        image: @member1.avatar_url
       },
       credentials: {
         token: "token",
@@ -22,10 +24,9 @@ RSpec.feature "EventsFeature", type: :feature do
       }
     })
 
-    @member1 = create(:member, :admin)
-
     # Route to trigger the OmniAuth callback directly for testing
     visit member_google_oauth2_omniauth_callback_path
+    
   end
 
     let(:new_event) {
@@ -61,52 +62,58 @@ RSpec.feature "EventsFeature", type: :feature do
     expect(page).to have_content("Events integration Test")
   end
 
-#   scenario "View events list" do
-#     # Create some events to test against
-#     # event1 = create(:event, name: "Event 1")
-#     # event2 = create(:event, name: "Event 2")
+  scenario "View events list" do
+    # Create some events to test against
+    event1 = Event.create(name: "Event 1", location: "1234 Fake Street", start_time: Time.current, end_time: Time.current + 2.hour, date: Date.today, points: 5)
+    event2 = Event.create(name: "Event 2", location: "1234 Fake Street", start_time: Time.current, end_time: Time.current + 2.hour, date: Date.today, points: 5)
 
-#     visit events_path
+    visit events_path
 
-#     expect(page).to have_content("Events Integration Test")
-#     # expect(page).to have_content(event2.name)
-#   end
+    expect(page).to have_content(event1.name)
+    expect(page).to have_content(event2.name)
+  end
 
-#   scenario "View event details" do
-#     event = create(:event, name: "Test Event")
+  scenario "View event details" do
+    event = Event.create(new_event)
 
-#     visit event_path(event)
+    visit event_path(event)
 
-#     expect(page).to have_content(event.name)
-#     expect(page).to have_content(event.location)
-#     # Add other expectations for event details
-#   end
+    expect(page).to have_content(event.name)
+    expect(page).to have_content(event.location)
+    expect(page).to have_content(event.points)
+  end
 
 
-#   scenario "Update event details" do
-#     event = create(:event, name: "Test Event", location: "Old Location")
+  scenario "Update event details" do
+    event = Event.create(new_event)
 
-#     visit edit_event_path(event)
+    visit event_path(event)
 
-#     fill_in "event_location", with: "Updated Location"
-#     # Update other fields as needed
+    click_link "Edit Event Details"
 
-#     click_button "Update Event"
+    fill_in "Name", with: "New name"
+    fill_in "Points", with: "10"
+    # Update other fields as needed
 
-#     expect(page).to have_content("Event was successfully updated")
-#     expect(page).to have_content("Updated Location")
-#     # Add other expectations for the updated event
-#   end
+    click_button "Create Event"
+
+    expect(page).to have_content("Event was successfully updated")
+
+    visit event_path(event)
+
+    expect(page).to have_content("New name")
+    expect(page).to have_content("10")
+  end
 
   scenario "Delete an event" do
 
-    event = Event.new(new_event)
-    event.save
+    event = Event.create(new_event)
+
     visit event_path(event)
     click_link "Delete Event"
     click_button "Delete this event"
 
     expect(page).to have_content("Event was successfully deleted.")
-    # expect(page).not_to have_content("Event to Delete")
+    # expect(page).not_to have_content(event.name)
   end
 end
