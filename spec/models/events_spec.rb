@@ -7,8 +7,8 @@ RSpec.describe Event, type: :model do
         name: "Test Event",
         location: "College Station",
         date: Date.today,
-        start_time: Time.current,
-        end_time: Time.current + 1.hour,
+        start_time: "1:00PM",
+        end_time: "2:00PM",
         capacity: 20,
         points: 3,
         contact_info: "Contact FakeEmail@tamu.edu for more information",
@@ -38,7 +38,7 @@ RSpec.describe Event, type: :model do
         end
         
         it 'End time before start time' do
-            event = Event.new(valid_attributes.merge(start_time: Time.current, end_time: Time.current - 1.hour))
+            event = Event.new(valid_attributes.merge(start_time: "1:00PM", end_time: "12:00PM"))
             expect(event).not_to be_valid
         end
 

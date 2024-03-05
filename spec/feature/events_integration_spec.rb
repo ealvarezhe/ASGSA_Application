@@ -33,8 +33,8 @@ RSpec.feature "EventsFeature", type: :feature do
         {
         name: "Events integration Test",
         location: "1234 Fake Street",
-        start_time: Time.current,
-        end_time: Time.current + 1.hour,
+        start_time: "1:00PM",
+        end_time: "2:00PM",
         date: Date.today,
         capacity: 40,
         points: 5,
@@ -48,8 +48,8 @@ RSpec.feature "EventsFeature", type: :feature do
 
     fill_in "Name", with: "Events integration Test"
     fill_in "Location", with: "1234 Fake Street"
-    fill_in "Start Time", with: Time.current
-    fill_in "End Time", with: Time.current + 1.hour
+    fill_in "Start Time", with: "1:00PM"
+    fill_in "End Time", with: "2:00PM"
     fill_in "Date", with: Date.today
     fill_in "Capacity", with: "40"
     fill_in "Points", with: "5"
@@ -67,8 +67,8 @@ RSpec.feature "EventsFeature", type: :feature do
 
     fill_in "Name", with: "Events integration Test"
     fill_in "Location", with: "1234 Fake Street"
-    fill_in "Start Time", with: Time.current
-    fill_in "End Time", with: Time.current - 1.hour
+    fill_in "Start Time", with: "1:00PM"
+    fill_in "End Time", with: "12:00PM"
     fill_in "Date", with: Date.today
     fill_in "Capacity", with: "40"
     fill_in "Points", with: "5"
@@ -82,8 +82,8 @@ RSpec.feature "EventsFeature", type: :feature do
 
   scenario "View events list" do
     # Create some events to test against
-    event1 = Event.create(name: "Event 1", location: "1234 Fake Street", start_time: Time.current, end_time: Time.current + 1.hour, date: Date.today, points: 5)
-    event2 = Event.create(name: "Event 2", location: "1234 Fake Street", start_time: Time.current, end_time: Time.current + 1.hour, date: Date.today, points: 5)
+    event1 = Event.create(name: "Event 1", location: "1234 Fake Street", start_time: "1:00PM", end_time: "2:00PM", date: Date.today, points: 5)
+    event2 = Event.create(name: "Event 2", location: "1234 Fake Street", start_time: "1:00PM", end_time: "2:00PM", date: Date.today, points: 5)
 
     visit events_path
 
@@ -130,7 +130,7 @@ RSpec.feature "EventsFeature", type: :feature do
 
     click_link "Edit Event Details"
 
-    fill_in "End Time", with: Time.current - 1.hour
+    fill_in "End Time", with: "12:00PM"
     # Update other fields as needed
 
     click_button "Update Event"
