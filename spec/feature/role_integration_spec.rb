@@ -63,6 +63,7 @@ RSpec.describe 'Creating a Role with blank fields', type: :feature do
   })
 
   before do
+    Rails.application.load_seed
     visit member_google_oauth2_omniauth_callback_path
   end
   
