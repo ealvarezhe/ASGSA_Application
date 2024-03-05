@@ -1,10 +1,13 @@
 class AttendeesController < ApplicationController
   before_action :set_attendee, only: %i[ show edit update destroy delete ]
-  before_action :set_event, only: %i[ index new edit delete attended check_in new_check_in ]
+  before_action :set_event, only: %i[ index new edit delete check_in new_check_in ]
 
   # GET /attendees or /attendees.json
   def index
-    @attendees = Attendee.where('event_id = '+params[:event_id])
+    @members = Member.all
+    @attendees = Attendee.where(event_id: params[:event_id])
+    @members = @members.search(params[:query]) if params[:query].present?
+    @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
   # GET /attendees/1 or /attendees/1.json
@@ -31,10 +34,10 @@ class AttendeesController < ApplicationController
     else
       currentPoints += @event.points
     end
-
     @member.update(points: currentPoints)
     @attendee.update(attended: !@attendee.attended)
-    redirect_to check_in_event_attendees_path(@event)
+
+    redirect_to check_in_event_attendees_path(@event, member_filter: params[:member_filter])
   end
 
   # POST /attendees or /attendees.json
@@ -51,12 +54,6 @@ class AttendeesController < ApplicationController
           format.html { redirect_to check_in_event_attendees_path(@event), notice: "Member was successfully checked in." }
         end
         format.json { render :show, status: :created, location: @attendee }
-      end
-    else
-      @attendee.errors.add(:member_id, "Invalid Member Id")
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,14 +83,20 @@ class AttendeesController < ApplicationController
     end
   end
 
-  def attended
-    @attendees = @event.attendees.where(attended: true)
-  end
-
   def check_in
+    attendees = Attendee.where(event_id: params[:event_id])
     @members = Member.all
     @members = @members.search(params[:query]) if params[:query].present?
     @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+
+    case params[:member_filter]
+    when "Attended"
+      @members = attendees.where(attended: true).map(&:member)
+    when "RSVP"
+      @members = attendees.where(rsvp: true).map(&:member)
+    when "Non-RSVP"
+      @members = Member.where.not(member_id: attendees.pluck(:member_id))
+    end
   end
 
   def sort_column
