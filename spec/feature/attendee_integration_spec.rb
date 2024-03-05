@@ -6,8 +6,8 @@ RSpec.feature "Attendee Features", type: :feature do
     @event = Event.create!(
       name: "name",
       location: "location",
-      start_time: Time.now,
-      end_time: Time.now + 2 hour,
+      start_time: Time.now + 100000,
+      end_time: Time.now + 100000,
       date: Date.today,
       description: "Sample Description",
       capacity: 100,
