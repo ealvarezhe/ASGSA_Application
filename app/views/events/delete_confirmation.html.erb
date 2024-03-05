@@ -1,0 +1,10 @@
+<h1>Are you sure you want to delete this event?</h1>
+
+<%= render @event %>
+
+</br>
+
+<div>
+  <%= button_to "Delete this event", @event, method: :delete, form: { style: "display: inline;"} %>
+  <%= button_to "Cancel", events_path, method: :get, form: { style: "display: inline;"}%>
+</div>

@@ -3,6 +3,16 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @events = @events.search(params[:query]) if params[:query].present?
+    @pagy, @events = pagy @events.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ name date start_time end_time capacity points }.include?(params[:sort]) ? params[:sort] : "date"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def show
@@ -15,6 +25,11 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def delete_confirmation
+    # Render delete_confirmation view
+    @event = Event.find(params[:id])
+  end
+
   def create
     @event = Event.new(event_params)
 
@@ -22,8 +37,17 @@ class EventsController < ApplicationController
       if @event.save
         format.html { redirect_to event_path(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :create, location: @event }
-        if params[:send_email] == "1"
-          MemberMailer.event_email(@event).deliver_now
+        if params[:send_email] == 'all'
+          # Send email to all members
+          MemberMailer.event_email(@event, Member.all).deliver_now
+        elsif params[:send_email] == 'officers'
+          # Send email to officers only
+          officers = Member.where(position: 'Officer')
+          MemberMailer.event_email(@event, officers).deliver_now
+        elsif params[:send_email] == 'members'
+          # Send email to members only
+          members = Member.where(position: 'Member')
+          MemberMailer.event_email(@event, members).deliver_now
         end
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -68,6 +92,7 @@ class EventsController < ApplicationController
       :end_time,
       :date,
       :description,
+      :contact_info,
       :capacity,
       :points
     )
