@@ -62,6 +62,24 @@ RSpec.feature "EventsFeature", type: :feature do
     expect(page).to have_content("Events integration Test")
   end
 
+  scenario "Create invalid event" do
+    visit new_event_path
+
+    fill_in "Name", with: "Events integration Test"
+    fill_in "Location", with: "1234 Fake Street"
+    fill_in "Start Time", with: Time.current
+    fill_in "End Time", with: Time.current - 2.hour
+    fill_in "Date", with: Date.today
+    fill_in "Capacity", with: "40"
+    fill_in "Points", with: "5"
+    # fill_in "Contact Information", with: "You can contact FakeUser@tamu.edu"
+    fill_in "Description", with: "This is a test for the events integration test"
+
+    click_button "Create Event"
+
+    expect(page).to have_content("End time must be after the start time")
+  end
+
   scenario "View events list" do
     # Create some events to test against
     event1 = Event.create(name: "Event 1", location: "1234 Fake Street", start_time: Time.current, end_time: Time.current + 2.hour, date: Date.today, points: 5)
@@ -95,7 +113,7 @@ RSpec.feature "EventsFeature", type: :feature do
     fill_in "Points", with: "10"
     # Update other fields as needed
 
-    click_button "Create Event"
+    click_button "Update Event"
 
     expect(page).to have_content("Event was successfully updated")
 
@@ -103,6 +121,21 @@ RSpec.feature "EventsFeature", type: :feature do
 
     expect(page).to have_content("New name")
     expect(page).to have_content("10")
+  end
+
+  scenario "Update event details with invalid values" do
+    event = Event.create(new_event)
+
+    visit event_path(event)
+
+    click_link "Edit Event Details"
+
+    fill_in "End Time", with: Time.current - 2.hour
+    # Update other fields as needed
+
+    click_button "Update Event"
+
+    expect(page).to have_content("End time must be after the start time")
   end
 
   scenario "Delete an event" do

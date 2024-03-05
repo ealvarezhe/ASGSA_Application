@@ -36,6 +36,11 @@ RSpec.describe Event, type: :model do
             event = Event.new(valid_attributes.merge(date: nil))
             expect(event).not_to be_valid
         end
+        
+        it 'End time before start time' do
+            event = Event.new(valid_attributes.merge(start_time: Time.current, end_time: Time.current - 1.hour))
+            expect(event).not_to be_valid
+        end
 
         it 'Is not valid with negative capacity' do
             event = Event.new(valid_attributes.merge(capacity: -1))
