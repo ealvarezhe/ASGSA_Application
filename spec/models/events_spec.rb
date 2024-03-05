@@ -8,7 +8,7 @@ RSpec.describe Event, type: :model do
         location: "College Station",
         date: Date.today,
         start_time: Time.current,
-        end_time: Time.current + 2.hour,
+        end_time: Time.current + 1.hour,
         capacity: 20,
         points: 3,
         contact_info: "Contact FakeEmail@tamu.edu for more information",
