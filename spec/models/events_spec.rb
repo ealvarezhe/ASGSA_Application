@@ -6,12 +6,13 @@ RSpec.describe Event, type: :model do
         {
         name: "Test Event",
         location: "College Station",
-        start_time: Time.now + 2.hour,
-        end_time: Time.current,
         date: Date.today,
-        description: "This is a description for test event",
+        start_time: Time.current,
+        end_time: Time.current + 2.hour,
         capacity: 20,
-        points: 3
+        points: 3,
+        contact_info: "Contact FakeEmail@tamu.edu for more information",
+        description: "This is a description for test event"
         }
     }
 

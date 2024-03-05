@@ -5,7 +5,7 @@
       | <%= link_to "RSVP", event_attendees_path(@event) %>
       <% if policy(current_member).admin_officer? %>
       | <%= link_to "Edit Event Details", edit_event_path(@event) %>
-      | <%= link_to "Delete Event", @event, method: :delete %>
+      | <%= link_to "Delete Event", delete_confirmation_event_path(@event), method: :get%>
       <% end %>
       <p style="color: green"><%= notice %></p>
       <h1 style="text-align: center"><strong><%= @event.name %></strong></h1>
