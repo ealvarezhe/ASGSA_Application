@@ -5,7 +5,7 @@ class AttendeesController < ApplicationController
   # GET /attendees or /attendees.json
   def index
     @members = Member.all
-    @attendees = Attendee.where('event_id = '+params[:event_id])
+    @attendees = Attendee.where(event_id: params[:event_id])
     @members = @members.search(params[:query]) if params[:query].present?
     @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
@@ -84,7 +84,7 @@ class AttendeesController < ApplicationController
   end
 
   def check_in
-    attendees = Attendee.where('event_id = '+params[:event_id])
+    attendees = Attendee.where(event_id: params[:event_id])
     @members = Member.all
     @members = @members.search(params[:query]) if params[:query].present?
     @pagy, @members = pagy @members.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)

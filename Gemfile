@@ -65,6 +65,7 @@ group :development do
   gem 'rspec-rails'
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "brakeman"
 end
 
 group :test do
