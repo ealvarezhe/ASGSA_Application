@@ -95,3 +95,5 @@ gem "font-awesome-sass", "~> 6.5.1"
 gem 'pundit' 
 
 gem 'simplecov', require: false, group: :test
+
+gem 'add_to_calendar'
