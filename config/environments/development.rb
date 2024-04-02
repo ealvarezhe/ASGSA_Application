@@ -74,8 +74,8 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  ENV['GOOGLE_OAUTH_CLIENT_ID'] = '722258478896-8an07lvak8ejvtsk90lqhqjf1aa1t33f.apps.googleusercontent.com'
-  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
+  ENV['GOOGLE_OAUTH_CLIENT_ID'] = '712928138396-6vp347to9nq5at597hd3dbl29b92mqii.apps.googleusercontent.com'
+  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
 
   config.action_mailer.delivery_method = :smtp
   host = 'localhost:3000'
